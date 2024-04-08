@@ -1,4 +1,4 @@
-package com.leads.capita.ui.theme
+package com.leads.capitabull.android.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider

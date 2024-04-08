@@ -1,22 +1,23 @@
-package com.leads.capita.ui.theme
+package com.leads.capitabull.android.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import com.leads.capitabull.android.theme.Shapes
+import com.leads.capita.ui.theme.Black
+import com.leads.capita.ui.theme.White
 
 private val DarkColorPalette = darkColors(
-    primary = Black,
-    primaryVariant = Black,
+    primary = White,
+    primaryVariant = White,
     secondary = White,
 )
 
 private val LightColorPalette = lightColors(
     primary = Black,
     primaryVariant = Black,
-    secondary = White,
+    secondary = Black,
 
     /* Other default colors to override
     background = Color.White,
@@ -36,16 +37,19 @@ fun CapitaTheme(windowSizeClass: WindowSizeClass, darkTheme: Boolean = isSystemI
         LightColorPalette
     }
 
+    // Determine the device orientation based on the width and height of the window
     val orientation = when {
         windowSizeClass.width.size > windowSizeClass.height.size -> Orientation.Landscape
         else -> Orientation.Portrait
     }
 
+    // Choose the dimension that matters based on the device orientation
     val sizeThatMatters = when (orientation) {
         Orientation.Portrait -> windowSizeClass.height
         else -> windowSizeClass.width
     }
 
+    // Select dimensions and typography based on the size that matters
     val dimensions = when (sizeThatMatters) {
         is WindowSize.Small -> smallDimensions
         is WindowSize.SemiCompact -> semiCompactDimensions

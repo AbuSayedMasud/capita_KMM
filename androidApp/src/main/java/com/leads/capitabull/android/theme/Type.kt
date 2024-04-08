@@ -1,4 +1,4 @@
-package com.leads.capita.ui.theme
+package com.leads.capitabull.android.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

@@ -10,35 +10,35 @@ sealed class BottomBar(
 ) {
     data object Home : BottomBar(
         route = "Home",
-        lightIcon = R.drawable.homelight,
-        darkIcon = R.drawable.homedark,
+        lightIcon = R.drawable.home_48px,
+        darkIcon = R.drawable.home_48px,
     )
     data object Market : BottomBar(
         route = "Market",
-        lightIcon = R.drawable.market,
-        darkIcon = R.drawable.marketdark,
+        lightIcon = R.drawable.monitoring_48px,
+        darkIcon = R.drawable.monitoring_48px,
     )
     data object Portfolio : BottomBar(
         route = "Portfolio",
-        lightIcon = R.drawable.portfolio,
-        darkIcon = R.drawable.portfolio,
+        lightIcon = R.drawable.portfolio_24px,
+        darkIcon = R.drawable.portfolio_24px,
     ) {
         const val ARG_VALUE = "value"
     }
 
     data object Service : BottomBar(
         route = "Service",
-        lightIcon = R.drawable.service,
-        darkIcon = R.drawable.service,
+        lightIcon = R.drawable.services_icon,
+        darkIcon = R.drawable.services_icon,
     )
-    data object Search : BottomBar(
-        route = "Search",
-        lightIcon = R.drawable.search,
-        darkIcon = R.drawable.search,
+    data object Trade : BottomBar(
+        route = "Trade",
+        lightIcon = R.drawable.handshake_48px,
+        darkIcon = R.drawable.handshake_48px,
     )
-    data object Account : BottomBar(
-        route = "Account",
-        lightIcon = R.drawable.account,
-        darkIcon = R.drawable.account,
+    data object Profile : BottomBar(
+        route = "Profile",
+        lightIcon = R.drawable.person_48px,
+        darkIcon = R.drawable.person_48px,
     )
 }

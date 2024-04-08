@@ -13,11 +13,13 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.* // ktlint-disable no-wildcard-imports
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -33,6 +35,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -51,17 +54,20 @@ fun MyAppBar(
     onProfileClick: (() -> Unit)?,
     profilePhoto: Painter?,
     showNotificationIcon: Boolean = false,
+    showSearchIcon: Boolean = false,
+    showSettingsIcon: Boolean = false,
     currentRoute: MutableState<String?>?,
-    showArrow: Boolean = false, // Add this parameter to decide when to use the arrow
+    showArrow: Boolean = false,
 ) {
     val myCustomColor = PrimaryColor
 
-    var searchText by remember { mutableStateOf("") } // Maintain the state of the search text
-    val isSearching by remember { mutableStateOf(showSearchBar) } // Maintain the state of whether the user is searching or not
+    var searchText by remember { mutableStateOf("") }
+    val isSearching by remember { mutableStateOf(showSearchBar) }
     val isActionSearch by remember { mutableStateOf(showSearchBar) }
 
     TopAppBar(
         title = {
+            // triggers if the search button is clicked
             if (isSearching || isActionSearch) {
                 TextField(
                     value = searchText,
@@ -88,6 +94,7 @@ fun MyAppBar(
                         }
                     },
                     trailingIcon = {
+                        // clears all texts if close icon is clicked when searchbar is not empty
                         if (searchText.isNotEmpty()) {
                             IconButton(onClick = { searchText = "" }) {
                                 Icon(
@@ -108,6 +115,10 @@ fun MyAppBar(
                         }
                     },
                     textStyle = TextStyle(fontSize = 15.5.sp, fontWeight = FontWeight.Light),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Ascii,
+                    ),
+                    singleLine = true,
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = Color.Transparent,
                         textColor = Color.White,
@@ -133,17 +144,18 @@ fun MyAppBar(
                                 },
                             ) {
                                 Icon(
-                                    painter = painterResource(id = R.drawable.baseline_arrow_back_24), // Replace with your arrow image
+                                    painter = painterResource(id =R.drawable.baseline_arrow_back_24),
                                     contentDescription = null,
                                     tint = Color.White,
                                     modifier = Modifier.size(27.dp),
                                 )
-                            } 
+                            }
                         }
                     } else if (onProfileClick != null) {
+                        // profile icon
                         Box(
                             contentAlignment = Alignment.CenterStart,
-                            modifier = Modifier.offset(x = (-8).dp),
+                            modifier = Modifier.offset(x = (-9).dp),
                         ) {
                             IconButton(onClick = onProfileClick) {
                                 Box(
@@ -167,9 +179,12 @@ fun MyAppBar(
                         }
                     }
 
+                    // when in home page title (e.g. shanta) will be in center else title will be at the start of appbar (e.g. market)
                     if (currentRoute != null && currentRoute.value == BottomBar.Home.route) {
                         Text(
                             text = title,
+                            fontSize = 21.sp,
+                            fontWeight = FontWeight.Bold,
                             color = Color.White,
                             textAlign = TextAlign.Center,
                             modifier = Modifier
@@ -179,11 +194,14 @@ fun MyAppBar(
                     } else {
                         Text(
                             text = title,
+                            fontSize = 21.sp,
+                            fontWeight = FontWeight.Bold,
                             color = Color.White,
+                            textAlign = TextAlign.Start,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(bottom = 2.dp)
-                                .offset(x = 1.dp),
+                                .padding(bottom = 2.dp),
+//                                .offset(x = 1.dp),
                         )
                     }
                 }
@@ -191,6 +209,23 @@ fun MyAppBar(
         },
 
         actions = {
+            //search icon
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End,
+            ) {
+                if (showSearchIcon) {
+                    IconButton(onClick = { navController.navigate("search") }) {
+                        Icon(
+                            Icons.Default.Search,
+                            contentDescription = null,
+                            tint = Color.White,
+                            modifier = Modifier.size(27.dp),
+                        )
+                    }
+                }
+            }
+            //notifications icon
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End,
@@ -199,6 +234,22 @@ fun MyAppBar(
                     IconButton(onClick = { }) {
                         Icon(
                             Icons.Default.Notifications,
+                            contentDescription = null,
+                            tint = Color.White,
+                            modifier = Modifier.size(27.dp),
+                        )
+                    }
+                }
+            }
+            //settings icon
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End,
+            ) {
+                if (showSettingsIcon) {
+                    IconButton(onClick = { navController.navigate("settings") }) {
+                        Icon(
+                            Icons.Default.Settings,
                             contentDescription = null,
                             tint = Color.White,
                             modifier = Modifier.size(27.dp),

@@ -37,6 +37,7 @@ fun SectionBar(
         color = sectionBarColor, // Use the lighter color for the section bar
         modifier = Modifier.fillMaxWidth(),
     ) {
+        // Use either CustomTabRow or CustomScrollableTabRow based on the number of sections
         if (isCustomTabRow) {
             CustomTabRow(
                 tabs = sections,
@@ -66,6 +67,7 @@ fun CustomTabRow(
     onTabClick: (Int) -> Unit,
     homeSectionBarColor: Color,
 ) {
+    // Default TabRow with custom styling
     TabRow(
         selectedTabIndex = selectedTabIndex,
         contentColor = if (isSystemInDarkTheme()) White else White,
@@ -81,6 +83,7 @@ fun CustomTabRow(
         backgroundColor = homeSectionBarColor,
     ) {
         tabs.forEachIndexed { tabIndex, tab ->
+            // Compute content color based on theme and selected/unselected state
             val isDarkTheme = isSystemInDarkTheme()
             val contentColor = remember(isDarkTheme, selectedTabIndex, tabIndex) {
                 if (isDarkTheme) {
@@ -150,6 +153,7 @@ fun CustomScrollableTabRow(
     }
 }
 
+// Custom modifier for adjusting the tab indicator offset during animations
 fun Modifier.customTabIndicatorOffset(
     currentTabPosition: TabPosition,
     tabWidth: Dp,
@@ -160,16 +164,20 @@ fun Modifier.customTabIndicatorOffset(
             value = currentTabPosition
         },
     ) {
+        // Animate the tab indicator offset and width
         val currentTabWidth by animateDpAsState(
+            // switching between tabs, the animation will smoothly resize the tab indicator to match the width of the newly selected tab.
             targetValue = tabWidth,
             animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
             label = "",
         )
         val indicatorOffset by animateDpAsState(
+            // switching between tabs, the animation will smoothly move the tab indicator to align with the left edge of the newly selected tab.
             targetValue = currentTabPosition.left,
             animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
             label = "",
         )
+        // Apply the computed offset and width to the modifier
         this.fillMaxWidth()
             .wrapContentSize(Alignment.BottomStart)
             .offset(x = indicatorOffset)

@@ -15,7 +15,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -25,7 +26,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.leads.capita.ui.theme.BottomBarColor2
 import com.leads.capita.ui.theme.PrimaryColor
-import com.leads.capita.ui.theme.themeactivity.ColorSelectionViewModel
+import com.leads.capitabull.android.shell.BottomNavGraph
+import com.leads.capitabull.android.theme.themeactivity.ColorSelectionViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "SuspiciousIndentation")
 @Composable
@@ -50,9 +52,9 @@ fun bottomBar(navController: NavHostController) {
     val screens = listOf(
         BottomBar.Home,
         BottomBar.Market,
-        BottomBar.Search,
+        BottomBar.Trade,
         BottomBar.Service,
-        BottomBar.Account,
+        BottomBar.Profile,
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -83,17 +85,17 @@ fun RowScope.AddItem(
 
     BottomNavigationItem(
         icon = {
-            val icon = painterResource(id = if (isDarkTheme) screen.darkIcon else screen.lightIcon)
+            val icon = if (isDarkTheme) screen.darkIcon else screen.lightIcon
             val modifier = if (selected) {
                 Modifier.size(26.dp)
             } else {
                 Modifier.size(24.dp).alpha(0.8f)
             }
             Icon(
-                painter = icon,
+                imageVector = ImageVector.vectorResource(id = icon),
                 contentDescription = "Navigation Icon",
                 modifier = modifier,
-                tint = PrimaryColor,
+                tint = if (selected) PrimaryColor else LocalContentColor.current.copy(alpha = 0.6f)
             )
         },
         selected = selected,

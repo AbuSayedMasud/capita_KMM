@@ -1,4 +1,4 @@
-package com.leads.capita.ui.theme
+package com.leads.capitabull.android.theme
 
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -52,8 +52,8 @@ val mediumDimensions = Dimensions(
     smallMedium = 7.dp,
     medium = 10.dp,
     mediumLarge = 35.dp,
-    large = 35.dp,
-    spacer1 = 50.dp,
+    large = 25.dp,
+    spacer1 = 60.dp,
     spacer2 = 50.dp,
     spacer3 = 260.dp,
 )

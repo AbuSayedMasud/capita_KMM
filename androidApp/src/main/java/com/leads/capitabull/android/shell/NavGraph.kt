@@ -17,6 +17,7 @@ import com.leads.capitabull.android.login.LoginScreen
 import com.leads.capitabull.android.registration.RegistrationScreen
 import com.leads.capitabull.android.sharePreference.PreferencesManager
 
+
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavGraph(navController: NavHostController, preferencesManager: PreferencesManager) {

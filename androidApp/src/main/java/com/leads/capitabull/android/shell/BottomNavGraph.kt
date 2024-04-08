@@ -1,4 +1,4 @@
-package com.leads.capita.shell
+package com.leads.capitabull.android.shell
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -9,19 +9,23 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.leads.capita.ui.theme.themeactivity.ColorSelectionViewModel
+import com.leads.capita.settings.SettingsScreen
+import com.leads.capita.shell.BottomBar
 import com.leads.capitabull.android.R
-import com.leads.capitabull.android.account.AccountScreen
 import com.leads.capitabull.android.home.HomeScreen
 import com.leads.capitabull.android.market.MarketScreen
 import com.leads.capitabull.android.portfolio.PortfolioScreen
+import com.leads.capitabull.android.profile.ProfileScreen
 import com.leads.capitabull.android.search.SearchScreen
 import com.leads.capitabull.android.service.ServiceScreen
+import com.leads.capitabull.android.theme.themeactivity.ColorSelectionViewModel
+import com.leads.capitabull.android.trade.TradeScreen
 import com.leads.capitabull.android.transaction.TransactionScreen
+
 
 @Composable
 fun BottomNavGraph(navController: NavHostController) {
-    val profilePhoto: Painter = painterResource(id = R.drawable.profile_1)
+    val profilePhoto: Painter = painterResource(id = R.drawable.profile_photo)
     val onProfileClick: () -> Unit = {
         // Handle the profile photo click event here
     }
@@ -53,15 +57,15 @@ fun BottomNavGraph(navController: NavHostController) {
             )
         }
 
-        composable(BottomBar.Search.route) {
-            SearchScreen()
+        composable(BottomBar.Trade.route) {
+            TradeScreen(navController)
         }
 
         composable(BottomBar.Service.route) {
             ServiceScreen()
         }
-        composable(BottomBar.Account.route) {
-            AccountScreen(
+        composable(BottomBar.Profile.route) {
+            ProfileScreen(
                 colorSelectionViewModel = colorSelectionViewModel,
                 navController = navController,
             )
@@ -69,6 +73,11 @@ fun BottomNavGraph(navController: NavHostController) {
         composable("transaction") {
             TransactionScreen(colorSelectionViewModel, navController)
         }
-
+        composable("search") {
+            SearchScreen()
+        }
+        composable("settings") {
+            SettingsScreen()
+        }
     }
 }

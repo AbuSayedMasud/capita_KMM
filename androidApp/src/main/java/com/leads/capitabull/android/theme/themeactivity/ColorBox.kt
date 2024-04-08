@@ -1,4 +1,4 @@
-package com.leads.capita.ui.theme.themeactivity
+package com.leads.capitabull.android.theme.themeactivity
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
