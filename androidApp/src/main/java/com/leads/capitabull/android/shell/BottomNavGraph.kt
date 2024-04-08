@@ -21,7 +21,7 @@ import com.leads.capitabull.android.transaction.TransactionScreen
 
 @Composable
 fun BottomNavGraph(navController: NavHostController) {
-    val profilePhoto: Painter = painterResource(id = R.drawable.profile_photo)
+    val profilePhoto: Painter = painterResource(id = R.drawable.profile_1)
     val onProfileClick: () -> Unit = {
         // Handle the profile photo click event here
     }

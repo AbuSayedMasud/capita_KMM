@@ -5,6 +5,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import com.leads.capitabull.android.theme.Shapes
 
 private val DarkColorPalette = darkColors(
     primary = Black,
