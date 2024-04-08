@@ -1,0 +1,16 @@
+[
+  {
+    "type": "Participation",
+    "market": "DSE",
+    "issuesAdvanced": "35",
+    "issuesDeclined": "120",
+    "issuesUnchanged": "133"
+  },
+  {
+    "type": "Participation",
+    "market": "CSE",
+    "issuesAdvanced": "31",
+    "issuesDeclined": "134",
+    "issuesUnchanged": "123"
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "instrumentIndex": 0,
+    "longName": "ACI Limited",
+    "shortName": "ACI",
+    "value": 15294.0,
+    "closedPrice": 0.57,
+    "change": 0.10,
+    "changeIcon": 1,
+    "totalQuantity": 500.00,
+    "salableQuantity": 450.00,
+    "averageCost": 800.00,
+    "totalCost": 2379.00,
+    "closePrice": 593.90,
+    "unrealizedGain": 7889.00,
+    "gainPercent": 35.45,
+    "costValue": 0.60
+  },
+  {
+    "instrumentIndex": 1,
+    "longName": "ACME Limited",
+    "shortName": "ACME",
+    "value": 15294.0,
+    "closedPrice": 0.78,
+    "change": 0.2,
+    "changeIcon": 2,
+    "totalQuantity": 500.00,
+    "salableQuantity": 450.00,
+    "averageCost": 800.00,
+    "totalCost": 2379.00,
+    "closePrice": 593.90,
+    "unrealizedGain": 7889.00,
+    "gainPercent": 35.45,
+    "costValue": 0.60
+  }
+]
