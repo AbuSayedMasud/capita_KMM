@@ -1,48 +1,35 @@
 package com.leads.capitabull.android.login
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.* // ktlint-disable no-wildcard-imports
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Checkbox
-import androidx.compose.material.CheckboxDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.* // ktlint-disable no-wildcard-imports
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.Button
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarData
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -61,19 +48,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.leads.capita.formatnumber.isWithinMaxCharLimit
+import com.leads.capitabull.android.R
+import com.leads.capitabull.android.biometricRegistration.BioMetricPrompt
+import com.leads.capitabull.android.sharePreference.PreferencesManager
+import com.leads.capitabull.android.snackbar.CustomSnackbarVisuals
 import com.leads.capitabull.android.theme.AppTheme
 import com.leads.capitabull.android.theme.BackgroundColor
-import com.leads.capitabull.android.theme.Black
 import com.leads.capitabull.android.theme.CapitaTheme
 import com.leads.capitabull.android.theme.Orientation
 import com.leads.capitabull.android.theme.PrimaryColor
 import com.leads.capitabull.android.theme.White
 import com.leads.capitabull.android.theme.getCardColors
 import com.leads.capitabull.android.theme.rememberWindowSizeClass
-import com.leads.capitabull.android.R
-import com.leads.capitabull.android.biometricRegistration.BioMetricPrompt
-import com.leads.capitabull.android.sharePreference.PreferencesManager
-
+import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -83,10 +70,10 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
     var isForgetClicked by remember { mutableStateOf(false) }
     var checked by remember { mutableStateOf(username.isNotEmpty() && password.isNotEmpty()) }
     var passwordVisible by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
 
     val context = LocalContext.current
     val placeholderTextColor = if (isSystemInDarkTheme()) Color(0x83F1F3F4) else Color.DarkGray
-    val textColor = if (isSystemInDarkTheme()) White else Black
     val (backgroundColor, contentColor) = getCardColors()
     val fingerButton = if (isSystemInDarkTheme()) Color(0xFF283138) else Color.White
     val biometricPrompt = BioMetricPrompt().bioMetricAuthentication()
@@ -95,12 +82,42 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
+    val snackbarHostState = remember { SnackbarHostState() }
 
     val window = rememberWindowSizeClass()
     CapitaTheme(window) {
         if (AppTheme.orientation == Orientation.Portrait) {
+//            Scaffold(
+//                scaffoldState = scaffoldState,
+//                snackbarHost = {
+//                    SnackbarHost(it) { data ->
+//                        Snackbar(
+//                            actionColor = Color.White,
+//                            snackbarData = data,
+//                        )
+//                    }
+//                },
+//                backgroundColor = if (isSystemInDarkTheme()) BackgroundColor else Color.White,
+//            ) {
             Scaffold(
                 scaffoldState = scaffoldState,
+                snackbarHost = {
+                    SnackbarHost(
+                        hostState = snackbarHostState,
+                        snackbar = { snackbarData: SnackbarData ->
+                            val customVisuals = snackbarData.visuals as? CustomSnackbarVisuals
+                            if (customVisuals != null) {
+                                Snackbar(
+                                    snackbarData = snackbarData,
+                                    contentColor = customVisuals.contentColor,
+                                    containerColor = customVisuals.containerColor,
+                                )
+                            } else {
+                                Snackbar(snackbarData = snackbarData)
+                            }
+                        },
+                    )
+                },
                 backgroundColor = if (isSystemInDarkTheme()) BackgroundColor else Color.White,
             ) {
                 Column(
@@ -132,110 +149,111 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
 
                     Spacer(modifier = Modifier.height(AppTheme.dimens.spacer1))
 
-                    Surface(
-                        shape = RoundedCornerShape(4.dp),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 16.dp),
-                        color = if (isSystemInDarkTheme()) BackgroundColor else Color.White,
-                    ) {
-                        OutlinedTextField(
-                            value = username,
-                            onValueChange = {
-                                if (isWithinMaxCharLimit(it, 40)) {
-                                    username = it
-                                }
-                            },
-                            label = { Text("Username") },
-                            placeholder = { Text("Enter your username") },
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                textColor = textColor,
-                                unfocusedLabelColor = textColor,
-                                unfocusedBorderColor = textColor,
-                                focusedBorderColor = textColor,
-                                focusedLabelColor = textColor,
-                                cursorColor = textColor,
-                                leadingIconColor = textColor,
-                                placeholderColor = placeholderTextColor,
-                            ),
-                            leadingIcon = {
-                                Icon(
-                                    Icons.Default.Person,
-                                    contentDescription = "Username Icon",
-                                )
-                            },
-                            trailingIcon = {
-                                if (username.isNotEmpty()) {
-                                    Icon(
-                                        imageVector = Icons.Default.Clear,
-                                        contentDescription = "Clear Icon",
-                                        modifier = Modifier.clickable { username = "" },
-                                        tint = textColor,
-                                    )
-                                }
-                            },
-                            keyboardOptions = KeyboardOptions.Default.copy(
-                                keyboardType = KeyboardType.Ascii,
-                            ),
-                            singleLine = true,
-                            modifier = Modifier.fillMaxWidth(),
-
+//                    Surface(
+//                        shape = RoundedCornerShape(4.dp),
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .padding(top = 16.dp),
+//                        color = if (isSystemInDarkTheme()) BackgroundColor else Color.White,
+//                    ) {
+                    OutlinedTextField(
+                        value = username,
+                        onValueChange = {
+                            if (isWithinMaxCharLimit(it, 40)) {
+                                username = it
+                            }
+                        },
+                        label = { Text("Username", color = contentColor, fontSize = 16.sp) },
+                        placeholder = { Text("Enter your username", color = contentColor, fontSize = 14.sp) },
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            textColor = contentColor,
+                            unfocusedLabelColor = contentColor,
+                            focusedLabelColor = contentColor,
+                            unfocusedBorderColor = contentColor,
+                            focusedBorderColor = contentColor,
+                            cursorColor = contentColor,
+                            leadingIconColor = contentColor,
+                            placeholderColor = contentColor,
+                        ),
+                        leadingIcon = {
+                            Icon(
+                                Icons.Default.Person,
+                                contentDescription = "Username Icon",
                             )
-                    }
-                    Surface(
-                        shape = RoundedCornerShape(4.dp),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 16.dp),
-                        color = if (isSystemInDarkTheme()) BackgroundColor else Color.White,
-                    ) {
-                        OutlinedTextField(
-                            value = password,
-                            onValueChange = {
-                                if (isWithinMaxCharLimit(it, 20)) {
-                                    password = it
-                                }
-                            },
-                            label = { Text("Password") },
-                            placeholder = { Text("Enter your password") },
-                            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                textColor = textColor,
-                                unfocusedLabelColor = textColor,
-                                unfocusedBorderColor = textColor,
-                                focusedBorderColor = textColor,
-                                focusedLabelColor = textColor,
-                                cursorColor = textColor,
-                                leadingIconColor = textColor,
-                                placeholderColor = placeholderTextColor,
-                            ),
-                            leadingIcon = {
+                        },
+                        trailingIcon = {
+                            if (username.isNotEmpty()) {
                                 Icon(
-                                    Icons.Default.Lock,
-                                    contentDescription = "Password Icon",
+                                    imageVector = Icons.Default.Clear,
+                                    contentDescription = "Clear Icon",
+                                    modifier = Modifier.clickable { username = "" },
+                                    tint = contentColor,
                                 )
-                            },
-                            trailingIcon = {
-                                val visibilityIcon =
-                                    if (passwordVisible) R.drawable.baseline_visibility_off_24 else R.drawable.baseline_visibility_24
-                                val visibilityIconContentDescription =
-                                    if (passwordVisible) "Hide password" else "Show password"
-                                Icon(
-                                    painter = painterResource(id = visibilityIcon),
-                                    contentDescription = visibilityIconContentDescription,
-                                    modifier = Modifier.clickable {
-                                        passwordVisible = !passwordVisible
-                                    },
-                                    tint = textColor,
-                                )
-                            },
-                            keyboardOptions = KeyboardOptions.Default.copy(
-                                keyboardType = KeyboardType.Ascii,
-                            ),
-                            singleLine = true,
-                            modifier = Modifier.fillMaxWidth(),
+                            }
+                        },
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Ascii,
+                        ),
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth(),
+
                         )
-                    }
+                    Spacer(modifier = Modifier.height(15.dp))
+
+//                    Surface(
+//                        shape = RoundedCornerShape(4.dp),
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .padding(top = 16.dp),
+//                        color = if (isSystemInDarkTheme()) BackgroundColor else Color.White,
+//                    ) {
+                    OutlinedTextField(
+                        value = password,
+                        onValueChange = {
+                            if (isWithinMaxCharLimit(it, 20)) {
+                                password = it
+                            }
+                        },
+                        label = { Text("Password", color = contentColor, fontSize = 16.sp) },
+                        placeholder = { Text("Enter your password", color = contentColor, fontSize = 16.sp) },
+                        visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            textColor = contentColor,
+                            unfocusedLabelColor = contentColor,
+                            unfocusedBorderColor = contentColor,
+                            focusedBorderColor = contentColor,
+                            focusedLabelColor = contentColor,
+                            cursorColor = contentColor,
+                            leadingIconColor = contentColor,
+                            placeholderColor = contentColor,
+                        ),
+                        leadingIcon = {
+                            Icon(
+                                Icons.Default.Lock,
+                                contentDescription = "Password Icon",
+                            )
+                        },
+                        trailingIcon = {
+                            val visibilityIcon =
+                                if (passwordVisible) R.drawable.baseline_visibility_off_24 else R.drawable.baseline_visibility_24
+                            val visibilityIconContentDescription =
+                                if (passwordVisible) "Hide password" else "Show password"
+                            Icon(
+                                painter = painterResource(id = visibilityIcon),
+                                contentDescription = visibilityIconContentDescription,
+                                modifier = Modifier.clickable {
+                                    passwordVisible = !passwordVisible
+                                },
+                                tint = contentColor,
+                            )
+                        },
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Ascii,
+                        ),
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Checkbox(
                             checked = checked,
@@ -249,14 +267,14 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
                                 }
                             },
                             colors = CheckboxDefaults.colors(
-                                uncheckedColor = textColor,
-                                checkedColor = textColor,
+                                uncheckedColor = contentColor,
+                                checkedColor = contentColor,
                             ),
                             modifier = Modifier.offset(x = (-10).dp),
                         )
                         Text(
                             text = "Remember me",
-                            color = textColor,
+                            color = contentColor,
                             modifier = Modifier.offset(x = (-16).dp),
                         )
 
@@ -272,10 +290,9 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
                         Spacer(modifier = Modifier.weight(1f))
                         val hyperlinkStyle = TextStyle(
                             color = PrimaryColor,
-                            fontSize = 15.sp,
+                            fontSize = 16.sp,
                             textDecoration = TextDecoration.Underline,
-
-                            )
+                        )
 
                         ClickableText(
                             text = AnnotatedString("Forget Password?"),
@@ -283,26 +300,57 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
                                 navController.navigate("forgetPassword")
                             },
                             style = hyperlinkStyle,
-                            modifier = Modifier.offset(y = (2).dp),
-                        )
+
+                            )
                     }
 
                     Button(
                         onClick = {
 //                            val loginBean = LoginPresenter()
-//                            val identityResponse = loginBean.login(context, username, password)
-//                            if (identityResponse) {
-//                                val intent = Intent(context, HomeActivity::class.java)
-//                                val service = MockLoader(context)
-//                                runBlocking {
-//                                    service.init()
+                            // Perform login authentication
+//                            val authResult = loginBean.login(context, username, password)
+//
+//                            // Handle the authentication result
+//                            when (authResult) {
+//                                AuthResult.Success -> {
+//                                    val intent = Intent(context, HomeActivity::class.java)
+//                                    val service = MockLoader(context)
+//                                    // Initialize the MockLoader service
+//                                    runBlocking {
+//                                        service.init()
+//                                    }
+//                                    // Start the HomeActivity
+//                                    context.startActivity(intent)
 //                                }
-//                                context.startActivity(intent)
-//                            } else {
-//                                coroutineScope.launch {
-//                                    scaffoldState.snackbarHostState.showSnackbar("Login failed")
+
+                                // If the username is invalid, show a snackbar with an error message
+//                                AuthResult.InvalidUsername -> {
+//                                    scope.launch {
+//                                        snackbarHostState.showSnackbar(
+//                                            CustomSnackbarVisuals(
+//                                                message = "Wrong username",
+//                                                contentColor = Color.White,
+//                                            ),
+//                                        )
+//                                    }
+//                                    // Hide the keyboard
+//                                    keyboardController?.hide()
 //                                }
-//                                keyboardController?.hide()
+//
+//                                AuthResult.InvalidPassword -> {
+//                                    scope.launch {
+//                                        snackbarHostState.showSnackbar(
+//                                            CustomSnackbarVisuals(
+//                                                message = "Wrong password",
+//                                                contentColor = Color.White,
+//                                            ),
+//                                        )
+//                                    }
+//                                    keyboardController?.hide()
+//                                }
+//
+//                                // Handle other authentication results if needed
+//                                else -> {}
 //                            }
                         },
                         modifier = Modifier
@@ -311,16 +359,17 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
 //                            .keyboardController(keyboardController),
 
                         colors = ButtonDefaults.buttonColors(
-                            PrimaryColor,
+                            backgroundColor = PrimaryColor,
                             contentColor = White,
                         ),
                         shape = RoundedCornerShape(20.dp),
                     ) {
                         Text(
                             text = "Login",
-                            fontSize = 16.sp,
-                            modifier = Modifier.padding(5.dp),
+                            fontSize = 18.sp,
+                            modifier = Modifier.padding(3.dp),
                             color = Color.White,
+                            fontWeight = FontWeight.Bold,
                         )
                     }
 
@@ -334,7 +383,7 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
                         Text(
                             text = "I don't have an account? ",
                             style = MaterialTheme.typography.body1,
-                            color = textColor,
+                            color = contentColor,
 
                             )
                         ClickableText(
@@ -396,7 +445,7 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
                         Text(
                             text = "Don't have TouchID yet? ",
                             style = MaterialTheme.typography.body1,
-                            color = textColor,
+                            color = contentColor,
 
                             )
                         ClickableText(
