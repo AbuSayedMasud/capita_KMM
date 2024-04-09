@@ -1,4 +1,4 @@
-package com.leads.capita.shell
+package com.leads.capitabull.android.shell
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color

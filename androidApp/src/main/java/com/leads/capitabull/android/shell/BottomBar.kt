@@ -1,4 +1,4 @@
-package com.leads.capita.shell
+package com.leads.capitabull.android.shell
 
 import com.leads.capitabull.android.R
 

@@ -10,7 +10,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.leads.capita.settings.SettingsScreen
-import com.leads.capita.shell.BottomBar
 import com.leads.capitabull.android.R
 import com.leads.capitabull.android.home.HomeScreen
 import com.leads.capitabull.android.market.MarketScreen

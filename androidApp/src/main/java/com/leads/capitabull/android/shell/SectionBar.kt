@@ -1,4 +1,4 @@
-package com.leads.capita.shell
+package com.leads.capitabull.android.shell
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.* // ktlint-disable no-wildcard-imports
-import com.leads.capita.ui.theme.White
+import com.leads.capitabull.android.theme.White
 
 @SuppressLint("RememberReturnType")
 @Composable

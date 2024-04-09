@@ -13,12 +13,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
-import com.leads.capita.shell.NavGraph
-import com.leads.capita.shell.SetStatusBarColor
-import com.leads.capita.ui.theme.BackgroundColor
-import com.leads.capita.ui.theme.BottomBarColor2
+import com.leads.capitabull.android.shell.NavGraph
+import com.leads.capitabull.android.shell.SetStatusBarColor
+import com.leads.capitabull.android.theme.BackgroundColor
+import com.leads.capitabull.android.theme.BottomBarColor2
 import com.leads.capitabull.android.theme.CapitaTheme
-import com.leads.capita.ui.theme.White
+import com.leads.capitabull.android.theme.White
 import com.leads.capitabull.android.theme.rememberWindowSizeClass
 import com.leads.capitabull.android.theme.themeactivity.ColorSelectionViewModel
 import com.leads.capitabull.android.sharePreference.PreferencesManager

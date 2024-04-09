@@ -1,4 +1,4 @@
-package com.leads.capita.shell
+package com.leads.capitabull.android.shell
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -24,9 +24,8 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.leads.capita.ui.theme.BottomBarColor2
-import com.leads.capita.ui.theme.PrimaryColor
-import com.leads.capitabull.android.shell.BottomNavGraph
+import com.leads.capitabull.android.theme.BottomBarColor2
+import com.leads.capitabull.android.theme.PrimaryColor
 import com.leads.capitabull.android.theme.themeactivity.ColorSelectionViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "SuspiciousIndentation")

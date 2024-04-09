@@ -10,7 +10,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.graphics.Color
-import com.leads.capita.ui.theme.themeactivity.ColorPicker
 
 @Composable
 fun ShowColorSelectionDialog(

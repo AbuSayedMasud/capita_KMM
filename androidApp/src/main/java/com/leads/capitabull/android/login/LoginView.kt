@@ -62,12 +62,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.leads.capita.formatnumber.isWithinMaxCharLimit
 import com.leads.capitabull.android.theme.AppTheme
-import com.leads.capita.ui.theme.BackgroundColor
-import com.leads.capita.ui.theme.Black
+import com.leads.capitabull.android.theme.BackgroundColor
+import com.leads.capitabull.android.theme.Black
 import com.leads.capitabull.android.theme.CapitaTheme
 import com.leads.capitabull.android.theme.Orientation
-import com.leads.capita.ui.theme.PrimaryColor
-import com.leads.capita.ui.theme.White
+import com.leads.capitabull.android.theme.PrimaryColor
+import com.leads.capitabull.android.theme.White
 import com.leads.capitabull.android.theme.getCardColors
 import com.leads.capitabull.android.theme.rememberWindowSizeClass
 import com.leads.capitabull.android.R

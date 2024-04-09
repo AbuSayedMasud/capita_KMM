@@ -1,4 +1,4 @@
-package com.leads.capita.ui.theme.themeactivity // ktlint-disable package-name
+package com.leads.capitabull.android.theme.themeactivity // ktlint-disable package-name
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.leads.capitabull.android.theme.themeactivity.ColorBox
 
 @Composable
 fun ColorPicker(

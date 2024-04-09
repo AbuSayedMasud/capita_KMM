@@ -40,8 +40,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.leads.capita.shell.BottomBar
-import com.leads.capita.ui.theme.PrimaryColor
+import com.leads.capitabull.android.theme.PrimaryColor
 import com.leads.capitabull.android.R
 
 @Composable
