@@ -48,7 +48,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.leads.capita.formatnumber.isWithinMaxCharLimit
+import com.leads.capitabull.android.MockJsonLoader.MockLoader
 import com.leads.capitabull.android.R
+import com.leads.capitabull.android.activity.HomeActivity
 import com.leads.capitabull.android.biometricRegistration.BioMetricPrompt
 import com.leads.capitabull.android.sharePreference.PreferencesManager
 import com.leads.capitabull.android.snackbar.CustomSnackbarVisuals
@@ -313,14 +315,15 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
 //                            // Handle the authentication result
 //                            when (authResult) {
 //                                AuthResult.Success -> {
-//                                    val intent = Intent(context, HomeActivity::class.java)
+                                    val intent = Intent(context, HomeActivity::class.java)
 //                                    val service = MockLoader(context)
 //                                    // Initialize the MockLoader service
 //                                    runBlocking {
 //                                        service.init()
+//                                       MockLoader(context).init()
 //                                    }
 //                                    // Start the HomeActivity
-//                                    context.startActivity(intent)
+                                    context.startActivity(intent)
 //                                }
 
                                 // If the username is invalid, show a snackbar with an error message
