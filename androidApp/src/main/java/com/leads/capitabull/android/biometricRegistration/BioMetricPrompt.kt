@@ -8,6 +8,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import com.leads.capitabull.android.MockJsonLoader.MockLoader
+import com.leads.capitabull.android.activity.HomeActivity
 import kotlinx.coroutines.runBlocking
 
 class BioMetricPrompt {
@@ -36,12 +38,13 @@ class BioMetricPrompt {
 
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
-//                    val intent = Intent(context, HomeActivity::class.java)
+                    val intent = Intent(context, HomeActivity::class.java)
 //                    val service = MockLoader(context)
-//                    runBlocking {
+                    runBlocking {
 //                        service.init()
-//                    }
-//                    context.startActivity(intent)
+//                        MockLoader(context).init()
+                    }
+                    context.startActivity(intent)
                 }
 
                 override fun onAuthenticationFailed() {
