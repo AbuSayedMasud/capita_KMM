@@ -1,4 +1,4 @@
-package com.leads.capitabull.android
+package com.leads.capitabull.android.activity
 
 import android.os.Build
 import android.os.Bundle
