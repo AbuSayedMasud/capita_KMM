@@ -5,10 +5,10 @@ plugins {
 }
 
 android {
-    namespace = "com.leads.capitabull.android"
+    namespace = "com.leads.capita.android"
     compileSdk = 34
     defaultConfig {
-        applicationId = "com.leads.capitabull.android"
+        applicationId = "com.leads.capita.android"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
