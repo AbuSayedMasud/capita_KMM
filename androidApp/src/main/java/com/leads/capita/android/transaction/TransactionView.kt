@@ -1,4 +1,4 @@
-package com.leads.capita.transaction
+package com.leads.capita.android.transaction
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
