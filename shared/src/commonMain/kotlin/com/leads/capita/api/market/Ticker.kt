@@ -1,4 +1,4 @@
-package com.leads.capita.android.api.market
+package com.leads.capita.api.market
 import kotlinx.serialization.Serializable
 @Serializable
 class Ticker(

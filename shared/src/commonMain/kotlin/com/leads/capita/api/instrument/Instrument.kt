@@ -1,4 +1,4 @@
-package com.leads.capita.android.api.instrument
+package com.leads.capita.api.instrument
 
 class Instrument(
 //    val icon: Int,

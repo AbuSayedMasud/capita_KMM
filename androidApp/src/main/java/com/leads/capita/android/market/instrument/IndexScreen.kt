@@ -26,13 +26,14 @@ import androidx.compose.ui.unit.dp
 
 import com.leads.capita.android.MockJsonLoader.MockLoader
 
-import com.leads.capita.android.api.market.Ticker
+
 import com.leads.capita.android.filter.IndexFilterScreen
 import com.leads.capita.android.theme.BackgroundColor
 import com.leads.capita.android.theme.FloatingActionButtonColor
 import com.leads.capita.android.theme.PrimaryColor
 import com.leads.capita.android.theme.White
 import com.leads.capita.android.R
+import com.leads.capita.api.market.Ticker
 
 @Composable
 fun IndexScreen(

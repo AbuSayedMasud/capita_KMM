@@ -14,12 +14,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.leads.capita.formatnumber.formatNumberWithCommas
-import com.leads.capita.android.api.market.Ticker
+
 import com.leads.capita.android.theme.Black
 import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.White
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
+import com.leads.capita.api.market.Ticker
 
 
 @Composable

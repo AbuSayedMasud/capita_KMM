@@ -1,4 +1,4 @@
-package com.leads.capita.market.instrument
+package com.leads.capita.android.market.instrument
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -28,13 +28,13 @@ import androidx.compose.ui.unit.dp
 import com.leads.capita.android.filter.InstrumentFilterScreen
 
 import com.leads.capita.android.MockJsonLoader.MockLoader
-import com.leads.capita.android.api.market.Ticker
-import com.leads.capita.android.market.instrument.InstrumentView
+
 import com.leads.capita.android.theme.BackgroundColor
 import com.leads.capita.android.theme.FloatingActionButtonColor
 import com.leads.capita.android.theme.PrimaryColor
 import com.leads.capita.android.theme.White
 import com.leads.capita.android.R
+import com.leads.capita.api.market.Ticker
 
 @Composable
 fun InstrumentScreen(

@@ -3,14 +3,14 @@ package com.leads.capita.android.MockJsonLoader
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.leads.capita.market.overview.Participation
-import com.leads.capita.market.overview.Status
-import com.leads.capita.android.api.account.AccountBalance
-import com.leads.capita.android.api.account.AccountInstrument
-import com.leads.capita.android.api.account.AccountReceivable
-import com.leads.capita.android.api.account.AccountTransaction
-import com.leads.capita.android.api.market.Ticker
-import com.leads.capita.android.api.news.News
+import com.leads.capita.api.account.AccountBalance
+import com.leads.capita.api.account.AccountInstrument
+import com.leads.capita.api.account.AccountReceivable
+import com.leads.capita.api.account.AccountTransaction
+import com.leads.capita.api.market.Ticker
+import com.leads.capita.api.market.overview.Participation
+import com.leads.capita.api.market.overview.Status
+import com.leads.capita.api.news.News
 import kotlinx.serialization.json.Json
 
 class MockLoader(private val context: Context) {

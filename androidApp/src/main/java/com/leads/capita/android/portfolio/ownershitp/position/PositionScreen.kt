@@ -18,8 +18,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.leads.capita.android.MockJsonLoader.MockLoader
-import com.leads.capita.android.api.account.AccountInstrument
+
 import com.leads.capita.android.theme.BackgroundColor
+import com.leads.capita.api.account.AccountInstrument
 
 
 @Composable

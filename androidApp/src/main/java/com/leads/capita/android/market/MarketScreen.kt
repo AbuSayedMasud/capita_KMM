@@ -27,7 +27,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.leads.capita.android.market.instrument.IndexScreen
-import com.leads.capita.market.instrument.InstrumentScreen
+import com.leads.capita.android.market.instrument.InstrumentScreen
 import com.leads.capita.android.market.news.NewsScreen
 import com.leads.capita.android.market.overview.OverviewScreen
 import com.leads.capita.android.shell.MyAppBar

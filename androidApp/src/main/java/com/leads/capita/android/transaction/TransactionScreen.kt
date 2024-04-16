@@ -27,7 +27,7 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.leads.capita.android.MockJsonLoader.MockLoader
 import com.leads.capita.android.R
-import com.leads.capita.android.api.account.AccountTransaction
+
 import com.leads.capita.android.shell.MyAppBar
 import com.leads.capita.android.shell.SectionBar
 import com.leads.capita.android.theme.BackgroundColor
@@ -36,6 +36,7 @@ import com.leads.capita.android.theme.themeactivity.ColorSelectionViewModel
 import com.leads.capita.android.transaction.allTransaction.AllTransactionScreen
 import com.leads.capita.android.transaction.creditTransaction.CreditTransactionScreen
 import com.leads.capita.android.transaction.debitTransaction.DebitTransactionScreen
+import com.leads.capita.api.account.AccountTransaction
 
 
 @OptIn(ExperimentalPagerApi::class)

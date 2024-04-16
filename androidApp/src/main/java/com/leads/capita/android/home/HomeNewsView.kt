@@ -28,9 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.leads.capita.android.MockJsonLoader.MockLoader
 
-import com.leads.capita.android.api.news.News
+
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.R
+import com.leads.capita.api.news.News
 
 
 @Composable

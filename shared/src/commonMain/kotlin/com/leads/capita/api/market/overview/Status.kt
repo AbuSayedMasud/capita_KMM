@@ -1,4 +1,4 @@
-package com.leads.capita.market.overview
+package com.leads.capita.api.market.overview
 
 import kotlinx.serialization.Serializable
 

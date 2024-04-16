@@ -16,9 +16,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 import com.leads.capita.android.MockJsonLoader.MockLoader
-import com.leads.capita.android.api.news.News
+
 import com.leads.capita.android.market.news.NewsView
 import com.leads.capita.android.theme.BackgroundColor
+import com.leads.capita.api.news.News
 
 
 @Composable

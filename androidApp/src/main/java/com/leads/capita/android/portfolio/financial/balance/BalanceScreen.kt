@@ -18,9 +18,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.leads.capita.android.MockJsonLoader.MockLoader
-import com.leads.capita.android.api.account.AccountBalance
+
 import com.leads.capita.android.portfolio.financial.balance.BalanceView
 import com.leads.capita.android.theme.BackgroundColor
+import com.leads.capita.api.account.AccountBalance
 
 @Composable
 fun BalanceScreen() {

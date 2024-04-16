@@ -25,12 +25,13 @@ import androidx.navigation.NavHostController
 import com.leads.capita.formatnumber.formatNumberWithCommas
 import com.leads.capita.android.MockJsonLoader.MockLoader
 
-import com.leads.capita.android.api.account.AccountBalance
+
 import com.leads.capita.android.shell.BottomBar
 import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
 import com.leads.capita.android.R
+import com.leads.capita.api.account.AccountBalance
 
 
 @Composable

@@ -1,4 +1,4 @@
-package com.leads.capita.android.api.news
+package com.leads.capita.api.news
 import kotlinx.serialization.Serializable
 @Serializable
 data class News (

@@ -27,8 +27,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.leads.capita.formatnumber.formatNumberWithCommas
-import com.leads.capita.android.api.account.AccountTransaction
 import com.leads.capita.android.theme.getCardColors
+import com.leads.capita.api.account.AccountTransaction
 
 
 @Composable

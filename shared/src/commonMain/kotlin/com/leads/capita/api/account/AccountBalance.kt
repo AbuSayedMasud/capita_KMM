@@ -1,4 +1,4 @@
-package com.leads.capita.android.api.account
+package com.leads.capita.api.account
 import kotlinx.serialization.Serializable
 @Serializable
 class AccountBalance(
