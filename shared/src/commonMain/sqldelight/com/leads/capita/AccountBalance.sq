@@ -1,0 +1,33 @@
+CREATE TABLE AccountBalanceData (
+    accountCode TEXT NOT NULL,
+    accruedCharge REAL,
+    assetValue REAL,
+    buyingPower REAL,
+    cashBalance REAL,
+    costValue REAL,
+    currentBalance REAL,
+    deptEquityRatio REAL,
+    equity REAL,
+    equityDebtRatio REAL,
+    immatureBalance REAL,
+    loanRatio REAL,
+    marginEquity REAL,
+    marketValue REAL,
+    totalDeposit REAL,
+    totalWithdrawal REAL,
+    unclearCheque REAL
+);
+
+insertAccountBalanceData:
+INSERT INTO AccountBalanceData(accountCode,accruedCharge,assetValue,buyingPower,cashBalance,costValue,
+currentBalance,deptEquityRatio,equity,equityDebtRatio,immatureBalance,loanRatio,marginEquity,marketValue,totalDeposit,totalWithdrawal,unclearCheque)
+VALUES(?,?,?,?,?,?,?,?,?,?,?,
+?,?,?,?,?,?);
+
+getAccountBalance:
+SELECT *
+FROM AccountBalanceData;
+getAccountBalanceByUniqueId:
+SELECT * FROM AccountBalanceData WHERE accountCode = :uniqueCode;
+deleteAccountBalance:
+DELETE FROM AccountBalanceData;

@@ -1,0 +1,19 @@
+CREATE TABLE NewsData(
+        title TEXT,
+        description TEXT,
+        date TEXT
+);
+
+insertNewsData:
+INSERT INTO NewsData(title,description,date)
+VALUES( ?, ?, ?);
+
+getNewsData:
+SELECT *
+FROM NewsData;
+
+getUniqueNews:
+SELECT * FROM NewsData WHERE title = :uniqueTitle;
+
+deleteNewsData:
+DELETE FROM NewsData;

@@ -1,0 +1,23 @@
+CREATE TABLE AccountReceivableData(
+    name TEXT,
+    company1 TEXT,
+    company2 TEXT,
+    shareQuantity1 REAL,
+    shareQuantity2 REAL,
+    amount1 REAL,
+    amount2 REAL
+
+);
+
+insertAccountReceivableData:
+INSERT INTO AccountReceivableData(name, company1, company2, shareQuantity1, shareQuantity2, amount1 ,amount2)
+VALUES( ?, ?, ?, ?, ?,?,?);
+
+getAccountReceivableData:
+SELECT *
+FROM AccountReceivableData;
+
+getAccountReceivableByUniqueName:
+SELECT * FROM AccountReceivableData WHERE name = :uniqueName;
+deleteAccountReceivableData:
+DELETE FROM AccountReceivableData;

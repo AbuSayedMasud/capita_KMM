@@ -1,0 +1,21 @@
+CREATE TABLE ParticipationData (
+    type TEXT,
+    issuesAdvanced TEXT,
+    issuesDeclined TEXT,
+    issuesUnchanged TEXT,
+    market TEXT
+);
+
+insertParticipationData:
+INSERT INTO ParticipationData(type, issuesAdvanced, issuesDeclined, issuesUnchanged, market)
+VALUES (?, ?, ?, ?, ?);
+
+getParticipationData:
+SELECT *
+FROM ParticipationData;
+
+getParticipationByUnique:
+SELECT * FROM ParticipationData WHERE market = :uniqueMarket;
+
+deleteParticipationData:
+DELETE FROM ParticipationData;

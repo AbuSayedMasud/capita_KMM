@@ -1,0 +1,20 @@
+CREATE TABLE StatusData (
+     type TEXT,
+     market TEXT,
+     status TEXT,
+     updatedata TEXT
+);
+
+insertStatusData:
+INSERT INTO StatusData(type, market, status, updatedata)
+VALUES(?,?,?,?);
+
+getStatusData:
+SELECT *
+FROM StatusData;
+
+getStatusByUnique:
+SELECT * FROM StatusData WHERE  market= :uniqueMarket;
+
+deleteStatusData:
+DELETE FROM StatusData;

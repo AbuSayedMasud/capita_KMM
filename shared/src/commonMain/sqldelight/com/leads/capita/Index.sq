@@ -1,0 +1,27 @@
+CREATE TABLE IndexData (
+    type TEXT,
+    market TEXT,
+    symbol TEXT,
+    name TEXT,
+    open TEXT,
+    high TEXT,
+    low TEXT,
+    close TEXT,
+    volume TEXT,
+    value TEXT,
+    trade TEXT,
+    change TEXT,
+    changePercent TEXT,
+    changeDirection TEXT
+);
+insertIndexData:
+INSERT INTO IndexData(type, market, symbol, name, open, high,low,close,volume,value,trade,change,changePercent,changeDirection)
+VALUES( ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?);
+
+getIndexData:
+SELECT *
+FROM IndexData;
+getIndexByUniqueIndex:
+SELECT * FROM IndexData WHERE name= :uniqueName;
+deleteIndexData:
+DELETE FROM IndexData;

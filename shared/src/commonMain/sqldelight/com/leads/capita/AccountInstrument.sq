@@ -1,0 +1,33 @@
+CREATE TABLE AccountInstrumentData (
+instrumentIndex REAL NOT NULL,
+    long_name TEXT,
+    short_name TEXT,
+    value REAL,
+    closed_price REAL,
+    change REAL,
+    change_icon REAL,
+    total_quantity REAL,
+    salable_quantity REAL,
+    average_cost REAL,
+    total_cost REAL,
+    close_price REAL,
+    unrealized_gain REAL,
+    gain_percent REAL,
+    cost_value REAL
+);
+
+insertAccountInstrumentData:
+INSERT INTO AccountInstrumentData(instrumentIndex, long_name, short_name,value,closed_price, change,change_icon,total_quantity,
+salable_quantity,average_cost,total_cost,close_price,unrealized_gain,gain_percent,cost_value)
+VALUES( ?, ?, ?, ?, ?,?,?,?,
+?,?,?,?,?,?,?);
+
+getAccountInstrumentData:
+SELECT *
+FROM AccountInstrumentData;
+
+getAccountInstrumentByUniqueId:
+SELECT * FROM AccountInstrumentData WHERE short_name = :uniqueName;
+
+deleteAccountInstrumentData:
+DELETE FROM AccountInstrumentData;

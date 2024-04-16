@@ -1,0 +1,21 @@
+CREATE TABLE AccountTransactionData (
+    transferType TEXT,
+    totalAmount REAL,
+    description TEXT,
+    quantity TEXT,
+    date TEXT,
+    identity TEXT
+);
+insertAccountTransactionData:
+INSERT INTO AccountTransactionData(transferType, totalAmount, description, quantity, date, identity)
+VALUES( ?, ?, ?, ?, ?,?);
+
+getAccountTransactionData:
+SELECT *
+FROM AccountTransactionData;
+
+getAccountTransactionByUniqueId:
+SELECT * FROM AccountTransactionData WHERE transferType = :uniqueId;
+
+deleteAccountTransactionData:
+DELETE FROM AccountTransactionData;

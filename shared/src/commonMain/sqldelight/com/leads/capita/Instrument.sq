@@ -1,0 +1,43 @@
+CREATE TABLE InstrumentData (
+       type TEXT,
+       market TEXT,
+       symbol TEXT,
+       name TEXT,
+       open TEXT,
+       high TEXT,
+       low TEXT,
+       close TEXT,
+       volume TEXT,
+       value TEXT,
+       trade TEXT,
+       change TEXT,
+       changePercent TEXT,
+       changeDirection TEXT
+);
+insertInstrumentData:
+INSERT INTO InstrumentData (
+    type,
+    market,
+    symbol,
+    name,
+    open,
+    high,
+    low,
+    close,
+    volume,
+    value,
+    trade,
+    change,
+    changePercent,
+    changeDirection
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+getInstrumentData:
+SELECT *
+FROM InstrumentData;
+
+getInstrumentByUnique:
+SELECT * FROM IndexData WHERE name= :uniqueName;
+
+deleteInstrumentData:
+DELETE FROM InstrumentData;

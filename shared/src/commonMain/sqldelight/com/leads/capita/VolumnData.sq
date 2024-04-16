@@ -1,0 +1,28 @@
+CREATE TABLE VolumnData(
+    type TEXT,
+    market TEXT,
+    symbol TEXT,
+    name TEXT,
+    open TEXT,
+    high TEXT,
+    low TEXT,
+    close TEXT,
+    volume TEXT,
+    value TEXT,
+    trade TEXT,
+    change TEXT,
+    changePercent TEXT,
+    changeDirection TEXT
+);
+insertTradeVolumnData:
+INSERT INTO VolumnData(type, market, symbol, name, open, high,low,close,volume,value,trade,change,changePercent,changeDirection)
+VALUES( ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?);
+
+getTradeVolumnData:
+SELECT *
+FROM VolumnData;
+
+getVolumnDataByUnique:
+SELECT * FROM VolumnData WHERE market = :uniqueMarket;
+deleteTradeVolumnData:
+DELETE FROM VolumnData;
