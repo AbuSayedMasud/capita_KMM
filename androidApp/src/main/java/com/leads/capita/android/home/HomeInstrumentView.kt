@@ -30,21 +30,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
 import androidx.navigation.NavHostController
+import com.leads.capita.DatabaseDriverFactory
 import com.leads.capita.formatnumber.formatNumberWithCommas
-import com.leads.capita.android.MockJsonLoader.MockLoader
 
 import com.leads.capita.android.shell.BottomBar
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.R
 import com.leads.capita.api.account.AccountInstrument
+import com.leads.capita.service.account.AccountServiceImpl
 
 @Composable
 fun HomeInstrumentView(navController: NavHostController) {
     val context = LocalContext.current
-//    val accountInstrument = AccountServiceImpl()
+
     var instrument: List<AccountInstrument>? by remember { mutableStateOf(null) }
-//    val homeInstrument = accountInstrument.getInstrumentServices(context)
-    instrument = MockLoader(context).instruments
+    var databaseDriverFactory = DatabaseDriverFactory(context)
+    val accountInstrument = AccountServiceImpl(databaseDriverFactory)
+    val homeInstrument = accountInstrument.getInstrumentServices()
+    instrument = homeInstrument
     val paddingValue = if (isSystemInDarkTheme()) {
         6.dp
     } else {
@@ -152,7 +155,10 @@ fun HomeInstrumentView(navController: NavHostController) {
                                 horizontalAlignment = Alignment.End,
                             ) {
                                 Text(
-                                    text = formatNumberWithCommas(position?.totalQuantity ?: 0.0, 2),
+                                    text = formatNumberWithCommas(
+                                        position?.totalQuantity ?: 0.0,
+                                        2
+                                    ),
                                     textAlign = TextAlign.Start,
                                     style = MaterialTheme.typography.body1
                                         .copy(

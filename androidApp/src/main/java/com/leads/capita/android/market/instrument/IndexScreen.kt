@@ -23,9 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-
-import com.leads.capita.android.MockJsonLoader.MockLoader
-
+import com.leads.capita.DatabaseDriverFactory
 
 import com.leads.capita.android.filter.IndexFilterScreen
 import com.leads.capita.android.theme.BackgroundColor
@@ -34,6 +32,7 @@ import com.leads.capita.android.theme.PrimaryColor
 import com.leads.capita.android.theme.White
 import com.leads.capita.android.R
 import com.leads.capita.api.market.Ticker
+import com.leads.capita.service.instrument.InstrumentServiceImpl
 
 @Composable
 fun IndexScreen(
@@ -45,10 +44,10 @@ fun IndexScreen(
     setIsFloatingActionButtonVisible: (Boolean) -> Unit,
     setIsSwipeEnabled: (Boolean) -> Unit,
 ) {
-//    val instrumentServiceImpl = InstrumentServiceImpl()
+    var databaseDriverFactory = DatabaseDriverFactory(context)
+    val instrumentServiceImpl = InstrumentServiceImpl(databaseDriverFactory)
     var indexList: List<Ticker>? by remember { mutableStateOf(null) }
-//    val indexData = instrumentServiceImpl.getTicker("Index", context)
-    val indexData = MockLoader(context).indices
+    val indexData = instrumentServiceImpl.getTicker("Index")
     indexList = indexData
     var selectedIndex by remember { mutableStateOf("") }
 

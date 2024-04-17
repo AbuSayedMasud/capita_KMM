@@ -21,7 +21,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.leads.capita.home.HomeBalanceView
 import com.leads.capita.android.shell.MyAppBar
 import com.leads.capita.android.theme.BackgroundColor
 import com.leads.capita.android.theme.CapitaTheme

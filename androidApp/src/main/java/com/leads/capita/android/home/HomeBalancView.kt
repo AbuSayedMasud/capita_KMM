@@ -1,4 +1,4 @@
-package com.leads.capita.home
+package com.leads.capita.android.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -22,8 +22,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
 import androidx.navigation.NavHostController
+import com.leads.capita.DatabaseDriverFactory
 import com.leads.capita.formatnumber.formatNumberWithCommas
-import com.leads.capita.android.MockJsonLoader.MockLoader
+import com.leads.capita.android.mockJsonLoader.MockLoaderDemo
 
 
 import com.leads.capita.android.shell.BottomBar
@@ -32,17 +33,21 @@ import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
 import com.leads.capita.android.R
 import com.leads.capita.api.account.AccountBalance
+import com.leads.capita.service.account.AccountServiceImpl
 
 
 @Composable
 fun HomeBalanceView(navController: NavHostController) {
     // Obtain the current context
     val context = LocalContext.current
-//    val accountService = AccountServiceImpl()
+
     var balance: AccountBalance? by remember { mutableStateOf(null) }
+
+   var  databaseDriverFactory= DatabaseDriverFactory(context)
+    val accountService = AccountServiceImpl(databaseDriverFactory)
     // Fetch the account balance information from the service
-//    val homeBalance = accountService.getBalanceServices(context)
-    val homeBalance=MockLoader(context).balances
+    val homeBalance = accountService.getBalanceServices()
+//    val homeBalance=MockLoaderDemo(context).balances
     balance = homeBalance[0]
 
     val (backgroundColor, contentColor) = getCardColors()

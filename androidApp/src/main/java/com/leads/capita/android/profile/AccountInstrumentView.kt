@@ -6,7 +6,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.R
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,12 +30,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.leads.capita.DatabaseDriverFactory
 import com.leads.capita.formatnumber.formatNumberWithCommas
-import com.leads.capita.android.MockJsonLoader.MockLoader
 import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
 import com.leads.capita.api.account.AccountInstrument
+import com.leads.capita.service.account.AccountServiceImpl
 
 @Composable
 fun AccountInstrumentView(
@@ -50,12 +50,12 @@ fun AccountInstrumentView(
     val screenWidth = configuration.screenWidthDp.dp
     val textColumnWeight =
         if (screenWidth > 600.dp) 4f else 1f
-
-//    val accountService = AccountServiceImpl()
+    val databaseDriverFactory: DatabaseDriverFactory = DatabaseDriverFactory(context)
+    val accountService = AccountServiceImpl(databaseDriverFactory)
     var instruments: List<AccountInstrument>? by remember { mutableStateOf(null) }
-//    val accountInstrument = accountService.getInstrumentServices(context)
-//    instruments = accountInstrument
-    instruments = MockLoader(context).instruments
+    val accountInstrument = accountService.getInstrumentServices()
+    instruments = accountInstrument
+//    instruments = MockLoaderDemo(context).instruments
 
     val (backgroundColor, contentColor) = getCardColors()
     val paddingValue = if (isSystemInDarkTheme()) {

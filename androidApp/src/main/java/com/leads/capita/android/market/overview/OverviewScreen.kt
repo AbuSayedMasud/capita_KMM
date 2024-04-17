@@ -25,7 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.leads.capita.android.MockJsonLoader.MockLoader
+import com.leads.capita.DatabaseDriverFactory
 import com.leads.capita.android.filter.OverviewFilterScreen
 import com.leads.capita.android.market.instrument.InstrumentView
 import com.leads.capita.android.theme.BackgroundColor
@@ -33,6 +33,8 @@ import com.leads.capita.android.theme.FloatingActionButtonColor
 import com.leads.capita.android.theme.PrimaryColor
 import com.leads.capita.android.theme.White
 import com.leads.capita.android.R
+import com.leads.capita.service.instrument.InstrumentServiceImpl
+import com.leads.capita.service.overview.OverviewServiceImpl
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -44,20 +46,23 @@ fun OverviewScreen(
     setIsFloatingActionButtonVisible: (Boolean) -> Unit,
     setIsSwipeEnabled: (Boolean) -> Unit,
 ) {
-//    val overviewService = OverviewServiceImpl()
-//    val instrumentService = InstrumentServiceImpl()
+    var context = LocalContext.current
+    var databaseDriverFactory = DatabaseDriverFactory(context)
+
+    val overviewService = OverviewServiceImpl(databaseDriverFactory)
+    val instrumentService = InstrumentServiceImpl(databaseDriverFactory)
     var selectedMarket by remember { mutableStateOf("") }
 
-    var context = LocalContext.current
-//    var enableSwiping = remember { mutableStateOf(true) }
-//    val indexData = instrumentService.getTicker("Index", context)
-//    val statusData = overviewService.listStatus(context)
-//    val volumeData = overviewService.getTicker("", context)
-//    val participationData = overviewService.listParticipation(context)
-    val indexData=MockLoader(context).indices
-    var statusData=MockLoader(context).status
-    var volumeData=MockLoader(context).volume
-    var participationData=MockLoader(context).participation
+
+    var enableSwiping = remember { mutableStateOf(true) }
+    val indexData = instrumentService.getTicker("Index")
+    val statusData = overviewService.listStatus()
+    val volumeData = overviewService.getTicker("")
+    val participationData = overviewService.listParticipation()
+//    val indexData=MockLoaderDemo(context).indices
+//    var statusData=MockLoaderDemo(context).status
+//    var volumeData=MockLoaderDemo(context).volume
+//    var participationData=MockLoaderDemo(context).participation
     // Fetch the instruments based on the selected market
     val overviewValues =
         indexData.filter { if (selectedMarket.isBlank()) it.market == "DSE" else it.market == selectedMarket }

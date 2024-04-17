@@ -27,7 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.leads.capita.android.filter.InstrumentFilterScreen
 
-import com.leads.capita.android.MockJsonLoader.MockLoader
+import com.leads.capita.android.mockJsonLoader.MockLoaderDemo
 
 import com.leads.capita.android.theme.BackgroundColor
 import com.leads.capita.android.theme.FloatingActionButtonColor
@@ -50,7 +50,7 @@ fun InstrumentScreen(
     val context = LocalContext.current
     var instrumentList: List<Ticker>? by remember { mutableStateOf(null) }
 //    val instrumentData = instrumentServiceImpl.getTicker("Instrument", context)
-    val instrumentData=MockLoader(context).instrument
+    val instrumentData=MockLoaderDemo(context).instrument
     instrumentList = instrumentData
 
     var selectedMarket by remember { mutableStateOf("") }

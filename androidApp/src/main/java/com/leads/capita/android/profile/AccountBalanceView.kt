@@ -1,6 +1,5 @@
 package com.leads.capita.android.profile
 
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -31,14 +30,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.leads.capita.DatabaseDriverFactory
 import com.leads.capita.formatnumber.formatNumberWithCommas
-import com.leads.capita.android.MockJsonLoader.MockLoader
 
 import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
 import com.leads.capita.android.R
 import com.leads.capita.api.account.AccountBalance
+import com.leads.capita.service.account.AccountServiceImpl
 
 @Composable
 fun AccountBalanceView(
@@ -53,11 +53,12 @@ fun AccountBalanceView(
     val screenWidth = configuration.screenWidthDp.dp
     val textColumnWeight =
         if (screenWidth > 600.dp) 4f else 1f
-//        val accountService = AccountServiceImpl()
+    val databaseDriverFactory:DatabaseDriverFactory= DatabaseDriverFactory(context)
+        val accountService = AccountServiceImpl(databaseDriverFactory)
     var balances: List<AccountBalance>? by remember { mutableStateOf(null) }
-//        val accountBalanceList = accountService.getBalanceServices(context)
-//        balances = accountBalanceList
-    balances = MockLoader(context).balances
+        val accountBalanceList = accountService.getBalanceServices()
+        balances = accountBalanceList
+//    balances = MockLoaderDemo(context).balances
     val (backgroundColor, contentColor) = getCardColors()
     val paddingValue = if (isSystemInDarkTheme()) {
         6.dp

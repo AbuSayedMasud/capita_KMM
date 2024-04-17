@@ -30,22 +30,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
 import androidx.navigation.NavHostController
+import com.leads.capita.DatabaseDriverFactory
 import com.leads.capita.formatnumber.formatNumberWithCommas
 
-import com.leads.capita.android.MockJsonLoader.MockLoader
 
 import com.leads.capita.android.shell.BottomBar
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.R
 import com.leads.capita.api.account.AccountReceivable
+import com.leads.capita.service.account.AccountServiceImpl
 
 @Composable
 fun HomeReceivableView(navController: NavHostController) {
     val context = LocalContext.current
-//    val accountInstrument = AccountServiceImpl()
+    var databaseDriverFactory = DatabaseDriverFactory(context)
+    val accountInstrument = AccountServiceImpl(databaseDriverFactory)
     var receivableList: List<AccountReceivable>? by remember { mutableStateOf(null) }
-//    val homeReceivableList = accountInstrument.getReceivableServices(context)
-    receivableList = MockLoader(context).receivables
+    val homeReceivableList = accountInstrument.getReceivableServices()
+    receivableList = homeReceivableList
     val (backgroundColor, contentColor) = getCardColors()
     val paddingValue = if (isSystemInDarkTheme()) {
         6.dp

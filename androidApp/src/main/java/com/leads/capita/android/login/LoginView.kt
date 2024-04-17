@@ -20,8 +20,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.Button
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarData
 import androidx.compose.material3.SnackbarHost
@@ -48,7 +46,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.leads.capita.formatnumber.isWithinMaxCharLimit
-import com.leads.capita.android.MockJsonLoader.MockLoader
 
 import com.leads.capita.android.activity.HomeActivity
 import com.leads.capita.android.biometricRegistration.BioMetricPrompt
@@ -63,7 +60,8 @@ import com.leads.capita.android.theme.White
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
 import com.leads.capita.android.R
-import kotlinx.coroutines.launch
+import com.leads.capita.android.mockJsonLoader.MockLoader
+import kotlinx.coroutines.runBlocking
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -317,12 +315,12 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
 //                            when (authResult) {
 //                                AuthResult.Success -> {
                                     val intent = Intent(context, HomeActivity::class.java)
-//                                    val service = MockLoader(context)
-//                                    // Initialize the MockLoader service
-//                                    runBlocking {
-//                                        service.init()
-//                                       MockLoader(context).init()
-//                                    }
+                                    val service = MockLoader(context)
+                                    // Initialize the MockLoader service
+                                    runBlocking {
+                                        service.init()
+                                       MockLoader(context).init()
+                                    }
 //                                    // Start the HomeActivity
                                     context.startActivity(intent)
 //                                }

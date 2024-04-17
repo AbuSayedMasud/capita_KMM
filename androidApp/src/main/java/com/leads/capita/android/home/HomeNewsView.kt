@@ -20,18 +20,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.leads.capita.android.MockJsonLoader.MockLoader
+import com.leads.capita.DatabaseDriverFactory
 
 
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.R
 import com.leads.capita.api.news.News
+import com.leads.capita.service.news.NewsServiceImpl
 
 
 @Composable
@@ -39,8 +39,9 @@ fun HomeNewsView() {
 //    val newsService = NewsServiceImpl()
     var newsList: List<News>? by remember { mutableStateOf(null) }
     val context = LocalContext.current
-//    val newsData = newsService.getNewsService(context)
-    newsList = MockLoader(context).news
+    var databaseDriverFactory = DatabaseDriverFactory(context)
+    val newsService = NewsServiceImpl(databaseDriverFactory)
+    newsList = newsService.getNewsService()
     val (backgroundColor, contentColor) = getCardColors()
     val paddingValue = if (isSystemInDarkTheme()) {
         6.dp
@@ -80,7 +81,11 @@ fun HomeNewsView() {
                         Text(
                             text = "News",
                             style = MaterialTheme.typography.body1
-                                .copy(fontWeight = FontWeight.Bold, fontSize = 18.sp, color = contentColor),
+                                .copy(
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 18.sp,
+                                    color = contentColor
+                                ),
                         )
                     }
 
@@ -117,14 +122,19 @@ fun HomeNewsView() {
                         val news = newsList!![index]
                         Row(
                             modifier = Modifier
-                                .fillMaxWidth().padding(5.dp),
+                                .fillMaxWidth()
+                                .padding(5.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Column {
                                 Text(
                                     text = news.title,
                                     style = MaterialTheme.typography.body2
-                                        .copy(fontSize = 15.5.sp, color = contentColor, fontWeight = FontWeight.Bold),
+                                        .copy(
+                                            fontSize = 15.5.sp,
+                                            color = contentColor,
+                                            fontWeight = FontWeight.Bold
+                                        ),
                                 )
                                 Spacer(modifier = Modifier.height(8.dp))
                                 Text(

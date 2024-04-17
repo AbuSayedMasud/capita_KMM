@@ -2,7 +2,6 @@ package com.leads.capita.android.mockJsonLoader
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.leads.capita.DatabaseDriverFactory
 import com.leads.capita.api.account.AccountBalance
 import com.leads.capita.api.account.AccountInstrument
 import com.leads.capita.api.account.AccountReceivable
@@ -11,64 +10,71 @@ import com.leads.capita.api.market.Ticker
 import com.leads.capita.api.market.overview.Participation
 import com.leads.capita.api.market.overview.Status
 import com.leads.capita.api.news.News
-import com.leads.capita.service.MockService
 import kotlinx.serialization.json.Json
 
-class MockLoader(private val context: Context) {
+class MockLoaderDemo(private val context: Context) {
 
-    fun init() {
-        var isLoaded = false
-        if (isLoaded) {
-            return
-        }
+//    fun init() {
+//        var isLoaded = false
+//        if (isLoaded) {
+//            return
+//        }
 
-        val databaseDriverFactory: DatabaseDriverFactory = DatabaseDriverFactory(context)
-        val service = MockService(databaseDriverFactory)
+//        val service = MockService(context)
 
         // account Transaction
         val jsonContent = loadJson("accounttransaction")
         // Deserialize JSON content into a list of AccountTransaction objects
         val transactions = Json.decodeFromString<List<AccountTransaction>>(jsonContent)
-        service.loadAccountTransaction(transactions)
-
+//        service.loadAccountTransaction(transactions)
         // account Balance
-        val balances = Json.decodeFromString<List<AccountBalance>>(loadJson("accountbalance"))
-        service.loadAccountBalance(balances)
+
+        var balances = Json.decodeFromString<List<AccountBalance>>(loadJson("accountbalance"))
+//        service.loadAccountBalance(balances)
+
 
         // account instrument
         val instruments = Json.decodeFromString<List<AccountInstrument>>(loadJson("accountinstruments"))
-        service.loadAccountInstrument(instruments)
+//        service.loadAccountInstrument(instruments)
+
 
         // account Receivable
         val receivables = Json.decodeFromString<List<AccountReceivable>>(loadJson("accountreceivable"))
-        service.loadAccountReceivable(receivables)
+//        service.loadAccountReceivable(receivables)
+
 
         // index
         val indices = Json.decodeFromString<List<Ticker>>(loadJson("index"))
-        service.loadIndices(indices)
+//        service.loadIndices(indices)
+
 
         // instrument
         val instrument = Json.decodeFromString<List<Ticker>>(loadJson("instrument"))
-        service.loadInstrument(instrument)
+//        service.loadInstrument(instrument)
+
 
         // news
         val news = Json.decodeFromString<List<News>>(loadJson("news"))
-        service.loadNews(news)
+//        service.loadNews(news)
+
 
         // participation
         val participation = Json.decodeFromString<List<Participation>>(loadJson("participationlist"))
-        service.loadParticipation(participation)
+//        service.loadParticipation(participation)
+
 
         // status
         val status = Json.decodeFromString<List<Status>>(loadJson("statuslist"))
-        service.loadStatus(status)
+//        service.loadStatus(status)
+
 
         // volume
         val volume = Json.decodeFromString<List<Ticker>>(loadJson("volumelist"))
-        service.loadvolume(volume)
+//        service.loadvolume(volume)
 
-        true.also { isLoaded = it }
-    }
+
+//        true.also { isLoaded = it }
+//    }
 
     /**
      * Loads JSON data from a raw resource file.
@@ -88,4 +94,7 @@ class MockLoader(private val context: Context) {
         // Use a buffered reader to efficiently read the text from the input stream
         return inputStream.bufferedReader().use { it.readText() }
     }
+
 }
+
+

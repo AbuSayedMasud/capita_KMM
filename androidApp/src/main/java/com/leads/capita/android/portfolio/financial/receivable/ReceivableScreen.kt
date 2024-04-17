@@ -17,19 +17,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.leads.capita.android.MockJsonLoader.MockLoader
+import com.leads.capita.DatabaseDriverFactory
 
 import com.leads.capita.android.theme.BackgroundColor
 import com.leads.capita.api.account.AccountReceivable
+import com.leads.capita.service.account.AccountServiceImpl
 
 
 @Composable
 fun ReceivableScreen() {
     val context = LocalContext.current
-//    val accountInstrument = AccountServiceImpl()
+    val databaseDriverFactory:DatabaseDriverFactory=DatabaseDriverFactory(context)
+
+    val accountInstrument = AccountServiceImpl(databaseDriverFactory)
     var receivableList: List<AccountReceivable>? by remember { mutableStateOf(null) }
-    val homeReceivableList=MockLoader(context).receivables
-//    val homeReceivableList = accountInstrument.getReceivableServices(context)
+//    val homeReceivableList=MockLoaderDemo(context).receivables
+    val homeReceivableList = accountInstrument.getReceivableServices()
     receivableList = homeReceivableList
 
     DisplayReceivables(receivableList!!)

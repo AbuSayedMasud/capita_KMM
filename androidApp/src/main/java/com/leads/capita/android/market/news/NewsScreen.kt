@@ -14,21 +14,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import com.leads.capita.DatabaseDriverFactory
 
-import com.leads.capita.android.MockJsonLoader.MockLoader
 
-import com.leads.capita.android.market.news.NewsView
 import com.leads.capita.android.theme.BackgroundColor
 import com.leads.capita.api.news.News
+import com.leads.capita.service.news.NewsServiceImpl
 
 
 @Composable
 fun NewsScreen() {
-//    val newsService = NewsServiceImpl()
     val context = LocalContext.current
+    var databaseDriverFactory = DatabaseDriverFactory(context)
+    val newsService = NewsServiceImpl(databaseDriverFactory)
+
     var newsList: List<News>? by remember { mutableStateOf(null) }
-//    val newsData = newsService.getNewsService(context)
-    val newsData=MockLoader(context).news
+    val newsData = newsService.getNewsService()
     newsList = newsData
 
     Box(

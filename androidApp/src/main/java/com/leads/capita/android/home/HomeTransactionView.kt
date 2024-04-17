@@ -33,21 +33,23 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.leads.capita.DatabaseDriverFactory
 import com.leads.capita.formatnumber.formatNumberWithCommas
-import com.leads.capita.android.MockJsonLoader.MockLoader
 
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.R
 import com.leads.capita.api.account.AccountTransaction
+import com.leads.capita.service.account.AccountServiceImpl
 
 
 @Composable
 fun HomeTransactionView(navController: NavHostController) {
     val context = LocalContext.current
-//    val accountInstrument = AccountServiceImpl()
+    var databaseDriverFactory = DatabaseDriverFactory(context)
+    val accountInstrument = AccountServiceImpl(databaseDriverFactory)
     var transactionList: List<AccountTransaction>? by remember { mutableStateOf(null) }
-//    val homeTransactionList = accountInstrument.getTransactionServices(context)
-    transactionList = MockLoader(context).transactions
+    val homeTransactionList = accountInstrument.getTransactionServices()
+    transactionList = homeTransactionList
 
     val (backgroundColor, contentColor) = getCardColors()
     val changeColor = Color(0xFF15A80B)
