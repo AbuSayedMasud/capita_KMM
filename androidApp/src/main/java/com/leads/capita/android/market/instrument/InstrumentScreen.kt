@@ -27,14 +27,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.leads.capita.android.filter.InstrumentFilterScreen
 
-import com.leads.capita.android.mockJsonLoader.MockLoaderDemo
 
 import com.leads.capita.android.theme.BackgroundColor
 import com.leads.capita.android.theme.FloatingActionButtonColor
 import com.leads.capita.android.theme.PrimaryColor
 import com.leads.capita.android.theme.White
 import com.leads.capita.android.R
-import com.leads.capita.api.market.Ticker
+import com.leads.capita.market.Ticker
+import com.leads.capita.repository.DatabaseDriverFactory
+import com.leads.capita.service.instrument.InstrumentServiceImpl
 
 @Composable
 fun InstrumentScreen(
@@ -46,11 +47,13 @@ fun InstrumentScreen(
     setIsSwipeEnabled: (Boolean) -> Unit,
 
 ) {
-//    val instrumentServiceImpl = InstrumentServiceImpl()
+
     val context = LocalContext.current
+    val databaseDriverFactory:DatabaseDriverFactory= DatabaseDriverFactory(context)
+    val instrumentServiceImpl = InstrumentServiceImpl(databaseDriverFactory)
     var instrumentList: List<Ticker>? by remember { mutableStateOf(null) }
-//    val instrumentData = instrumentServiceImpl.getTicker("Instrument", context)
-    val instrumentData=MockLoaderDemo(context).instrument
+    val instrumentData = instrumentServiceImpl.getTicker("Instrument")
+
     instrumentList = instrumentData
 
     var selectedMarket by remember { mutableStateOf("") }
@@ -106,7 +109,8 @@ fun InstrumentScreen(
 @Composable
 fun DisplayInstrument(instruments: List<Ticker>) {
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .background(if (isSystemInDarkTheme()) BackgroundColor else Color.White),
     ) {
         LazyColumn(

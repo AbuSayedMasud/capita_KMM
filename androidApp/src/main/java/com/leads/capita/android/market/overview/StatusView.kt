@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
-import com.leads.capita.api.market.overview.Status
+import com.leads.capita.market.overview.Status
 
 @Composable
 fun StatusView(status: List<Status>) {

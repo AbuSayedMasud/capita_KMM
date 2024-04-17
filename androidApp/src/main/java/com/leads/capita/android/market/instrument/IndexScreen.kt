@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.leads.capita.DatabaseDriverFactory
+import com.leads.capita.repository.DatabaseDriverFactory
 
 import com.leads.capita.android.filter.IndexFilterScreen
 import com.leads.capita.android.theme.BackgroundColor
@@ -31,7 +31,7 @@ import com.leads.capita.android.theme.FloatingActionButtonColor
 import com.leads.capita.android.theme.PrimaryColor
 import com.leads.capita.android.theme.White
 import com.leads.capita.android.R
-import com.leads.capita.api.market.Ticker
+import com.leads.capita.market.Ticker
 import com.leads.capita.service.instrument.InstrumentServiceImpl
 
 @Composable
@@ -102,7 +102,7 @@ fun IndexScreen(
 }
 
 @Composable
-fun DisplayIndices(indices: List<Ticker>) {
+fun DisplayIndices(indices: List<com.leads.capita.market.Ticker>) {
     Box(
         modifier = Modifier.fillMaxSize()
             .background(if (isSystemInDarkTheme()) BackgroundColor else Color.White),

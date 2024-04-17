@@ -17,17 +17,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.leads.capita.DatabaseDriverFactory
+import com.leads.capita.repository.DatabaseDriverFactory
 
 import com.leads.capita.android.theme.BackgroundColor
-import com.leads.capita.api.account.AccountBalance
+import com.leads.capita.account.AccountBalance
 import com.leads.capita.service.account.AccountServiceImpl
 
 @Composable
 fun BalanceScreen() {
     val context = LocalContext.current
     var balance: List<AccountBalance> by remember { mutableStateOf(emptyList()) }
-    val databaseDriverFactory:DatabaseDriverFactory= DatabaseDriverFactory(context)
+    val databaseDriverFactory: DatabaseDriverFactory = DatabaseDriverFactory(context)
     val balanceService = AccountServiceImpl(databaseDriverFactory)
     val balanceData = balanceService.getBalanceServices()
 //    val balanceData=MockLoaderDemo(context).balances

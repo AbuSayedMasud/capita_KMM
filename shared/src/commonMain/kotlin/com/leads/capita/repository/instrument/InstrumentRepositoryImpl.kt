@@ -1,7 +1,7 @@
 package com.leads.capita.repository.instrument
 
-import com.leads.capita.api.instrument.InstrumentRepository
-import com.leads.capita.api.market.Ticker
+import com.leads.capita.instrument.InstrumentRepository
+import com.leads.capita.market.Ticker
 
 
 class InstrumentRepositoryImpl() : InstrumentRepository {

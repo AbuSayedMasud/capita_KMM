@@ -1,15 +1,16 @@
 package com.leads.capita.service.overview
 
 
-import com.leads.capita.DatabaseDriverFactory
-import com.leads.capita.api.market.Ticker
-import com.leads.capita.api.market.TickerService
-import com.leads.capita.api.market.overview.OverviewService
-import com.leads.capita.api.market.overview.Participation
-import com.leads.capita.api.market.overview.Status
+import com.leads.capita.repository.DatabaseDriverFactory
+import com.leads.capita.market.Ticker
+import com.leads.capita.market.TickerService
+import com.leads.capita.market.overview.OverviewService
+import com.leads.capita.market.overview.Participation
+import com.leads.capita.market.overview.Status
 import com.leads.capita.service.overview.OverviewFactory
 
-class OverviewServiceImpl(private var databaseDriverFactory: DatabaseDriverFactory) : TickerService, OverviewService {
+class OverviewServiceImpl(private var databaseDriverFactory: DatabaseDriverFactory) : TickerService,
+   OverviewService {
     override fun getTicker(type: String): List<Ticker> {
         val repository = OverviewFactory.getRepository(databaseDriverFactory)
         return repository.getTradeVolume()

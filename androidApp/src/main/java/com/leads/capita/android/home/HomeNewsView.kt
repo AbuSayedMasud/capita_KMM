@@ -25,12 +25,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.leads.capita.DatabaseDriverFactory
+import com.leads.capita.repository.DatabaseDriverFactory
 
 
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.R
-import com.leads.capita.api.news.News
+import com.leads.capita.news.News
 import com.leads.capita.service.news.NewsServiceImpl
 
 

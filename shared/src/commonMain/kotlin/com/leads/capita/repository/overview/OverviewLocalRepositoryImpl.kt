@@ -1,14 +1,15 @@
 package com.leads.capita.repository.overview
 
 import com.leads.capita.CapitaDb
-import com.leads.capita.DatabaseDriverFactory
-import com.leads.capita.api.market.Ticker
-import com.leads.capita.api.market.overview.OverviewRepository
-import com.leads.capita.api.market.overview.Participation
-import com.leads.capita.api.market.overview.Status
+import com.leads.capita.repository.DatabaseDriverFactory
+import com.leads.capita.market.Ticker
+import com.leads.capita.market.overview.OverviewRepository
+import com.leads.capita.market.overview.Participation
+import com.leads.capita.market.overview.Status
 
 
-class OverviewLocalRepositoryImpl(private var databaseDriverFactory: DatabaseDriverFactory) : OverviewRepository {
+class OverviewLocalRepositoryImpl(private var databaseDriverFactory: DatabaseDriverFactory) :
+    OverviewRepository {
 
     override fun getStatus(): List<Status> {
         val db = CapitaDb(databaseDriverFactory.createDriver())
@@ -53,7 +54,7 @@ class OverviewLocalRepositoryImpl(private var databaseDriverFactory: DatabaseDri
         return db.participationDataQueries.getParticipationData()
             .executeAsList()
             .map { participationData ->
-                Participation(
+               Participation(
                     type = participationData?.type!!,
                     issuesAdvanced = participationData?.issuesAdvanced!!,
                     issuesDeclined = participationData?.issuesDeclined!!,

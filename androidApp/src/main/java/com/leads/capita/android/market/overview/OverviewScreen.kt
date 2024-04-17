@@ -25,7 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.leads.capita.DatabaseDriverFactory
+import com.leads.capita.repository.DatabaseDriverFactory
 import com.leads.capita.android.filter.OverviewFilterScreen
 import com.leads.capita.android.market.instrument.InstrumentView
 import com.leads.capita.android.theme.BackgroundColor

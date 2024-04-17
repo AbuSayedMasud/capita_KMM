@@ -1,10 +1,10 @@
 package com.leads.capita.repository.overview
 
 
-import com.leads.capita.api.market.Ticker
-import com.leads.capita.api.market.overview.OverviewRepository
-import com.leads.capita.api.market.overview.Participation
-import com.leads.capita.api.market.overview.Status
+import com.leads.capita.market.Ticker
+import com.leads.capita.market.overview.OverviewRepository
+import com.leads.capita.market.overview.Participation
+import com.leads.capita.market.overview.Status
 
 
 class OverviewRepositoryImpl : OverviewRepository {

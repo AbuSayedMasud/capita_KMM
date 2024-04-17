@@ -33,12 +33,12 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.leads.capita.DatabaseDriverFactory
+import com.leads.capita.repository.DatabaseDriverFactory
 import com.leads.capita.formatnumber.formatNumberWithCommas
 
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.R
-import com.leads.capita.api.account.AccountTransaction
+import com.leads.capita.account.AccountTransaction
 import com.leads.capita.service.account.AccountServiceImpl
 
 

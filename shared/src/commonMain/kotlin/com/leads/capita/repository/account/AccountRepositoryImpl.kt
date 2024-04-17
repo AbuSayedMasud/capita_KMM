@@ -1,11 +1,11 @@
 package com.leads.capita.repository.account
 
 
-import com.leads.capita.api.account.AccountBalance
-import com.leads.capita.api.account.AccountInstrument
-import com.leads.capita.api.account.AccountReceivable
-import com.leads.capita.api.account.AccountRepository
-import com.leads.capita.api.account.AccountTransaction
+import com.leads.capita.account.AccountBalance
+import com.leads.capita.account.AccountInstrument
+import com.leads.capita.account.AccountReceivable
+import com.leads.capita.account.AccountRepository
+import com.leads.capita.account.AccountTransaction
 import com.leads.capita.repository.RestUtil.BASE_URL
 import com.leads.capita.repository.RestUtil.getClient
 import io.ktor.client.call.body

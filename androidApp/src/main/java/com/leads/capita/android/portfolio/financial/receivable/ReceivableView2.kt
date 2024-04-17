@@ -21,7 +21,7 @@ import com.leads.capita.formatnumber.formatNumberWithCommas
 import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
-import com.leads.capita.api.account.AccountReceivable
+import com.leads.capita.account.AccountReceivable
 
 
 @Composable

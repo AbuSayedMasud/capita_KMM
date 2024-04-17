@@ -1,7 +1,7 @@
 package com.leads.capita.repository.security
 
-import com.leads.capita.api.security.Identity
-import com.leads.capita.api.security.IdentityRepository
+import com.leads.capita.security.Identity
+import com.leads.capita.security.IdentityRepository
 import com.leads.capita.repository.RestUtil.BASE_URL
 
 import io.ktor.client.HttpClient

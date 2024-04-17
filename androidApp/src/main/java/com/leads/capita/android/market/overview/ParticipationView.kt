@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
-import com.leads.capita.api.market.overview.Participation
+import com.leads.capita.market.overview.Participation
 
 
 @Composable

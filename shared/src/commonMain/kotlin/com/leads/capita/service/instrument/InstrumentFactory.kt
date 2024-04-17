@@ -1,9 +1,9 @@
 package com.leads.capita.service.instrument
 
 
-import com.leads.capita.DatabaseDriverFactory
-import com.leads.capita.api.instrument.InstrumentRepository
-import com.leads.capita.api.market.TickerService
+import com.leads.capita.repository.DatabaseDriverFactory
+import com.leads.capita.instrument.InstrumentRepository
+import com.leads.capita.market.TickerService
 import com.leads.capita.repository.instrument.InstrumentLocalRepositoryImpl
 import com.leads.capita.repository.instrument.InstrumentRepositoryImpl
 import com.leads.capita.service.RuntimeProfile

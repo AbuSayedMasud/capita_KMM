@@ -1,7 +1,7 @@
 package com.leads.capita.service.security
 
-import com.leads.capita.api.security.IdentityRepository
-import com.leads.capita.api.security.IdentityService
+import com.leads.capita.security.IdentityRepository
+import com.leads.capita.security.IdentityService
 import com.leads.capita.repository.security.IdentityLocalRepositoryImpl
 import com.leads.capita.repository.security.IdentityRepositoryImpl
 

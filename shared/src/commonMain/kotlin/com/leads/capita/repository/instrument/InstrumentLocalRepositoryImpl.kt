@@ -2,12 +2,13 @@ package com.leads.capita.repository.instrument
 
 
 import com.leads.capita.CapitaDb
-import com.leads.capita.DatabaseDriverFactory
-import com.leads.capita.api.instrument.InstrumentRepository
-import com.leads.capita.api.market.Ticker
+import com.leads.capita.repository.DatabaseDriverFactory
+import com.leads.capita.instrument.InstrumentRepository
+import com.leads.capita.market.Ticker
 
 
-class InstrumentLocalRepositoryImpl(private var databaseDriverFactory: DatabaseDriverFactory) : InstrumentRepository {
+class InstrumentLocalRepositoryImpl(private var databaseDriverFactory: DatabaseDriverFactory) :
+    InstrumentRepository {
 
     override fun getInstrument(): List<Ticker> {
         val db = CapitaDb(databaseDriverFactory.createDriver())

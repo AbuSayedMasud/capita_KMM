@@ -37,12 +37,12 @@ import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.White
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
-import com.leads.capita.api.account.AccountInstrument
+import com.leads.capita.account.AccountInstrument
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PositionView(
-    accountInstrument: AccountInstrument,
+    accountInstrument:AccountInstrument,
     expandedIndexPosition: Int,
     onCardClicked: (Int) -> Unit,
 

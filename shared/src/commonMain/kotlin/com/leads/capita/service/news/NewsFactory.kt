@@ -1,9 +1,9 @@
 package com.leads.capita.service.news
 
 
-import com.leads.capita.DatabaseDriverFactory
-import com.leads.capita.api.news.NewsRepository
-import com.leads.capita.api.news.NewsService
+import com.leads.capita.repository.DatabaseDriverFactory
+import com.leads.capita.news.NewsRepository
+import com.leads.capita.news.NewsService
 
 import com.leads.capita.repository.news.NewsLocalRepositoryImpl
 import com.leads.capita.repository.news.NewsRepositoryImpl

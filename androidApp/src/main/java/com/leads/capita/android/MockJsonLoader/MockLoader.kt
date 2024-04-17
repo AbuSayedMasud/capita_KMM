@@ -2,15 +2,15 @@ package com.leads.capita.android.mockJsonLoader
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.leads.capita.DatabaseDriverFactory
-import com.leads.capita.api.account.AccountBalance
-import com.leads.capita.api.account.AccountInstrument
-import com.leads.capita.api.account.AccountReceivable
-import com.leads.capita.api.account.AccountTransaction
-import com.leads.capita.api.market.Ticker
-import com.leads.capita.api.market.overview.Participation
-import com.leads.capita.api.market.overview.Status
-import com.leads.capita.api.news.News
+import com.leads.capita.repository.DatabaseDriverFactory
+import com.leads.capita.account.AccountBalance
+import com.leads.capita.account.AccountInstrument
+import com.leads.capita.account.AccountReceivable
+import com.leads.capita.account.AccountTransaction
+import com.leads.capita.market.Ticker
+import com.leads.capita.market.overview.Participation
+import com.leads.capita.market.overview.Status
+import com.leads.capita.news.News
 import com.leads.capita.service.MockService
 import kotlinx.serialization.json.Json
 
@@ -26,45 +26,54 @@ class MockLoader(private val context: Context) {
         val service = MockService(databaseDriverFactory)
 
         // account Transaction
-        val jsonContent = loadJson("accounttransaction")
+        val jsonTransactionContent = loadJson("account_transaction")
         // Deserialize JSON content into a list of AccountTransaction objects
-        val transactions = Json.decodeFromString<List<AccountTransaction>>(jsonContent)
+        val transactions = Json.decodeFromString<List<AccountTransaction>>(jsonTransactionContent)
         service.loadAccountTransaction(transactions)
 
         // account Balance
-        val balances = Json.decodeFromString<List<AccountBalance>>(loadJson("accountbalance"))
+        val jsonBalanceContent = loadJson("account_balance");
+        val balances = Json.decodeFromString<List<AccountBalance>>(jsonBalanceContent)
         service.loadAccountBalance(balances)
 
         // account instrument
-        val instruments = Json.decodeFromString<List<AccountInstrument>>(loadJson("accountinstruments"))
+        val jsonAccountInstrumentContent = loadJson("account_instruments");
+        val instruments = Json.decodeFromString<List<AccountInstrument>>(jsonAccountInstrumentContent)
         service.loadAccountInstrument(instruments)
 
         // account Receivable
-        val receivables = Json.decodeFromString<List<AccountReceivable>>(loadJson("accountreceivable"))
+        val jsonReceivableContent = loadJson("account_receivable");
+        val receivables = Json.decodeFromString<List<AccountReceivable>>(jsonReceivableContent)
         service.loadAccountReceivable(receivables)
 
         // index
-        val indices = Json.decodeFromString<List<Ticker>>(loadJson("index"))
+        val jsonIndexContent = loadJson("index");
+        val indices = Json.decodeFromString<List<Ticker>>(jsonIndexContent)
         service.loadIndices(indices)
 
         // instrument
-        val instrument = Json.decodeFromString<List<Ticker>>(loadJson("instrument"))
+        val jsonInstrumentContent = loadJson("instrument");
+        val instrument = Json.decodeFromString<List<Ticker>>(jsonInstrumentContent)
         service.loadInstrument(instrument)
 
         // news
-        val news = Json.decodeFromString<List<News>>(loadJson("news"))
+        val jsonNewsContent = loadJson("news");
+        val news = Json.decodeFromString<List<News>>(jsonNewsContent)
         service.loadNews(news)
 
         // participation
-        val participation = Json.decodeFromString<List<Participation>>(loadJson("participationlist"))
+        val jsonParticipationContent=loadJson("participation_list")
+        val participation = Json.decodeFromString<List<Participation>>(jsonParticipationContent)
         service.loadParticipation(participation)
 
         // status
-        val status = Json.decodeFromString<List<Status>>(loadJson("statuslist"))
+        val jsonStatusContent=loadJson("status_list")
+        val status = Json.decodeFromString<List<Status>>(jsonStatusContent)
         service.loadStatus(status)
 
         // volume
-        val volume = Json.decodeFromString<List<Ticker>>(loadJson("volumelist"))
+        val jsonVolumeContent=loadJson("volume_list");
+        val volume = Json.decodeFromString<List<Ticker>>(jsonVolumeContent)
         service.loadvolume(volume)
 
         true.also { isLoaded = it }

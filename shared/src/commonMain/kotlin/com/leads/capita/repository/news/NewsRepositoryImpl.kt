@@ -1,8 +1,8 @@
 package com.leads.capita.repository.news
 
 
-import com.leads.capita.api.news.News
-import com.leads.capita.api.news.NewsRepository
+import com.leads.capita.news.News
+import com.leads.capita.news.NewsRepository
 
 
 class NewsRepositoryImpl : NewsRepository {

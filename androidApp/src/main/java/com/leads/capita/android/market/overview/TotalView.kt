@@ -20,7 +20,7 @@ import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.White
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
-import com.leads.capita.api.market.Ticker
+import com.leads.capita.market.Ticker
 
 
 @Composable

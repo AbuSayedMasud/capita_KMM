@@ -17,17 +17,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.leads.capita.DatabaseDriverFactory
+import com.leads.capita.repository.DatabaseDriverFactory
 
 import com.leads.capita.android.theme.BackgroundColor
-import com.leads.capita.api.account.AccountInstrument
+import com.leads.capita.account.AccountInstrument
 import com.leads.capita.service.account.AccountServiceImpl
 
 
 @Composable
 fun PositionScreen() {
     val context = LocalContext.current
-    val databaseDriverFactory:DatabaseDriverFactory= DatabaseDriverFactory(context)
+    val databaseDriverFactory: DatabaseDriverFactory = DatabaseDriverFactory(context)
     val accountInstrument = AccountServiceImpl(databaseDriverFactory)
     var instrument: List<AccountInstrument>? by remember { mutableStateOf(null) }
 //    val homeInstrument=MockLoaderDemo(context).instruments

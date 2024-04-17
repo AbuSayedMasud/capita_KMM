@@ -35,7 +35,7 @@ import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.White
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
-import com.leads.capita.api.account.AccountBalance
+import com.leads.capita.account.AccountBalance
 
 
 @OptIn(ExperimentalMaterialApi::class)

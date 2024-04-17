@@ -1,15 +1,16 @@
 package com.leads.capita.repository.account
 
 import com.leads.capita.CapitaDb
-import com.leads.capita.DatabaseDriverFactory
-import com.leads.capita.api.account.AccountBalance
-import com.leads.capita.api.account.AccountInstrument
-import com.leads.capita.api.account.AccountReceivable
-import com.leads.capita.api.account.AccountRepository
-import com.leads.capita.api.account.AccountTransaction
+import com.leads.capita.repository.DatabaseDriverFactory
+import com.leads.capita.account.AccountBalance
+import com.leads.capita.account.AccountInstrument
+import com.leads.capita.account.AccountReceivable
+import com.leads.capita.account.AccountRepository
+import com.leads.capita.account.AccountTransaction
 
 
-class AccountLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) : AccountRepository {
+class AccountLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
+    AccountRepository {
     val db = CapitaDb(databaseDriverFactory.createDriver())
     override fun getAccountBalance(): List<AccountBalance> {
         return db.accountBalanceQueries.getAccountBalance()

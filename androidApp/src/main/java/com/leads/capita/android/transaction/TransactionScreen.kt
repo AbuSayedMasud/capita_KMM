@@ -25,7 +25,7 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
-import com.leads.capita.DatabaseDriverFactory
+import com.leads.capita.repository.DatabaseDriverFactory
 import com.leads.capita.android.R
 
 import com.leads.capita.android.shell.MyAppBar
@@ -36,7 +36,7 @@ import com.leads.capita.android.theme.themeactivity.ColorSelectionViewModel
 import com.leads.capita.android.transaction.allTransaction.AllTransactionScreen
 import com.leads.capita.android.transaction.creditTransaction.CreditTransactionScreen
 import com.leads.capita.android.transaction.debitTransaction.DebitTransactionScreen
-import com.leads.capita.api.account.AccountTransaction
+import com.leads.capita.account.AccountTransaction
 import com.leads.capita.service.account.AccountServiceImpl
 
 
@@ -50,7 +50,7 @@ fun TransactionScreen(
     val onProfileClick: () -> Unit = {
     }
     val context = LocalContext.current
-    val databaseDriverFactory:DatabaseDriverFactory= DatabaseDriverFactory(context)
+    val databaseDriverFactory: DatabaseDriverFactory = DatabaseDriverFactory(context)
     val accountInstrument = AccountServiceImpl(databaseDriverFactory)
     var transactionList: List<AccountTransaction>? by remember { mutableStateOf(null) }
     val accountTransactionList = accountInstrument.getTransactionServices()

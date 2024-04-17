@@ -1,14 +1,15 @@
 package com.leads.capita.service.account
 
 
-import com.leads.capita.DatabaseDriverFactory
-import com.leads.capita.api.account.AccountBalance
-import com.leads.capita.api.account.AccountInstrument
-import com.leads.capita.api.account.AccountReceivable
-import com.leads.capita.api.account.AccountService
-import com.leads.capita.api.account.AccountTransaction
+import com.leads.capita.repository.DatabaseDriverFactory
+import com.leads.capita.account.AccountBalance
+import com.leads.capita.account.AccountInstrument
+import com.leads.capita.account.AccountReceivable
+import com.leads.capita.account.AccountService
+import com.leads.capita.account.AccountTransaction
 
-class AccountServiceImpl(private val databaseDriverFactory: DatabaseDriverFactory) : AccountService {
+class AccountServiceImpl(private val databaseDriverFactory: DatabaseDriverFactory) :
+    AccountService {
 
    override fun getBalanceServices(): List<AccountBalance>{
        val repository = AccountFactory.getRepository(databaseDriverFactory);

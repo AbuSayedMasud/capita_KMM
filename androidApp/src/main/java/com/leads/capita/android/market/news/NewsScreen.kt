@@ -14,11 +14,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import com.leads.capita.DatabaseDriverFactory
+import com.leads.capita.repository.DatabaseDriverFactory
 
 
 import com.leads.capita.android.theme.BackgroundColor
-import com.leads.capita.api.news.News
+import com.leads.capita.news.News
 import com.leads.capita.service.news.NewsServiceImpl
 
 

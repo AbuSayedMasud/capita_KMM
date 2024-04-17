@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 import com.leads.capita.android.transaction.TransactionView
 
 import com.leads.capita.android.theme.BackgroundColor
-import com.leads.capita.api.account.AccountTransaction
+import com.leads.capita.account.AccountTransaction
 
 
 @Composable

@@ -30,14 +30,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.leads.capita.DatabaseDriverFactory
+import com.leads.capita.repository.DatabaseDriverFactory
 import com.leads.capita.formatnumber.formatNumberWithCommas
 
 import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
 import com.leads.capita.android.R
-import com.leads.capita.api.account.AccountBalance
+import com.leads.capita.account.AccountBalance
 import com.leads.capita.service.account.AccountServiceImpl
 
 @Composable
@@ -53,9 +53,9 @@ fun AccountBalanceView(
     val screenWidth = configuration.screenWidthDp.dp
     val textColumnWeight =
         if (screenWidth > 600.dp) 4f else 1f
-    val databaseDriverFactory:DatabaseDriverFactory= DatabaseDriverFactory(context)
+    val databaseDriverFactory: DatabaseDriverFactory = DatabaseDriverFactory(context)
         val accountService = AccountServiceImpl(databaseDriverFactory)
-    var balances: List<AccountBalance>? by remember { mutableStateOf(null) }
+    var balances: List<com.leads.capita.account.AccountBalance>? by remember { mutableStateOf(null) }
         val accountBalanceList = accountService.getBalanceServices()
         balances = accountBalanceList
 //    balances = MockLoaderDemo(context).balances
