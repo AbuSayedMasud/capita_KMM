@@ -1,0 +1,34 @@
+[
+  {
+    "type": "Volume",
+    "market": "DSE",
+    "symbol": "",
+    "name": "",
+    "open": "",
+    "high": "",
+    "low": "",
+    "close": "",
+    "volume": "300264263",
+    "value": "8906.97",
+    "trade": "193559",
+    "change": "",
+    "changePercent": "",
+    "changeDirection": "false"
+  },
+  {
+    "type": "Volume",
+    "market": "CSE",
+    "symbol": "",
+    "name": "",
+    "open": "",
+    "high": "",
+    "low": "",
+    "close": "",
+    "volume": "432456212",
+    "value": "7645.45",
+    "trade": "124532",
+    "change": "",
+    "changePercent": "",
+    "changeDirection": "true"
+  }
+]

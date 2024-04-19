@@ -1,0 +1,22 @@
+[
+  {
+    "accountCode": "00001",
+    "accruedCharge": "0.0",
+    "assetValue": "0.0",
+    "buyingPower": "0.0",
+    "cashBalance": "254818.91",
+    "costValue": "0.0",
+    "currentBalance": "258618.91",
+    "deptEquityRatio": "0.0",
+    "equity": "258618.90",
+    "equityDebtRatio": "0.0",
+    "immatureBalance": "0.0",
+    "loanRatio": "0.0",
+    "marginEquity": "0.0",
+    "marketValue": "0.0",
+    "totalDeposit": "1655476100.00",
+    "totalWithdrawal": "1742096260.00",
+    "unclearCheque": "3800.00"
+  }
+]
+

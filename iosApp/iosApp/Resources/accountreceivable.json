@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Right Share Receivable",
+    "company1": "AL-HAJTEX",
+    "company2": "AL-HAJTEX",
+    "shareQuantity1": 100.00,
+    "shareQuantity2": 50.00,
+    "amount1": 0.00,
+    "amount2": 0.00
+  },
+  {
+    "name": "Cash Dividend Receivable",
+    "company1": "ACI",
+    "company2": "ACI",
+    "shareQuantity1": 0.00,
+    "shareQuantity2": 0.00,
+    "amount1": 22000.00,
+    "amount2": 18000.00
+  },
+  {
+    "name": "Bonus Receivable",
+    "company1": "AL-HAJTEX",
+    "company2": "AL-HAJTEX",
+    "shareQuantity1": 221.50,
+    "shareQuantity2": 350.50,
+    "amount1": 0.00,
+    "amount2": 0.00
+  },
+  {
+    "name": "IPO Receivable",
+    "company1": "AL-ARAB BANK",
+    "company2": "AL-ARAB BANK",
+    "shareQuantity1": 344.00,
+    "shareQuantity2": 360.00,
+    "amount1": 0.00,
+    "amount2": 0.00
+  }
+]
