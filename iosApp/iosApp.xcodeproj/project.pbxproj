@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,20 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		2BCBB76F2BD14C2600FAE429 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BCBB76E2BD14C2600FAE429 /* libsqlite3.tbd */; };
+		2BCBB77C2BD246D500FAE429 /* accountinstruments.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BCBB7712BD246D400FAE429 /* accountinstruments.json */; };
+		2BCBB77D2BD246D500FAE429 /* participationlist.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BCBB7722BD246D400FAE429 /* participationlist.json */; };
+		2BCBB77E2BD246D500FAE429 /* accountreceivable.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BCBB7732BD246D400FAE429 /* accountreceivable.json */; };
+		2BCBB77F2BD246D500FAE429 /* accounttransaction.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BCBB7742BD246D400FAE429 /* accounttransaction.json */; };
+		2BCBB7802BD246D500FAE429 /* finger_print_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BCBB7752BD246D400FAE429 /* finger_print_animation.json */; };
+		2BCBB7812BD246D500FAE429 /* index.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BCBB7762BD246D400FAE429 /* index.json */; };
+		2BCBB7822BD246D500FAE429 /* accountbalance.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BCBB7772BD246D400FAE429 /* accountbalance.json */; };
+		2BCBB7832BD246D500FAE429 /* statuslist.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BCBB7782BD246D400FAE429 /* statuslist.json */; };
+		2BCBB7842BD246D500FAE429 /* news.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BCBB7792BD246D500FAE429 /* news.json */; };
+		2BCBB7852BD246D500FAE429 /* volumelist.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BCBB77A2BD246D500FAE429 /* volumelist.json */; };
+		2BCBB7862BD246D500FAE429 /* instrument.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BCBB77B2BD246D500FAE429 /* instrument.json */; };
+		2BCBB78B2BD279E400FAE429 /* IOSMockLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB78A2BD279E400FAE429 /* IOSMockLoader.swift */; };
+		2BCBB78D2BD27AC900FAE429 /* accountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB78C2BD27AC900FAE429 /* accountData.swift */; };
+		2BCBB78F2BD280B600FAE429 /* accountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB78E2BD280B600FAE429 /* accountModel.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +46,20 @@
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		2BCBB76E2BD14C2600FAE429 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		2BCBB7712BD246D400FAE429 /* accountinstruments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountinstruments.json; sourceTree = "<group>"; };
+		2BCBB7722BD246D400FAE429 /* participationlist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = participationlist.json; sourceTree = "<group>"; };
+		2BCBB7732BD246D400FAE429 /* accountreceivable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountreceivable.json; sourceTree = "<group>"; };
+		2BCBB7742BD246D400FAE429 /* accounttransaction.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accounttransaction.json; sourceTree = "<group>"; };
+		2BCBB7752BD246D400FAE429 /* finger_print_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = finger_print_animation.json; sourceTree = "<group>"; };
+		2BCBB7762BD246D400FAE429 /* index.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = index.json; sourceTree = "<group>"; };
+		2BCBB7772BD246D400FAE429 /* accountbalance.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountbalance.json; sourceTree = "<group>"; };
+		2BCBB7782BD246D400FAE429 /* statuslist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = statuslist.json; sourceTree = "<group>"; };
+		2BCBB7792BD246D500FAE429 /* news.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = news.json; sourceTree = "<group>"; };
+		2BCBB77A2BD246D500FAE429 /* volumelist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = volumelist.json; sourceTree = "<group>"; };
+		2BCBB77B2BD246D500FAE429 /* instrument.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = instrument.json; sourceTree = "<group>"; };
+		2BCBB78A2BD279E400FAE429 /* IOSMockLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMockLoader.swift; sourceTree = "<group>"; };
+		2BCBB78C2BD27AC900FAE429 /* accountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = accountData.swift; sourceTree = "<group>"; };
+		2BCBB78E2BD280B600FAE429 /* accountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = accountModel.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,6 +85,50 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		2BCBB7702BD2465000FAE429 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2BCBB7772BD246D400FAE429 /* accountbalance.json */,
+				2BCBB7712BD246D400FAE429 /* accountinstruments.json */,
+				2BCBB7732BD246D400FAE429 /* accountreceivable.json */,
+				2BCBB7742BD246D400FAE429 /* accounttransaction.json */,
+				2BCBB7752BD246D400FAE429 /* finger_print_animation.json */,
+				2BCBB7762BD246D400FAE429 /* index.json */,
+				2BCBB77B2BD246D500FAE429 /* instrument.json */,
+				2BCBB7792BD246D500FAE429 /* news.json */,
+				2BCBB7722BD246D400FAE429 /* participationlist.json */,
+				2BCBB7782BD246D400FAE429 /* statuslist.json */,
+				2BCBB77A2BD246D500FAE429 /* volumelist.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2BCBB7872BD278CA00FAE429 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				2BCBB78E2BD280B600FAE429 /* accountModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		2BCBB7882BD278D300FAE429 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				7555FF82242A565900829871 /* ContentView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		2BCBB7892BD278D800FAE429 /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2152FB032600AC8F00CF470E /* iOSApp.swift */,
+				2BCBB78A2BD279E400FAE429 /* IOSMockLoader.swift */,
+				2BCBB78C2BD27AC900FAE429 /* accountData.swift */,
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
@@ -77,10 +149,12 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				2BCBB7702BD2465000FAE429 /* Resources */,
+				2BCBB7872BD278CA00FAE429 /* model */,
+				2BCBB7882BD278D300FAE429 /* view */,
+				2BCBB7892BD278D800FAE429 /* viewModel */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
-				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
-				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
 			path = iosApp;
@@ -122,8 +196,9 @@
 		7555FF73242A565900829871 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1510;
 				ORGANIZATIONNAME = orgName;
 				TargetAttributes = {
 					7555FF7A242A565900829871 = {
@@ -155,7 +230,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
+				2BCBB77D2BD246D500FAE429 /* participationlist.json in Resources */,
+				2BCBB7812BD246D500FAE429 /* index.json in Resources */,
+				2BCBB7832BD246D500FAE429 /* statuslist.json in Resources */,
+				2BCBB7842BD246D500FAE429 /* news.json in Resources */,
+				2BCBB77F2BD246D500FAE429 /* accounttransaction.json in Resources */,
+				2BCBB7802BD246D500FAE429 /* finger_print_animation.json in Resources */,
+				2BCBB77C2BD246D500FAE429 /* accountinstruments.json in Resources */,
+				2BCBB7822BD246D500FAE429 /* accountbalance.json in Resources */,
+				2BCBB77E2BD246D500FAE429 /* accountreceivable.json in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
+				2BCBB7862BD246D500FAE429 /* instrument.json in Resources */,
+				2BCBB7852BD246D500FAE429 /* volumelist.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +263,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -186,8 +273,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BCBB78F2BD280B600FAE429 /* accountModel.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				2BCBB78B2BD279E400FAE429 /* IOSMockLoader.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				2BCBB78D2BD27AC900FAE429 /* accountData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,6 +321,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -245,7 +336,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -292,6 +383,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -300,7 +392,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
