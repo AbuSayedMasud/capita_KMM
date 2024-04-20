@@ -25,6 +25,12 @@
 		2BCBB78B2BD279E400FAE429 /* IOSMockLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB78A2BD279E400FAE429 /* IOSMockLoader.swift */; };
 		2BCBB78D2BD27AC900FAE429 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB78C2BD27AC900FAE429 /* ContentViewModel.swift */; };
 		2BCBB78F2BD280B600FAE429 /* accountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB78E2BD280B600FAE429 /* accountModel.swift */; };
+		2BCBB79C2BD3D52300FAE429 /* TopSafeAreaColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB7952BD3D52200FAE429 /* TopSafeAreaColorModifier.swift */; };
+		2BCBB79D2BD3D52300FAE429 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB7962BD3D52200FAE429 /* Colors.swift */; };
+		2BCBB79E2BD3D52300FAE429 /* dateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB7972BD3D52200FAE429 /* dateFormatter.swift */; };
+		2BCBB79F2BD3D52300FAE429 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB7992BD3D52200FAE429 /* ImagePicker.swift */; };
+		2BCBB7A02BD3D52300FAE429 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB79A2BD3D52200FAE429 /* Helper.swift */; };
+		2BCBB7A12BD3D52300FAE429 /* inputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB79B2BD3D52200FAE429 /* inputView.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +66,12 @@
 		2BCBB78A2BD279E400FAE429 /* IOSMockLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMockLoader.swift; sourceTree = "<group>"; };
 		2BCBB78C2BD27AC900FAE429 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		2BCBB78E2BD280B600FAE429 /* accountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = accountModel.swift; sourceTree = "<group>"; };
+		2BCBB7952BD3D52200FAE429 /* TopSafeAreaColorModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopSafeAreaColorModifier.swift; sourceTree = "<group>"; };
+		2BCBB7962BD3D52200FAE429 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		2BCBB7972BD3D52200FAE429 /* dateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dateFormatter.swift; sourceTree = "<group>"; };
+		2BCBB7992BD3D52200FAE429 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		2BCBB79A2BD3D52200FAE429 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		2BCBB79B2BD3D52200FAE429 /* inputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = inputView.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -128,12 +140,41 @@
 			path = viewModel;
 			sourceTree = "<group>";
 		};
-		2BCBB7922BD3146800FAE429 /* app initial */ = {
+		2BCBB7922BD3146800FAE429 /* Root */ = {
 			isa = PBXGroup;
 			children = (
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 			);
-			path = "app initial";
+			path = Root;
+			sourceTree = "<group>";
+		};
+		2BCBB7932BD3D52200FAE429 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				2BCBB7942BD3D52200FAE429 /* styling */,
+				2BCBB7972BD3D52200FAE429 /* dateFormatter.swift */,
+				2BCBB7982BD3D52200FAE429 /* Helper */,
+				2BCBB79B2BD3D52200FAE429 /* inputView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		2BCBB7942BD3D52200FAE429 /* styling */ = {
+			isa = PBXGroup;
+			children = (
+				2BCBB7952BD3D52200FAE429 /* TopSafeAreaColorModifier.swift */,
+				2BCBB7962BD3D52200FAE429 /* Colors.swift */,
+			);
+			path = styling;
+			sourceTree = "<group>";
+		};
+		2BCBB7982BD3D52200FAE429 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				2BCBB7992BD3D52200FAE429 /* ImagePicker.swift */,
+				2BCBB79A2BD3D52200FAE429 /* Helper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -156,7 +197,8 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				2BCBB7922BD3146800FAE429 /* app initial */,
+				2BCBB7922BD3146800FAE429 /* Root */,
+				2BCBB7932BD3D52200FAE429 /* Component */,
 				2BCBB7702BD2465000FAE429 /* Resources */,
 				2BCBB7872BD278CA00FAE429 /* model */,
 				2BCBB7882BD278D300FAE429 /* view */,
@@ -281,9 +323,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BCBB7A12BD3D52300FAE429 /* inputView.swift in Sources */,
+				2BCBB79E2BD3D52300FAE429 /* dateFormatter.swift in Sources */,
 				2BCBB78F2BD280B600FAE429 /* accountModel.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				2BCBB79F2BD3D52300FAE429 /* ImagePicker.swift in Sources */,
+				2BCBB79C2BD3D52300FAE429 /* TopSafeAreaColorModifier.swift in Sources */,
+				2BCBB79D2BD3D52300FAE429 /* Colors.swift in Sources */,
 				2BCBB78B2BD279E400FAE429 /* IOSMockLoader.swift in Sources */,
+				2BCBB7A02BD3D52300FAE429 /* Helper.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				2BCBB78D2BD27AC900FAE429 /* ContentViewModel.swift in Sources */,
 			);
