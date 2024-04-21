@@ -5,7 +5,7 @@ class ContentViewModel: ObservableObject {
     @Published var accountBalances: [AccountBalance] = []
     
     // Initialize AccountService
-    //let loader = IOSMockLoader() // Initialize IOSMockLoader
+    let loader = IOSMockLoader() // Initialize IOSMockLoader
     let databaseDriverFactory = DatabaseDriverFactory()
     var accountService: AccountService
     var accountBalanceList: [AccountBalance] = []
