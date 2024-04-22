@@ -1,11 +1,26 @@
 package com.leads.capita.repository.security
 
+
+import com.leads.capita.repository.RestUtil.BASE_URL
+import com.leads.capita.repository.RestUtil.getClient
 import com.leads.capita.security.Identity
 import com.leads.capita.security.IdentityRepository
+import com.leads.capita.security.IdentityErrorResponse
+import io.ktor.client.call.body
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
+import io.ktor.util.InternalAPI
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 
 class IdentityLocalRepositoryImpl : IdentityRepository {
-
+    private val TOKEN_PATH: String = "/tokens"
     private val identityList = listOf(
         Identity("capita", "Capita@1234"),
     )
@@ -14,13 +29,53 @@ class IdentityLocalRepositoryImpl : IdentityRepository {
         return identityList.any { it.username == username }
     }
 
+    @OptIn(InternalAPI::class)
     override fun getToken(username: String, password: String): String {
-        return if (username == "capita" && password == "Capita@1234") {
-            "hhfghfdg46456456"
-        } else {
-            ""
-        }
+        val client = getClient()
+        var responseContent: String? = null
+        var loginError: IdentityErrorResponse? = null
+        var  error: String? = null
+        val token: String? = null
+
+       /* try {*/
+            runBlocking {
+
+                responseContent =
+                    client.post("$BASE_URL$TOKEN_PATH") {
+                        contentType(ContentType.Application.Json)
+                        setBody(
+                            Identity(
+                                username = username,
+                                password = password
+                            )
+                        )
+                    }.body()
+
+
+            val jsonObject = Json.parseToJsonElement(responseContent ?: "").jsonObject
+            val token = jsonObject["token"]?.jsonPrimitive?.contentOrNull
+                if (token.equals("")){
+                   error  = Json.parseToJsonElement(loginError?.detail ?: "").jsonObject.toString()
+
+                }
+                //Logger.d("afffadgdgdfhfdjgsdshdf", responseContent.toString())
+                println("afffadgdgdfhfdjgsdshdf"+responseContent.toString())
+
+
+            }
+        /*} catch (e: Exception) {
+            //Log.e("API Call Error", e.toString())
+            println("afffadgdgdfhfdjgsdshdf"+e.toString())
+
+
+
+        }*/
+
+
+        return token.toString()
     }
+
+
 
     override fun getBiometricRegistrationToken(username: String, password: String): String {
         return if (username == "capita" && password == "Capita@1234") {

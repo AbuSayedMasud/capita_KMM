@@ -13,7 +13,7 @@ object RestUtil {
     val token = authToken
 
 //    val token= TokenManager.getToken()?.token
-    const val BASE_URL: String = "http://192.168.10.33:7001/capitapi"
+    const val BASE_URL: String = "http://192.168.10.42:7001/capitapi"   //Internal Dev URL
     fun getClient(): HttpClient {
         return HttpClient() {
             install(ContentNegotiation) {

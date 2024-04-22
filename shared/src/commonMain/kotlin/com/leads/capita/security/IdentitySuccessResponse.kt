@@ -3,7 +3,7 @@ package com.leads.capita.security
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Identity(
-    val username: String,
-    val password: String,
+data class IdentitySuccessResponse (
+    var token: String,
+    var useRef: String
 )
