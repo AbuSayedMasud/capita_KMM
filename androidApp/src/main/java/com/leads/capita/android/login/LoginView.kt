@@ -61,6 +61,7 @@ import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
 import com.leads.capita.android.R
 import com.leads.capita.android.mockJsonLoader.MockLoader
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -165,7 +166,11 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
                             }
                         },
                         label = { Text("Username", color = contentColor, fontSize = 16.sp) },
-                        placeholder = { Text("Enter your username", color = contentColor, fontSize = 14.sp) },
+                        placeholder = {
+                            Text(
+                                "Enter your username", color = contentColor, fontSize = 14.sp
+                            )
+                        },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             textColor = contentColor,
                             unfocusedLabelColor = contentColor,
@@ -216,7 +221,11 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
                             }
                         },
                         label = { Text("Password", color = contentColor, fontSize = 16.sp) },
-                        placeholder = { Text("Enter your password", color = contentColor, fontSize = 16.sp) },
+                        placeholder = {
+                            Text(
+                                "Enter your password", color = contentColor, fontSize = 16.sp
+                            )
+                        },
                         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             textColor = contentColor,
@@ -307,53 +316,49 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
 
                     Button(
                         onClick = {
-//                            val loginBean = LoginPresenter()
+                            val loginBean = LoginPresenter()
                             // Perform login authentication
-//                            val authResult = loginBean.login(context, username, password)
-//
-//                            // Handle the authentication result
-//                            when (authResult) {
-//                                AuthResult.Success -> {
+                            val authResult = loginBean.login(context, username, password)
+                            // Handle the authentication result
+                            when (authResult) {
+                                AuthResult.Success -> {
                                     val intent = Intent(context, HomeActivity::class.java)
                                     val service = MockLoader(context)
-                                    // Initialize the MockLoader service
+                            // Initialize the MockLoader service
                                     runBlocking {
                                         service.init()
-                                       MockLoader(context).init()
                                     }
-//                                    // Start the HomeActivity
+                            // Start the HomeActivity
                                     context.startActivity(intent)
-//                                }
+                                }
+                            // If the username is invalid, show a snackbar with an error message
+                                AuthResult.InvalidUsername -> {
+                                    scope.launch {
+                                        snackbarHostState.showSnackbar(
+                                            CustomSnackbarVisuals(
+                                                message = "Wrong username",
+                                                contentColor = Color.White,
+                                            ),
+                                        )
+                                    }
+                            // Hide the keyboard
+                                    keyboardController?.hide()
+                                }
 
-                                // If the username is invalid, show a snackbar with an error message
-//                                AuthResult.InvalidUsername -> {
-//                                    scope.launch {
-//                                        snackbarHostState.showSnackbar(
-//                                            CustomSnackbarVisuals(
-//                                                message = "Wrong username",
-//                                                contentColor = Color.White,
-//                                            ),
-//                                        )
-//                                    }
-//                                    // Hide the keyboard
-//                                    keyboardController?.hide()
-//                                }
-//
-//                                AuthResult.InvalidPassword -> {
-//                                    scope.launch {
-//                                        snackbarHostState.showSnackbar(
-//                                            CustomSnackbarVisuals(
-//                                                message = "Wrong password",
-//                                                contentColor = Color.White,
-//                                            ),
-//                                        )
-//                                    }
-//                                    keyboardController?.hide()
-//                                }
-//
-//                                // Handle other authentication results if needed
-//                                else -> {}
-//                            }
+                                AuthResult.InvalidPassword -> {
+                                    scope.launch {
+                                        snackbarHostState.showSnackbar(
+                                            CustomSnackbarVisuals(
+                                                message = "Wrong password",
+                                                contentColor = Color.White,
+                                            ),
+                                        )
+                                    }
+                                    keyboardController?.hide()
+                                }
+                            // Handle other authentication results if needed
+                                else -> {}
+                            }
                         },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -390,11 +395,10 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
                             )
                         ClickableText(
                             text = AnnotatedString("Sign Up"),
-                            style = MaterialTheme.typography.body1
-                                .copy(
-                                    textDecoration = TextDecoration.Underline,
-                                    color = PrimaryColor,
-                                ),
+                            style = MaterialTheme.typography.body1.copy(
+                                textDecoration = TextDecoration.Underline,
+                                color = PrimaryColor,
+                            ),
 
                             onClick = {
                                 navController.navigate("registration")
@@ -452,11 +456,10 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
                             )
                         ClickableText(
                             text = AnnotatedString("TouchID"),
-                            style = MaterialTheme.typography.body1
-                                .copy(
-                                    textDecoration = TextDecoration.Underline,
-                                    color = PrimaryColor,
-                                ),
+                            style = MaterialTheme.typography.body1.copy(
+                                textDecoration = TextDecoration.Underline,
+                                color = PrimaryColor,
+                            ),
 
                             onClick = {
                                 navController.navigate("biometricRegistration")
