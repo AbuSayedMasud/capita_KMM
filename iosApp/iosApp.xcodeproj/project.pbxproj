@@ -10,6 +10,28 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		2BB9F3152BD7619E005AE48E /* password recovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F30F2BD7619E005AE48E /* password recovery.swift */; };
+		2BB9F3162BD7619E005AE48E /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3112BD7619E005AE48E /* RegistrationView.swift */; };
+		2BB9F3172BD7619E005AE48E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3132BD7619E005AE48E /* LoginView.swift */; };
+		2BB9F3182BD7619E005AE48E /* BiometricAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3142BD7619E005AE48E /* BiometricAuthView.swift */; };
+		2BB9F32B2BD761DF005AE48E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F31C2BD761DF005AE48E /* HomeView.swift */; };
+		2BB9F32C2BD761DF005AE48E /* shantaHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F31E2BD761DF005AE48E /* shantaHomeView.swift */; };
+		2BB9F32D2BD761DF005AE48E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3202BD761DF005AE48E /* ProfileView.swift */; };
+		2BB9F32E2BD761DF005AE48E /* IndicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3232BD761DF005AE48E /* IndicesView.swift */; };
+		2BB9F32F2BD761DF005AE48E /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3242BD761DF005AE48E /* NewsView.swift */; };
+		2BB9F3302BD761DF005AE48E /* StocksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3252BD761DF005AE48E /* StocksView.swift */; };
+		2BB9F3312BD761DF005AE48E /* OverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3262BD761DF005AE48E /* OverviewView.swift */; };
+		2BB9F3322BD761DF005AE48E /* WatchlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3272BD761DF005AE48E /* WatchlistView.swift */; };
+		2BB9F3332BD761DF005AE48E /* marketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3282BD761DF005AE48E /* marketView.swift */; };
+		2BB9F3342BD761DF005AE48E /* services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F32A2BD761DF005AE48E /* services.swift */; };
+		2BB9F3422BD761E7005AE48E /* credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3382BD761E7005AE48E /* credit.swift */; };
+		2BB9F3432BD761E7005AE48E /* debit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3392BD761E7005AE48E /* debit.swift */; };
+		2BB9F3442BD761E7005AE48E /* all_statements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F33A2BD761E7005AE48E /* all_statements.swift */; };
+		2BB9F3452BD761E7005AE48E /* Ledger Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F33B2BD761E7005AE48E /* Ledger Statement.swift */; };
+		2BB9F3462BD761E7005AE48E /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F33E2BD761E7005AE48E /* Balance.swift */; };
+		2BB9F3472BD761E7005AE48E /* Receivable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F33F2BD761E7005AE48E /* Receivable.swift */; };
+		2BB9F3482BD761E7005AE48E /* position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3402BD761E7005AE48E /* position.swift */; };
+		2BB9F3492BD761E7005AE48E /* Protfolio statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3412BD761E7005AE48E /* Protfolio statement.swift */; };
 		2BCBB76F2BD14C2600FAE429 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BCBB76E2BD14C2600FAE429 /* libsqlite3.tbd */; };
 		2BCBB77C2BD246D500FAE429 /* accountinstruments.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BCBB7712BD246D400FAE429 /* accountinstruments.json */; };
 		2BCBB77D2BD246D500FAE429 /* participationlist.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BCBB7722BD246D400FAE429 /* participationlist.json */; };
@@ -51,6 +73,28 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		2BB9F30F2BD7619E005AE48E /* password recovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "password recovery.swift"; sourceTree = "<group>"; };
+		2BB9F3112BD7619E005AE48E /* RegistrationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		2BB9F3132BD7619E005AE48E /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		2BB9F3142BD7619E005AE48E /* BiometricAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiometricAuthView.swift; sourceTree = "<group>"; };
+		2BB9F31C2BD761DF005AE48E /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		2BB9F31E2BD761DF005AE48E /* shantaHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shantaHomeView.swift; sourceTree = "<group>"; };
+		2BB9F3202BD761DF005AE48E /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		2BB9F3232BD761DF005AE48E /* IndicesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicesView.swift; sourceTree = "<group>"; };
+		2BB9F3242BD761DF005AE48E /* NewsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
+		2BB9F3252BD761DF005AE48E /* StocksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StocksView.swift; sourceTree = "<group>"; };
+		2BB9F3262BD761DF005AE48E /* OverviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewView.swift; sourceTree = "<group>"; };
+		2BB9F3272BD761DF005AE48E /* WatchlistView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchlistView.swift; sourceTree = "<group>"; };
+		2BB9F3282BD761DF005AE48E /* marketView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = marketView.swift; sourceTree = "<group>"; };
+		2BB9F32A2BD761DF005AE48E /* services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = services.swift; sourceTree = "<group>"; };
+		2BB9F3382BD761E7005AE48E /* credit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = credit.swift; sourceTree = "<group>"; };
+		2BB9F3392BD761E7005AE48E /* debit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = debit.swift; sourceTree = "<group>"; };
+		2BB9F33A2BD761E7005AE48E /* all_statements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = all_statements.swift; sourceTree = "<group>"; };
+		2BB9F33B2BD761E7005AE48E /* Ledger Statement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Ledger Statement.swift"; sourceTree = "<group>"; };
+		2BB9F33E2BD761E7005AE48E /* Balance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
+		2BB9F33F2BD761E7005AE48E /* Receivable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Receivable.swift; sourceTree = "<group>"; };
+		2BB9F3402BD761E7005AE48E /* position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = position.swift; sourceTree = "<group>"; };
+		2BB9F3412BD761E7005AE48E /* Protfolio statement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Protfolio statement.swift"; sourceTree = "<group>"; };
 		2BCBB76E2BD14C2600FAE429 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		2BCBB7712BD246D400FAE429 /* accountinstruments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountinstruments.json; sourceTree = "<group>"; };
 		2BCBB7722BD246D400FAE429 /* participationlist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = participationlist.json; sourceTree = "<group>"; };
@@ -97,6 +141,161 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		2BB9F30D2BD7619E005AE48E /* Authantication */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F30E2BD7619E005AE48E /* Forget Password */,
+				2BB9F3102BD7619E005AE48E /* Registration */,
+				2BB9F3122BD7619E005AE48E /* login */,
+			);
+			path = Authantication;
+			sourceTree = "<group>";
+		};
+		2BB9F30E2BD7619E005AE48E /* Forget Password */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F30F2BD7619E005AE48E /* password recovery.swift */,
+			);
+			path = "Forget Password";
+			sourceTree = "<group>";
+		};
+		2BB9F3102BD7619E005AE48E /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F3112BD7619E005AE48E /* RegistrationView.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		2BB9F3122BD7619E005AE48E /* login */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F3132BD7619E005AE48E /* LoginView.swift */,
+				2BB9F3142BD7619E005AE48E /* BiometricAuthView.swift */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
+		2BB9F3192BD761DF005AE48E /* TabViews */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F31A2BD761DF005AE48E /* trade */,
+				2BB9F31B2BD761DF005AE48E /* Home(BASE) */,
+				2BB9F31D2BD761DF005AE48E /* shantaHomeTab */,
+				2BB9F31F2BD761DF005AE48E /* profile */,
+				2BB9F3212BD761DF005AE48E /* market */,
+				2BB9F3292BD761DF005AE48E /* services */,
+			);
+			path = TabViews;
+			sourceTree = "<group>";
+		};
+		2BB9F31A2BD761DF005AE48E /* trade */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = trade;
+			sourceTree = "<group>";
+		};
+		2BB9F31B2BD761DF005AE48E /* Home(BASE) */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F31C2BD761DF005AE48E /* HomeView.swift */,
+			);
+			path = "Home(BASE)";
+			sourceTree = "<group>";
+		};
+		2BB9F31D2BD761DF005AE48E /* shantaHomeTab */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F31E2BD761DF005AE48E /* shantaHomeView.swift */,
+			);
+			path = shantaHomeTab;
+			sourceTree = "<group>";
+		};
+		2BB9F31F2BD761DF005AE48E /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F3202BD761DF005AE48E /* ProfileView.swift */,
+			);
+			path = profile;
+			sourceTree = "<group>";
+		};
+		2BB9F3212BD761DF005AE48E /* market */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F3222BD761DF005AE48E /* tabs */,
+				2BB9F3282BD761DF005AE48E /* marketView.swift */,
+			);
+			path = market;
+			sourceTree = "<group>";
+		};
+		2BB9F3222BD761DF005AE48E /* tabs */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F3232BD761DF005AE48E /* IndicesView.swift */,
+				2BB9F3242BD761DF005AE48E /* NewsView.swift */,
+				2BB9F3252BD761DF005AE48E /* StocksView.swift */,
+				2BB9F3262BD761DF005AE48E /* OverviewView.swift */,
+				2BB9F3272BD761DF005AE48E /* WatchlistView.swift */,
+			);
+			path = tabs;
+			sourceTree = "<group>";
+		};
+		2BB9F3292BD761DF005AE48E /* services */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F32A2BD761DF005AE48E /* services.swift */,
+			);
+			path = services;
+			sourceTree = "<group>";
+		};
+		2BB9F3352BD761E7005AE48E /* otherViews */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F3362BD761E7005AE48E /* LedgerStatement */,
+				2BB9F33C2BD761E7005AE48E /* ProtfolioStatement */,
+			);
+			path = otherViews;
+			sourceTree = "<group>";
+		};
+		2BB9F3362BD761E7005AE48E /* LedgerStatement */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F3372BD761E7005AE48E /* tabs */,
+				2BB9F33B2BD761E7005AE48E /* Ledger Statement.swift */,
+			);
+			path = LedgerStatement;
+			sourceTree = "<group>";
+		};
+		2BB9F3372BD761E7005AE48E /* tabs */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F3382BD761E7005AE48E /* credit.swift */,
+				2BB9F3392BD761E7005AE48E /* debit.swift */,
+				2BB9F33A2BD761E7005AE48E /* all_statements.swift */,
+			);
+			path = tabs;
+			sourceTree = "<group>";
+		};
+		2BB9F33C2BD761E7005AE48E /* ProtfolioStatement */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F33D2BD761E7005AE48E /* tabs */,
+				2BB9F3412BD761E7005AE48E /* Protfolio statement.swift */,
+			);
+			path = ProtfolioStatement;
+			sourceTree = "<group>";
+		};
+		2BB9F33D2BD761E7005AE48E /* tabs */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9F33E2BD761E7005AE48E /* Balance.swift */,
+				2BB9F33F2BD761E7005AE48E /* Receivable.swift */,
+				2BB9F3402BD761E7005AE48E /* position.swift */,
+			);
+			path = tabs;
+			sourceTree = "<group>";
+		};
 		2BCBB7702BD2465000FAE429 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +325,9 @@
 		2BCBB7882BD278D300FAE429 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				2BB9F3352BD761E7005AE48E /* otherViews */,
+				2BB9F3192BD761DF005AE48E /* TabViews */,
+				2BB9F30D2BD7619E005AE48E /* Authantication */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 			);
 			path = view;
@@ -326,14 +528,36 @@
 				2BCBB7A12BD3D52300FAE429 /* inputView.swift in Sources */,
 				2BCBB79E2BD3D52300FAE429 /* dateFormatter.swift in Sources */,
 				2BCBB78F2BD280B600FAE429 /* accountModel.swift in Sources */,
+				2BB9F3472BD761E7005AE48E /* Receivable.swift in Sources */,
+				2BB9F3162BD7619E005AE48E /* RegistrationView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				2BB9F3152BD7619E005AE48E /* password recovery.swift in Sources */,
+				2BB9F3302BD761DF005AE48E /* StocksView.swift in Sources */,
 				2BCBB79F2BD3D52300FAE429 /* ImagePicker.swift in Sources */,
+				2BB9F3432BD761E7005AE48E /* debit.swift in Sources */,
+				2BB9F3492BD761E7005AE48E /* Protfolio statement.swift in Sources */,
 				2BCBB79C2BD3D52300FAE429 /* TopSafeAreaColorModifier.swift in Sources */,
+				2BB9F32E2BD761DF005AE48E /* IndicesView.swift in Sources */,
+				2BB9F3422BD761E7005AE48E /* credit.swift in Sources */,
+				2BB9F3342BD761DF005AE48E /* services.swift in Sources */,
+				2BB9F3172BD7619E005AE48E /* LoginView.swift in Sources */,
+				2BB9F32C2BD761DF005AE48E /* shantaHomeView.swift in Sources */,
+				2BB9F3442BD761E7005AE48E /* all_statements.swift in Sources */,
+				2BB9F3462BD761E7005AE48E /* Balance.swift in Sources */,
+				2BB9F32D2BD761DF005AE48E /* ProfileView.swift in Sources */,
 				2BCBB79D2BD3D52300FAE429 /* Colors.swift in Sources */,
+				2BB9F3322BD761DF005AE48E /* WatchlistView.swift in Sources */,
+				2BB9F32F2BD761DF005AE48E /* NewsView.swift in Sources */,
 				2BCBB78B2BD279E400FAE429 /* IOSMockLoader.swift in Sources */,
 				2BCBB7A02BD3D52300FAE429 /* Helper.swift in Sources */,
+				2BB9F3332BD761DF005AE48E /* marketView.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				2BB9F32B2BD761DF005AE48E /* HomeView.swift in Sources */,
+				2BB9F3182BD7619E005AE48E /* BiometricAuthView.swift in Sources */,
 				2BCBB78D2BD27AC900FAE429 /* ContentViewModel.swift in Sources */,
+				2BB9F3312BD761DF005AE48E /* OverviewView.swift in Sources */,
+				2BB9F3482BD761E7005AE48E /* position.swift in Sources */,
+				2BB9F3452BD761E7005AE48E /* Ledger Statement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
