@@ -9,10 +9,9 @@ class IdentityServiceUTBL : IdentityService {
         TODO("Not yet implemented")
     }
 
-    override fun authenticate(username: String, password: String): Boolean {
+    override fun authenticate(username: String, password: String): String {
         val userRepository = IdentityRepositoryImpl()
-        val apiResponse = userRepository.getToken(username, password)
-        return apiResponse!!.isNotEmpty()
+        return userRepository.getToken(username, password)
     }
 
     override fun biometricRegistered(username: String, password: String): String {

@@ -4,10 +4,9 @@ import com.leads.capita.security.IdentityService
 
 
 class IdentityServiceImpl : IdentityService {
-    override fun authenticate(username: String, password: String): Boolean {
+    override fun authenticate(username: String, password: String): String {
         val identityRepository = SecurityFactory.getIdentityRepository()
-        val identityResponse = identityRepository.getToken(username, password)
-        return identityResponse.isNotEmpty()
+        return identityRepository.getToken(username, password)
     }
 
     override fun biometricRegistered(username: String, password: String): String {

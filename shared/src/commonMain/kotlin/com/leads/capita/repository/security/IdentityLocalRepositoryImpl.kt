@@ -53,11 +53,11 @@ class IdentityLocalRepositoryImpl : IdentityRepository {
 
 
             val jsonObject = Json.parseToJsonElement(responseContent ?: "").jsonObject
-            val token = jsonObject["token"]?.jsonPrimitive?.contentOrNull
-                if (token.equals("")){
-                   error  = Json.parseToJsonElement(loginError?.detail ?: "").jsonObject.toString()
-
-                }
+//            val token = jsonObject["token"]?.jsonPrimitive?.contentOrNull
+//                if (token.equals("")){
+//                   error  = Json.parseToJsonElement(loginError?.detail ?: "").jsonObject.toString()
+//
+//                }
                 //Logger.d("afffadgdgdfhfdjgsdshdf", responseContent.toString())
                 println("afffadgdgdfhfdjgsdshdf"+responseContent.toString())
 
@@ -72,7 +72,7 @@ class IdentityLocalRepositoryImpl : IdentityRepository {
         }*/
 
 
-        return token.toString()
+        return responseContent.toString()
     }
 
 

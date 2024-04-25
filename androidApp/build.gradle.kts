@@ -84,4 +84,8 @@ dependencies {
     implementation ("com.airbnb.android:lottie-compose:6.1.0")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
+
+    //json
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+
 }

@@ -2,6 +2,10 @@ package com.leads.capita.android.login
 
 import android.content.Context
 import com.leads.capita.service.security.SecurityFactory
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 // Sealed class to represent different authentication results
 sealed class AuthResult {
@@ -26,10 +30,12 @@ class LoginPresenter {
         password: String,
     ): AuthResult {
         val identityService = SecurityFactory.getIdentityService("LEADS")
-        // Perform authentication using the identity service
-        return if (identityService.authenticate(username, password)) {
+        val identityLoginResponse:String=identityService.authenticate(username, password)
+        val jsonObject = Json.parseToJsonElement(identityLoginResponse ?: "").jsonObject
+         val token = jsonObject["token"]?.jsonPrimitive?.contentOrNull
+        return if(token?.isNotEmpty() == true){
             AuthResult.Success
-        } else {
+        }else{
             if (!identityService.userExists(username)) {
                 AuthResult.InvalidUsername
             } else {

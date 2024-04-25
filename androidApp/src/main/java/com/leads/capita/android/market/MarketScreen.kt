@@ -75,7 +75,6 @@ fun MarketScreen(
             marketSelectedSection = page
         }
     }
-
     // Use another LaunchedEffect to animate scrolling to the selected market section
     LaunchedEffect(marketSelectedSection) {
         // Animate scrolling to the specified market section when marketSelectedSection changes

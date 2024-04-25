@@ -67,6 +67,8 @@ import com.leads.capita.android.theme.PrimaryColor
 import com.leads.capita.android.theme.White
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.R
+import com.leads.capita.android.login.AuthResult
+import com.leads.capita.android.login.LoginPresenter
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -282,44 +284,44 @@ fun BiometricRegistrationView(navController: NavHostController) {
                     Button(
                         onClick = {
                             navController.navigate("fingerprint")
-//                            val loginBean = LoginPresenter()
-//                            // Perform login authentication
-//                            val authResult = loginBean.login(context, username, password)
-//
-//                            // Handle the authentication result
-//                            when (authResult) {
-//                                AuthResult.Success -> {
-//                                    preferencesManager.saveUsername("Username", username)
-//                                    preferencesManager.saveUsername("Password", password)
-//                                    navController.navigate("fingerprint")
-//                                }
-//
-//                                AuthResult.InvalidUsername -> {
-//                                    scope.launch {
-//                                        snackbarHostState.showSnackbar(
-//                                            CustomSnackbarVisuals(
-//                                                message = "Wrong username",
-//                                                contentColor = Color.White,
-//                                            ),
-//                                        )
-//                                    }
-//                                    keyboardController?.hide()
-//                                }
-//
-//                                AuthResult.InvalidPassword -> {
-//                                    scope.launch {
-//                                        snackbarHostState.showSnackbar(
-//                                            CustomSnackbarVisuals(
-//                                                message = "Wrong password",
-//                                                contentColor = Color.White,
-//                                            ),
-//                                        )
-//                                    }
-//                                    keyboardController?.hide()
-//                                }
-//
-//                                else -> {}
-//                            }
+                            val loginBean = LoginPresenter()
+                            // Perform login authentication
+                            val authResult = loginBean.login(context, username, password)
+
+                            // Handle the authentication result
+                            when (authResult) {
+                                AuthResult.Success -> {
+                                    preferencesManager.saveUsername("Username", username)
+                                    preferencesManager.saveUsername("Password", password)
+                                    navController.navigate("fingerprint")
+                                }
+
+                                AuthResult.InvalidUsername -> {
+                                    scope.launch {
+                                        snackbarHostState.showSnackbar(
+                                            CustomSnackbarVisuals(
+                                                message = "Wrong username",
+                                                contentColor = Color.White,
+                                            ),
+                                        )
+                                    }
+                                    keyboardController?.hide()
+                                }
+
+                                AuthResult.InvalidPassword -> {
+                                    scope.launch {
+                                        snackbarHostState.showSnackbar(
+                                            CustomSnackbarVisuals(
+                                                message = "Wrong password",
+                                                contentColor = Color.White,
+                                            ),
+                                        )
+                                    }
+                                    keyboardController?.hide()
+                                }
+
+                                else -> {}
+                            }
                         },
                         modifier = Modifier
                             .padding(start = 0.dp, top = 16.dp, end = 0.dp, bottom = 0.dp)
