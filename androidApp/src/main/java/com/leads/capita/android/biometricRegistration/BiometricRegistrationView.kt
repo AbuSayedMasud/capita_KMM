@@ -296,11 +296,13 @@ fun BiometricRegistrationView(navController: NavHostController) {
                                     navController.navigate("fingerprint")
                                 }
 
-                                AuthResult.InvalidUsername -> {
+                                is AuthResult.Invalid -> {
                                     scope.launch {
+                                        val errorMessage = authResult.errorMessage
                                         snackbarHostState.showSnackbar(
+
                                             CustomSnackbarVisuals(
-                                                message = "Wrong username",
+                                                message = errorMessage,
                                                 contentColor = Color.White,
                                             ),
                                         )
@@ -308,17 +310,6 @@ fun BiometricRegistrationView(navController: NavHostController) {
                                     keyboardController?.hide()
                                 }
 
-                                AuthResult.InvalidPassword -> {
-                                    scope.launch {
-                                        snackbarHostState.showSnackbar(
-                                            CustomSnackbarVisuals(
-                                                message = "Wrong password",
-                                                contentColor = Color.White,
-                                            ),
-                                        )
-                                    }
-                                    keyboardController?.hide()
-                                }
 
                                 else -> {}
                             }

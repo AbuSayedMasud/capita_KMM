@@ -332,28 +332,17 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
                                     context.startActivity(intent)
                                 }
                             // If the username is invalid, show a snackbar with an error message
-                                AuthResult.InvalidUsername -> {
+                                is AuthResult.Invalid -> {
+                                    val errorMessage = authResult.errorMessage
                                     scope.launch {
                                         snackbarHostState.showSnackbar(
                                             CustomSnackbarVisuals(
-                                                message = "Wrong username",
+                                                message = errorMessage,
                                                 contentColor = Color.White,
                                             ),
                                         )
                                     }
                             // Hide the keyboard
-                                    keyboardController?.hide()
-                                }
-
-                                AuthResult.InvalidPassword -> {
-                                    scope.launch {
-                                        snackbarHostState.showSnackbar(
-                                            CustomSnackbarVisuals(
-                                                message = "Wrong password",
-                                                contentColor = Color.White,
-                                            ),
-                                        )
-                                    }
                                     keyboardController?.hide()
                                 }
                             // Handle other authentication results if needed
