@@ -105,7 +105,7 @@ fun BalanceView(
                             horizontalArrangement = Arrangement.End,
                         ) {
                             Text(
-                                text = formatNumberWithCommas(accountBalance.currentBalance,2),
+                                text = formatNumberWithCommas(accountBalance.currentBalance.toDouble(),2),
                                 style = MaterialTheme.typography.body1,
                                 fontSize = 15.5.sp,
                                 fontWeight = FontWeight.Bold,
@@ -135,22 +135,22 @@ fun BalanceView(
                                 border = null,
                             ) {
                                 Column(modifier = Modifier.padding(0.dp)) {
-                                    BalanceItem("AccountCode", accountBalance.accountCode.toDouble())
-                                    BalanceItem("AccruedCharge", accountBalance.accruedCharge)
-                                    BalanceItem("AssetValue", accountBalance.assetValue)
-                                    BalanceItem("BuyingPower ", accountBalance.buyingPower)
-                                    BalanceItem("CashBalance", accountBalance.cashBalance)
-                                    BalanceItem("CostValue", accountBalance.costValue)
-                                    BalanceItem("DeptEquityRatio", accountBalance.deptEquityRatio)
-                                    BalanceItem("Equity", accountBalance.equity)
-                                    BalanceItem("EquityDebtRatio", accountBalance.equityDebtRatio)
-                                    BalanceItem("ImmatureBalance", accountBalance.immatureBalance)
-                                    BalanceItem("LoanRatio", accountBalance.loanRatio)
-                                    BalanceItem("MarginEquity", accountBalance.marginEquity)
-                                    BalanceItem("MarketValue", accountBalance.marketValue)
-                                    BalanceItem("TotalDeposit", accountBalance.totalDeposit)
-                                    BalanceItem("TotalWithdrawal", accountBalance.totalWithdrawal)
-                                    BalanceItem("UnclearCheque", accountBalance.unclearCheque)
+                                    BalanceItem("AccountCode", accountBalance.accountCode.toDouble()) //app crashed here, need to solve
+                                    BalanceItem("AccruedCharge", accountBalance.accruedCharge.toDouble())
+                                    BalanceItem("AssetValue", accountBalance.assetValue.toDouble())
+                                    BalanceItem("BuyingPower ", accountBalance.buyingPower.toDouble())
+                                    BalanceItem("CashBalance", accountBalance.cashBalance.toDouble())
+                                    BalanceItem("CostValue", accountBalance.costValue.toDouble())
+                                    BalanceItem("DeptEquityRatio", accountBalance.deptEquityRatio.toDouble())
+                                    BalanceItem("Equity", accountBalance.equity.toDouble())
+                                    BalanceItem("EquityDebtRatio", accountBalance.equityDebtRatio.toDouble())
+                                    BalanceItem("ImmatureBalance", accountBalance.immatureBalance.toDouble())
+                                    BalanceItem("LoanRatio", accountBalance.loanRatio.toDouble())
+                                    BalanceItem("MarginEquity", accountBalance.marginEquity.toDouble())
+                                    BalanceItem("MarketValue", accountBalance.marketValue.toDouble())
+                                    BalanceItem("TotalDeposit", accountBalance.totalDeposit.toDouble())
+                                    BalanceItem("TotalWithdrawal", accountBalance.totalWithdrawal.toDouble())
+                                    BalanceItem("UnclearCheque", accountBalance.unclearCheque.toDouble())
                                 }
                             }
                         }

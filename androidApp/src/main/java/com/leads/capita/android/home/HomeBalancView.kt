@@ -157,7 +157,7 @@ fun HomeBalanceView(navController: NavHostController) {
                                 horizontalAlignment = Alignment.End,
                             ) {
                                 Text(
-                                    text = formatNumberWithCommas(balance?.cashBalance ?: 0.0, 2),
+                                    text = formatNumberWithCommas((balance?.cashBalance ?: 0.0) as Double, 2),
                                     style = MaterialTheme.typography.body2
                                         .copy(fontSize = 15.5.sp, color = contentColor, fontWeight = FontWeight.Bold),
                                 )
@@ -184,7 +184,7 @@ fun HomeBalanceView(navController: NavHostController) {
                                 horizontalAlignment = Alignment.End,
                             ) {
                                 Text(
-                                    text = formatNumberWithCommas(balance?.currentBalance ?: 0.0, 2),
+                                    text = formatNumberWithCommas((balance?.currentBalance ?: 0.0) as Double, 2),
                                     style = MaterialTheme.typography.body2
                                         .copy(fontSize = 15.5.sp, color = contentColor, fontWeight = FontWeight.Bold),
                                 )
@@ -211,7 +211,7 @@ fun HomeBalanceView(navController: NavHostController) {
                                 horizontalAlignment = Alignment.End,
                             ) {
                                 Text(
-                                    text = formatNumberWithCommas(balance?.equity ?: 0.0, 2),
+                                    text = formatNumberWithCommas((balance?.equity ?: 0.0) as Double, 2),
                                     style = MaterialTheme.typography.body2
                                         .copy(fontSize = 15.5.sp, color = contentColor, fontWeight = FontWeight.Bold),
                                 )
@@ -238,7 +238,7 @@ fun HomeBalanceView(navController: NavHostController) {
                                 horizontalAlignment = Alignment.End,
                             ) {
                                 Text(
-                                    text = formatNumberWithCommas(balance?.buyingPower ?: 0.0, 2),
+                                    text = formatNumberWithCommas((balance?.buyingPower ?: 0.0) as Double, 2),
                                     style = MaterialTheme.typography.body2
                                         .copy(fontSize = 15.5.sp, color = contentColor, fontWeight = FontWeight.Bold),
                                 )

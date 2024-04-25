@@ -159,7 +159,7 @@ fun AccountBalanceView(
                                         )
 
                                         Text(
-                                            text = formatNumberWithCommas(balance!!.cashBalance, 2),
+                                            text = formatNumberWithCommas(balance!!.cashBalance.toDouble(), 2),
                                             style = MaterialTheme.typography.body2
                                                 .copy(fontSize = 13.sp, color = contentColor),
                                             modifier = Modifier.align(Alignment.CenterVertically),
@@ -179,7 +179,7 @@ fun AccountBalanceView(
 
                                         Text(
                                             text = formatNumberWithCommas(
-                                                balance!!.currentBalance,
+                                                balance!!.currentBalance.toDouble(),
                                                 2
                                             ),
                                             style = MaterialTheme.typography.body2
@@ -201,7 +201,7 @@ fun AccountBalanceView(
                                         )
 
                                         Text(
-                                            text = formatNumberWithCommas(balance!!.cashBalance, 2),
+                                            text = formatNumberWithCommas(balance!!.cashBalance.toDouble(), 2),
                                             style = MaterialTheme.typography.body2
                                                 .copy(fontSize = 13.sp, color = contentColor),
                                             modifier = Modifier.align(Alignment.CenterVertically),
@@ -220,7 +220,7 @@ fun AccountBalanceView(
                                         )
 
                                         Text(
-                                            text = formatNumberWithCommas(balance!!.buyingPower, 2),
+                                            text = formatNumberWithCommas(balance!!.buyingPower.toDouble(), 2),
                                             style = MaterialTheme.typography.body2
                                                 .copy(fontSize = 13.sp, color = contentColor),
                                             modifier = Modifier.align(Alignment.CenterVertically),

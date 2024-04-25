@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -60,7 +61,7 @@ fun BalanceScreen() {
                 .padding(bottom = 56.dp)
                 .fillMaxHeight(),
         ) {
-            item(balance) {
+            items(items = listOfNotNull(balance)) {
                 balance?.let {
                     BalanceView(
                         accountBalance = it,
