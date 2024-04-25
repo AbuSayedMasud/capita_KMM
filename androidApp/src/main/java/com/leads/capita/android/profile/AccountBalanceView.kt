@@ -39,6 +39,10 @@ import com.leads.capita.android.theme.rememberWindowSizeClass
 import com.leads.capita.android.R
 import com.leads.capita.account.AccountBalance
 import com.leads.capita.service.account.AccountServiceImpl
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 @Composable
 fun AccountBalanceView(
@@ -53,11 +57,24 @@ fun AccountBalanceView(
     val screenWidth = configuration.screenWidthDp.dp
     val textColumnWeight =
         if (screenWidth > 600.dp) 4f else 1f
-    val databaseDriverFactory: DatabaseDriverFactory = DatabaseDriverFactory(context)
-        val accountService = AccountServiceImpl(databaseDriverFactory)
-    var balances: List<com.leads.capita.account.AccountBalance>? by remember { mutableStateOf(null) }
-        val accountBalanceList = accountService.getBalanceServices()
-        balances = accountBalanceList
+//    val databaseDriverFactory: DatabaseDriverFactory = DatabaseDriverFactory(context)
+//        val accountService = AccountServiceImpl(databaseDriverFactory)
+//    var balances: List<com.leads.capita.account.AccountBalance>? by remember { mutableStateOf(null) }
+//        val accountBalanceList = accountService.getBalanceServices()
+//        balances = accountBalanceList
+    var balance: AccountBalance? by remember { mutableStateOf(null) }
+
+    var  databaseDriverFactory= DatabaseDriverFactory(context)
+    val accountService = AccountServiceImpl(databaseDriverFactory)
+    // Fetch the account balance information from the service
+    val homeBalance = accountService.getBalanceServices()
+    val jsonObject = Json.parseToJsonElement(homeBalance ?: "").jsonObject
+    var balancedata = jsonObject["status"]?.jsonPrimitive?.contentOrNull
+    if (balancedata?.isNotEmpty() == true){
+
+    }else{
+        balance= Json.decodeFromString<AccountBalance>(homeBalance)
+    }
 //    balances = MockLoaderDemo(context).balances
     val (backgroundColor, contentColor) = getCardColors()
     val paddingValue = if (isSystemInDarkTheme()) {
@@ -121,7 +138,7 @@ fun AccountBalanceView(
                 }
                 Spacer(modifier = Modifier.height(8.dp))
 
-                for (balance in balances.orEmpty()) {
+//                for (balance in balances.orEmpty()) {
                     AnimatedVisibility(expandedState.value && cardName == "balance") {
                         Column {
                             Row(
@@ -142,7 +159,7 @@ fun AccountBalanceView(
                                         )
 
                                         Text(
-                                            text = formatNumberWithCommas(balance.cashBalance, 2),
+                                            text = formatNumberWithCommas(balance!!.cashBalance, 2),
                                             style = MaterialTheme.typography.body2
                                                 .copy(fontSize = 13.sp, color = contentColor),
                                             modifier = Modifier.align(Alignment.CenterVertically),
@@ -162,7 +179,7 @@ fun AccountBalanceView(
 
                                         Text(
                                             text = formatNumberWithCommas(
-                                                balance.currentBalance,
+                                                balance!!.currentBalance,
                                                 2
                                             ),
                                             style = MaterialTheme.typography.body2
@@ -184,7 +201,7 @@ fun AccountBalanceView(
                                         )
 
                                         Text(
-                                            text = formatNumberWithCommas(balance.cashBalance, 2),
+                                            text = formatNumberWithCommas(balance!!.cashBalance, 2),
                                             style = MaterialTheme.typography.body2
                                                 .copy(fontSize = 13.sp, color = contentColor),
                                             modifier = Modifier.align(Alignment.CenterVertically),
@@ -203,7 +220,7 @@ fun AccountBalanceView(
                                         )
 
                                         Text(
-                                            text = formatNumberWithCommas(balance.buyingPower, 2),
+                                            text = formatNumberWithCommas(balance!!.buyingPower, 2),
                                             style = MaterialTheme.typography.body2
                                                 .copy(fontSize = 13.sp, color = contentColor),
                                             modifier = Modifier.align(Alignment.CenterVertically),
@@ -214,7 +231,7 @@ fun AccountBalanceView(
                             Spacer(modifier = Modifier.height(8.dp))
                         }
                     }
-                }
+//                }
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }

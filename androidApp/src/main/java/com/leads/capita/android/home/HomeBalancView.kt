@@ -33,7 +33,12 @@ import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
 import com.leads.capita.android.R
 import com.leads.capita.account.AccountBalance
+import com.leads.capita.security.IdentitySuccessResponse
 import com.leads.capita.service.account.AccountServiceImpl
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 
 @Composable
@@ -47,8 +52,13 @@ fun HomeBalanceView(navController: NavHostController) {
     val accountService = AccountServiceImpl(databaseDriverFactory)
     // Fetch the account balance information from the service
     val homeBalance = accountService.getBalanceServices()
+    val jsonObject = Json.parseToJsonElement(homeBalance ?: "").jsonObject
+    var balancedata = jsonObject["status"]?.jsonPrimitive?.contentOrNull
+    if (balancedata?.isNotEmpty() == true){
 
-    balance = homeBalance[0]
+    }else{
+        balance=Json.decodeFromString<AccountBalance>(homeBalance)
+    }
 
     val (backgroundColor, contentColor) = getCardColors()
     val paddingValue = if (isSystemInDarkTheme()) {

@@ -11,7 +11,7 @@ import com.leads.capita.account.AccountTransaction
 class AccountServiceImpl(private val databaseDriverFactory: DatabaseDriverFactory) :
     AccountService {
 
-   override fun getBalanceServices(): List<AccountBalance>{
+   override fun getBalanceServices(): String{
        val repository = AccountFactory.getRepository(databaseDriverFactory);
         return repository.getAccountBalance()
     }

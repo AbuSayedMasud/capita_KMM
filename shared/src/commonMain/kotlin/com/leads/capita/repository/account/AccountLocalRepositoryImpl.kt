@@ -7,36 +7,54 @@ import com.leads.capita.account.AccountInstrument
 import com.leads.capita.account.AccountReceivable
 import com.leads.capita.account.AccountRepository
 import com.leads.capita.account.AccountTransaction
+import com.leads.capita.repository.RestUtil
+import com.leads.capita.service.security.IdentityTokenManager
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import kotlinx.coroutines.runBlocking
 
 
 class AccountLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
     AccountRepository {
     val db = CapitaDb(databaseDriverFactory.createDriver())
-    override fun getAccountBalance(): List<AccountBalance> {
-        return db.accountBalanceQueries.getAccountBalance()
-            .executeAsList()
-            .map { accountBalanceData ->
-                AccountBalance(
-                    accountCode = accountBalanceData?.accountCode!!,
-                    accruedCharge = accountBalanceData?.accruedCharge!!,
-                    assetValue = accountBalanceData?.assetValue!!,
-                    buyingPower = accountBalanceData?.buyingPower!!,
-                    cashBalance = accountBalanceData?.cashBalance!!,
-                    costValue = accountBalanceData?.costValue!!,
-                    currentBalance = accountBalanceData?.currentBalance!!,
-                    deptEquityRatio = accountBalanceData?.deptEquityRatio!!,
-                    equity = accountBalanceData?.equity!!,
-                    equityDebtRatio = accountBalanceData?.equityDebtRatio!!,
-                    immatureBalance = accountBalanceData?.immatureBalance!!,
-                    loanRatio = accountBalanceData?.loanRatio!!,
-                    marginEquity = accountBalanceData?.marginEquity!!,
-                    marketValue = accountBalanceData?.marketValue!!,
-                    totalDeposit = accountBalanceData?.totalDeposit!!,
-                    totalWithdrawal = accountBalanceData?.totalWithdrawal!!,
-                    unclearCheque = accountBalanceData?.unclearCheque!!,
-                )
+    private val ACCOUNT_BALANCE_PATH: String = "/accounts/balances/00DLB358"
+    override fun getAccountBalance(): String {
+        var response: String? = null
+
+        runBlocking {
+            try {
+                response = RestUtil.getClient().get(urlString = "${RestUtil.BASE_URL}$ACCOUNT_BALANCE_PATH").body()
+            } catch (e: Exception) {
             }
+        }
+
+        return response.toString()
     }
+//    override fun getAccountBalance(): List<AccountBalance> {
+//        return db.accountBalanceQueries.getAccountBalance()
+//            .executeAsList()
+//            .map { accountBalanceData ->
+//                AccountBalance(
+//                    accountCode = accountBalanceData?.accountCode!!,
+//                    accruedCharge = accountBalanceData?.accruedCharge!!,
+//                    assetValue = accountBalanceData?.assetValue!!,
+//                    buyingPower = accountBalanceData?.buyingPower!!,
+//                    cashBalance = accountBalanceData?.cashBalance!!,
+//                    costValue = accountBalanceData?.costValue!!,
+//                    currentBalance = accountBalanceData?.currentBalance!!,
+//                    deptEquityRatio = accountBalanceData?.deptEquityRatio!!,
+//                    equity = accountBalanceData?.equity!!,
+//                    equityDebtRatio = accountBalanceData?.equityDebtRatio!!,
+//                    immatureBalance = accountBalanceData?.immatureBalance!!,
+//                    loanRatio = accountBalanceData?.loanRatio!!,
+//                    marginEquity = accountBalanceData?.marginEquity!!,
+//                    marketValue = accountBalanceData?.marketValue!!,
+//                    totalDeposit = accountBalanceData?.totalDeposit!!,
+//                    totalWithdrawal = accountBalanceData?.totalWithdrawal!!,
+//                    unclearCheque = accountBalanceData?.unclearCheque!!,
+//                )
+//            }
+//    }
 
     override fun getAccountInstrument(): List<AccountInstrument> {
 

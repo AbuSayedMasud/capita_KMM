@@ -15,8 +15,8 @@ import kotlinx.coroutines.runBlocking
 class AccountRepositoryImpl : AccountRepository {
     private val BALANCE_PATH: String = "/account-balances"
     private val TRANSACTION_PATH: String = "/account-balances"
-    override fun getAccountBalance(): List<AccountBalance> {
-        var response: AccountBalance? = null
+    override fun getAccountBalance(): String {
+        var response: String? = null
 
         runBlocking {
             try {
@@ -24,7 +24,7 @@ class AccountRepositoryImpl : AccountRepository {
             } catch (e: Exception) {
             }
         }
-        return listOf(response!!)
+        return response.toString()
     }
 
     override fun getAccountInstrument(): List<AccountInstrument> {
