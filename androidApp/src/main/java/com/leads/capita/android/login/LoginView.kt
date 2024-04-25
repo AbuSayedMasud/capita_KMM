@@ -337,7 +337,7 @@ fun LoginView(navController: NavHostController, preferencesManager: PreferencesM
                                     scope.launch {
                                         snackbarHostState.showSnackbar(
                                             CustomSnackbarVisuals(
-                                                message = errorMessage,
+                                                message = errorMessage.toString(),
                                                 contentColor = Color.White,
                                             ),
                                         )

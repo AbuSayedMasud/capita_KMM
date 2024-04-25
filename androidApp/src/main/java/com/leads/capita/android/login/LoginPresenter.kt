@@ -2,13 +2,10 @@ package com.leads.capita.android.login
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.leads.capita.account.AccountTransaction
-import com.leads.capita.repository.security.authToken
 import com.leads.capita.security.IdentityErrorResponse
 import com.leads.capita.security.IdentitySuccessResponse
 import com.leads.capita.service.security.SecurityFactory
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
@@ -16,7 +13,7 @@ import kotlinx.serialization.json.jsonPrimitive
 // Sealed class to represent different authentication results
 sealed class AuthResult {
     object Success : AuthResult()
-    data class Invalid(val errorMessage: String): AuthResult()
+    data class Invalid(val errorMessage: List<String>): AuthResult()
 }
 
 // Presenter class for handling login functionality
@@ -47,7 +44,7 @@ class LoginPresenter {
         }else{
             loginErrorResponse=Json.decodeFromString<IdentityErrorResponse>(identityLoginResponse)
 
-                AuthResult.Invalid(loginErrorResponse.detail)
+                AuthResult.Invalid(loginErrorResponse.details)
 
         }
     }

@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class IdentityErrorResponse(
-    val detail: String,
+    val details: List<String>,
     val status: Int,
     val title: String,
     val type: String

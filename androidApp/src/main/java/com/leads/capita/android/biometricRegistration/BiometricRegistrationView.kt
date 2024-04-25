@@ -302,7 +302,7 @@ fun BiometricRegistrationView(navController: NavHostController) {
                                         snackbarHostState.showSnackbar(
 
                                             CustomSnackbarVisuals(
-                                                message = errorMessage,
+                                                message = errorMessage.toString(),
                                                 contentColor = Color.White,
                                             ),
                                         )
