@@ -5,8 +5,7 @@ import com.leads.capita.repository.RestUtil.BASE_URL
 import com.leads.capita.repository.RestUtil.getClient
 import com.leads.capita.security.Identity
 import com.leads.capita.security.IdentityRepository
-import com.leads.capita.security.IdentityErrorResponse
-import com.leads.capita.service.security.AuthTokenManager
+import com.leads.capita.service.security.IdentityTokenManager
 import io.ktor.client.call.body
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -19,7 +18,7 @@ import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-var authToken: String? = null
+
 class IdentityLocalRepositoryImpl : IdentityRepository {
     private val TOKEN_PATH: String = "/tokens"
     private val identityList = listOf(
@@ -51,17 +50,23 @@ class IdentityLocalRepositoryImpl : IdentityRepository {
 
             val jsonObject = Json.parseToJsonElement(responseContent ?: "").jsonObject
             val token = jsonObject["token"]?.jsonPrimitive?.contentOrNull
+            val useRef = jsonObject["useRef"]?.jsonPrimitive?.contentOrNull
 //                if (token.equals("")){
 //                   error  = Json.parseToJsonElement(loginError?.detail ?: "").jsonObject.toString()
 //
 //                }
             //Logger.d("afffadgdgdfhfdjgsdshdf", responseContent.toString())
-           authToken=token
-            println("afffadgdgdfhfdjgsdshdf" + authToken.toString())
 
-            AuthTokenManager.updateAuthToken("Bearer "+token)
+            println("afffadgdgdfhfdjgsdshdf" + token.toString())
 
-            println("AuthToken: ${AuthTokenManager.getAuthToken()}")
+
+            if(token?.isNotEmpty() == true){
+                IdentityTokenManager.updateAuthToken(token)
+                IdentityTokenManager.userRef(useRef!!)
+
+            }
+
+            println("AuthToken: ${IdentityTokenManager.getAuthToken()}")
 
 
         }

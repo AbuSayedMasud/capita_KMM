@@ -43,7 +43,7 @@ class IdentityRepositoryImpl : IdentityRepository {
 
                 val jsonObject = Json.parseToJsonElement(res ?: "").jsonObject
                 val token = jsonObject["token"]?.jsonPrimitive?.contentOrNull
-                authToken = token
+//                authToken = token
                 response = token
             } catch (e: Exception) {
             }
