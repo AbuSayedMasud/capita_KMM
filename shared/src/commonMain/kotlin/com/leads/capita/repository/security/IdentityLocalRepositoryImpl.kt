@@ -6,6 +6,7 @@ import com.leads.capita.repository.RestUtil.getClient
 import com.leads.capita.security.Identity
 import com.leads.capita.security.IdentityRepository
 import com.leads.capita.security.IdentityErrorResponse
+import com.leads.capita.service.security.AuthTokenManager
 import io.ktor.client.call.body
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -58,16 +59,12 @@ class IdentityLocalRepositoryImpl : IdentityRepository {
            authToken=token
             println("afffadgdgdfhfdjgsdshdf" + authToken.toString())
 
+            AuthTokenManager.updateAuthToken("Bearer "+token)
+
+            println("AuthToken: ${AuthTokenManager.getAuthToken()}")
+
 
         }
-        /*} catch (e: Exception) {
-            //Log.e("API Call Error", e.toString())
-            println("afffadgdgdfhfdjgsdshdf"+e.toString())
-
-
-
-        }*/
-
 
         return responseContent.toString()
     }
