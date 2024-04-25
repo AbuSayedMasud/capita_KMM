@@ -6,9 +6,9 @@ import com.leads.capita.repository.DatabaseDriverFactory
 
 class CustomerRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
     CustomerProfileRepository {
-    override fun getCustomerProfile(): List<CustomerProfileResponse> {
+    override fun getCustomerProfile(): String {
 
-        return emptyList()
+        return ""
     }
 
 }

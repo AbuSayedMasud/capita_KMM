@@ -18,7 +18,7 @@ import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-
+var authToken: String? = null
 class IdentityLocalRepositoryImpl : IdentityRepository {
     private val TOKEN_PATH: String = "/tokens"
     private val identityList = listOf(
@@ -33,36 +33,33 @@ class IdentityLocalRepositoryImpl : IdentityRepository {
     override fun getToken(username: String, password: String): String {
         val client = getClient()
         var responseContent: String? = null
-        var loginError: IdentityErrorResponse? = null
-        var  error: String? = null
-        val token: String? = null
+        /* try {*/
+        runBlocking {
 
-       /* try {*/
-            runBlocking {
-
-                responseContent =
-                    client.post("$BASE_URL$TOKEN_PATH") {
-                        contentType(ContentType.Application.Json)
-                        setBody(
-                            Identity(
-                                username = username,
-                                password = password
-                            )
+            responseContent =
+                client.post("$BASE_URL$TOKEN_PATH") {
+                    contentType(ContentType.Application.Json)
+                    setBody(
+                        Identity(
+                            username = username,
+                            password = password
                         )
-                    }.body()
+                    )
+                }.body()
 
 
             val jsonObject = Json.parseToJsonElement(responseContent ?: "").jsonObject
-//            val token = jsonObject["token"]?.jsonPrimitive?.contentOrNull
+            val token = jsonObject["token"]?.jsonPrimitive?.contentOrNull
 //                if (token.equals("")){
 //                   error  = Json.parseToJsonElement(loginError?.detail ?: "").jsonObject.toString()
 //
 //                }
-                //Logger.d("afffadgdgdfhfdjgsdshdf", responseContent.toString())
-                println("afffadgdgdfhfdjgsdshdf"+responseContent.toString())
+            //Logger.d("afffadgdgdfhfdjgsdshdf", responseContent.toString())
+           authToken=token
+            println("afffadgdgdfhfdjgsdshdf" + authToken.toString())
 
 
-            }
+        }
         /*} catch (e: Exception) {
             //Log.e("API Call Error", e.toString())
             println("afffadgdgdfhfdjgsdshdf"+e.toString())
@@ -76,7 +73,6 @@ class IdentityLocalRepositoryImpl : IdentityRepository {
     }
 
 
-
     override fun getBiometricRegistrationToken(username: String, password: String): String {
         return if (username == "capita" && password == "Capita@1234") {
             "okay"
@@ -84,6 +80,7 @@ class IdentityLocalRepositoryImpl : IdentityRepository {
             ""
         }
     }
+
     override fun getPasswordRecoveryToken(
         username: String,
         dateOfBirth: String,

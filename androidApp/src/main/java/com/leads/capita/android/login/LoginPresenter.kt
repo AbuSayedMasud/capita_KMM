@@ -1,7 +1,9 @@
 package com.leads.capita.android.login
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.leads.capita.account.AccountTransaction
+import com.leads.capita.repository.security.authToken
 import com.leads.capita.security.IdentityErrorResponse
 import com.leads.capita.security.IdentitySuccessResponse
 import com.leads.capita.service.security.SecurityFactory
@@ -27,6 +29,7 @@ class LoginPresenter {
      * @param password The provided password.
      * @return An instance of AuthResult representing the authentication result.
      */
+    @SuppressLint("SuspiciousIndentation")
     fun login(
         context: Context,
         username: String,

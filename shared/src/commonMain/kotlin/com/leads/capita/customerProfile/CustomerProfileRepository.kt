@@ -1,5 +1,5 @@
 package com.leads.capita.customerProfile
 
 interface CustomerProfileRepository {
-    fun getCustomerProfile(): List<CustomerProfileResponse>
+    fun getCustomerProfile(): String
 }

@@ -1,5 +1,6 @@
 package com.leads.capita.android.profile
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -32,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -39,6 +41,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.R
+import com.leads.capita.repository.DatabaseDriverFactory
+import com.leads.capita.service.account.AccountServiceImpl
+import com.leads.capita.service.customerProfile.CustomerProfileServiceImpl
 
 @Composable
 fun AccountProfileView(navController: NavHostController) {
@@ -52,6 +57,12 @@ fun AccountProfileView(navController: NavHostController) {
     } else {
         10.dp
     }
+    val context= LocalContext.current
+    var  databaseDriverFactory= DatabaseDriverFactory(context)
+    val profileService = CustomerProfileServiceImpl(databaseDriverFactory)
+    // Fetch the account balance information from the service
+    val profile = profileService.getCustomerProfile()
+    Log.d("profile data",profile)
     var expanded by remember { mutableStateOf(false) }
     var selectedOption by remember { mutableStateOf("") }
     var selectedAccountData by remember { mutableStateOf("") }

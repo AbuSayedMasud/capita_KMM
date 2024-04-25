@@ -18,7 +18,6 @@ import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-var authToken: String? = null
 class IdentityRepositoryImpl : IdentityRepository {
     private val TOKEN_PATH: String = "/tokens"
     override fun userExists(username: String): Boolean {

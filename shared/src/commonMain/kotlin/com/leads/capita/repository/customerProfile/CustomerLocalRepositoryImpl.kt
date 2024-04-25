@@ -1,13 +1,28 @@
 package com.leads.capita.repository.customerProfile
 
 import com.leads.capita.customerProfile.CustomerProfileRepository
-import com.leads.capita.customerProfile.CustomerProfileResponse
 import com.leads.capita.repository.DatabaseDriverFactory
+import com.leads.capita.repository.RestUtil
+import com.leads.capita.repository.RestUtil.getClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import kotlinx.coroutines.runBlocking
 
 class CustomerLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) : CustomerProfileRepository {
-    override fun getCustomerProfile(): List<CustomerProfileResponse> {
 
-        return emptyList()
+    private val PROFILE_PATH: String = "/customers/profiles/123"
+
+    override fun getCustomerProfile(): String {
+        var response: String? = null
+
+        runBlocking {
+            try {
+                response = getClient().get(urlString = "${RestUtil.BASE_URL}$PROFILE_PATH").body()
+            } catch (e: Exception) {
+            }
+        }
+
+        return response.toString()
     }
 
 }
