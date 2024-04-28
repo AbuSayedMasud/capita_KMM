@@ -135,7 +135,7 @@ fun BalanceView(
                                 border = null,
                             ) {
                                 Column(modifier = Modifier.padding(0.dp)) {
-                                    BalanceItem("AccountCode", accountBalance.accountCode.toDouble()) //app crashed here, need to solve
+                                    BalanceCode("AccountCode", accountBalance.accountCode) 
                                     BalanceItem("AccruedCharge", accountBalance.accruedCharge.toDouble())
                                     BalanceItem("AssetValue", accountBalance.assetValue.toDouble())
                                     BalanceItem("BuyingPower ", accountBalance.buyingPower.toDouble())
@@ -187,3 +187,30 @@ fun BalanceItem(label: String, value: Double) {
         )
     }
 }
+@Composable
+fun BalanceCode(label: String, value: String) {
+    val textColor = if (isSystemInDarkTheme()) White else Black
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 4.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.body2,
+            fontSize = 13.sp,
+            modifier = Modifier.weight(1f),
+            color = textColor,
+        )
+        Text(
+            text = value,
+            style = MaterialTheme.typography.body2,
+            fontSize = 13.sp,
+            textAlign = TextAlign.End,
+            modifier = Modifier.weight(1f),
+            color = textColor,
+        )
+    }
+}
+
