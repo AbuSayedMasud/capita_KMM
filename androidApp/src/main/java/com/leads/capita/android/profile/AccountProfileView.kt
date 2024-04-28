@@ -39,11 +39,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.leads.capita.account.AccountBalance
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.R
+import com.leads.capita.customerProfile.CustomerProfileResponse
 import com.leads.capita.repository.DatabaseDriverFactory
 import com.leads.capita.service.account.AccountServiceImpl
 import com.leads.capita.service.customerProfile.CustomerProfileServiceImpl
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 @Composable
 fun AccountProfileView(navController: NavHostController) {
@@ -58,10 +64,20 @@ fun AccountProfileView(navController: NavHostController) {
         10.dp
     }
     val context= LocalContext.current
+    var profileData: CustomerProfileResponse? by remember { mutableStateOf(null) }
     var  databaseDriverFactory= DatabaseDriverFactory(context)
     val profileService = CustomerProfileServiceImpl(databaseDriverFactory)
     // Fetch the account balance information from the service
     val profile = profileService.getCustomerProfile()
+    val jsonObject = Json.parseToJsonElement(profile ?: "").jsonObject
+    Log.d("user name", "data is${jsonObject} ")
+    var profileObjectData = jsonObject["customerType"]?.jsonPrimitive?.contentOrNull
+    if (profileObjectData?.isNotEmpty() == true){
+        profileData= Json.decodeFromString<CustomerProfileResponse>(profile)
+
+    }else{
+
+    }
     Log.d("profile data",profile)
     var expanded by remember { mutableStateOf(false) }
     var selectedOption by remember { mutableStateOf("") }
@@ -114,12 +130,14 @@ fun AccountProfileView(navController: NavHostController) {
                 Column(
                     verticalArrangement = Arrangement.Center,
                 ) {
-                    Text(
-                        text = "Md. Momtajul Karim",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = contentColor,
-                    )
+                    profileData?.let {
+                        Text(
+                            text = it.lastName,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = contentColor,
+                        )
+                    }
                     Spacer(modifier = Modifier.padding(4.dp))
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Column {
@@ -131,7 +149,7 @@ fun AccountProfileView(navController: NavHostController) {
                         }
                         Column {
                             Text(
-                                text =selectedOption.takeIf { it.isNotEmpty() } ?: "F111",
+                                text = (selectedOption.takeIf { it.isNotEmpty() } ?: profileData?.accounts?.get(0)?.accountCode)!!,
                                 fontSize = 13.sp,
                                 color = contentColor,
                                 modifier = Modifier.padding(start = 4.dp)
@@ -153,14 +171,14 @@ fun AccountProfileView(navController: NavHostController) {
                             onDismissRequest = { expanded = false },
                             Modifier.background(backgroundColor)
                         ) {
-                            options.forEach { option ->
+                            profileData?.accounts?.forEach { option ->
                                 DropdownMenuItem(onClick = {
-                                    selectedOption = option
+                                    selectedOption = option.accountCode
                                     selectedAccountData =
-                                        accountDataMap[option].orEmpty() // Update selected data
+                                       option.boId
                                     expanded = false
                                 }) {
-                                    Text(text = option)
+                                    Text(text = option.accountCode)
                                 }
                             }
                         }
@@ -169,17 +187,19 @@ fun AccountProfileView(navController: NavHostController) {
                     Row() {
                         Column {
                             Text(
-                                text = "BO ID :",
+                                text = "BO ID : ",
                                 fontSize = 13.sp,
                                 color = contentColor,
                             )
                         }
                         Column {
-                            Text(
-                                text = if (selectedAccountData.isNotEmpty()) selectedAccountData else "1202105357564563",
-                                fontSize = 13.sp,
-                                color = contentColor,
-                            )
+                            (if (selectedAccountData.isNotEmpty()) selectedAccountData else profileData?.accounts?.get(0)?.boId)?.let {
+                                Text(
+                                    text = it,
+                                    fontSize = 13.sp,
+                                    color = contentColor,
+                                )
+                            }
                         }
                     }
                     Spacer(modifier = Modifier.padding(4.dp))

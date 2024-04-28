@@ -1,5 +1,8 @@
 package com.leads.capita.customerProfile
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Addresses(
     var address1: String,
     var address2: String,

@@ -1,5 +1,8 @@
 package com.leads.capita.customerProfile
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class CustomerProfileResponse(
     var accounts: ArrayList<Accounts>,
     var addresses: ArrayList<Addresses>,
