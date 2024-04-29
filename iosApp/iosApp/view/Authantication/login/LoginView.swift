@@ -8,6 +8,7 @@
 
 import LocalAuthentication
 import SwiftUI
+import shared
 
 struct LoginView: View {
     @State private var username = ""
@@ -16,8 +17,12 @@ struct LoginView: View {
     @State private var rememberMe = false
     @State var isShowingPassword: Bool = false
     @State private var isLogged = false
-   
+    @State private var navigateToHome = false
     
+    @StateObject var viewModel: LoginViewModel
+    
+    @State private var isActive = false
+
     var body: some View {
         
             NavigationStack{
@@ -115,23 +120,24 @@ struct LoginView: View {
                     }
                     
                     //LOGIN button
-                    NavigationLink {
-                        //HomeView()
-                        ContentView()
-                            .navigationBarBackButtonHidden()
-                    } label: {
-                        HStack{
-                            Text("Login")
-                                .fontWeight(.semibold)
-                        }
-                        .foregroundColor(.white)
-                        .frame(width: UIScreen.main.bounds.width - 100, height: 48)
+                    // Login Button with NavigationLink
+                    NavigationLink(destination: HomeView().navigationBarHidden(true), isActive: $isActive) {
+                        EmptyView() // Hidden NavigationLink
                     }
-                    .background(Color("AccentColor"))
-                    .cornerRadius(30)
-                    .padding(.top,35)
-                    
-                    
+
+                             Button(action: {
+                                 viewModel.login(username: username, password: password, isActive: $isActive)
+                             }) {
+                                 Text("Login")
+                                     .fontWeight(.semibold)
+                                     .foregroundColor(.white)
+                                     .frame(width: UIScreen.main.bounds.width - 100, height: 48)
+                                     .background(Color("AccentColor"))
+                                     .cornerRadius(30)
+                                     .padding(.top, 35)
+                             
+                         }
+               
                     //SIGN-UP BUTTON
                     NavigationLink {
                         RegistrationView()
@@ -203,6 +209,8 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+       // LoginView(viewModel: <#T##LoginViewModel#>)
+        LoginView(viewModel: LoginViewModel(identityService: IdentityServiceImpl()))
     }
 }
+
