@@ -1,108 +1,158 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State private var accountCodes = "F11" // Initial value for accountCodes
+    
+    @State private var isModeUp = true // Initial mode is "Up"
+    @State private var isPopoverPresented = false // State to manage popover presentation
+    let popupTitles = ["F111", "F222", "F333"]  // Titles for the popup
+    
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(spacing: 20) {
-                    // User Profile Row
-                    UserProfileRow(image: "person.crop.circle.fill", userName: "Md. Momtajul Karim", accountCode: "F111", boId: "5678")
-                    
-                    // 5 Different Rows with Titles
-                    TitleRow(title: "Balances")
-                        .onTapGesture {
-                            // Show description for Row 1
-                            print("Description for Row 1")
+            ZStack {
+                ScrollView {
+                    VStack(spacing: 20) {
+                        // User Profile Row
+                        UserProfileRow(image: "person.crop.circle.fill", userName: "Md. Momtajul Karim", accountCode: accountCodes, boId: "5678", isModeUp: $isModeUp, isPopoverPresented: $isPopoverPresented)
+                        
+                        // 5 Different Rows with Titles
+                        TitleRow(title: "Balances")
+                            .onTapGesture {
+                                // Show description for Row 1
+                                print("Description for Row 1")
+                            }
+                        
+                        TitleRow(title: "Position")
+                            .onTapGesture {
+                                // Show description for Row 2
+                                print("Description for Row 2")
+                            }
+                        
+                        NavigationLink(destination: Protfolio_statement()) {
+                            SimpleTitleRow(title: "Portfolio Statement")
                         }
-                    
-                    TitleRow(title: "Position")
-                        .onTapGesture {
-                            // Show description for Row 2
-                            print("Description for Row 2")
+                        
+                        NavigationLink(destination: marketView()) {
+                            SimpleTitleRow(title: "Ledger Statement")
                         }
-                    
-                    NavigationLink(destination: Protfolio_statement()) {
-                        SimpleTitleRow(title: "Portfolio Statement")
+                        
+                        // Logout Row
+                        LogoutRow()
+                        // Spacer to push content to the top
+                        Spacer()
                     }
-                    
-                    NavigationLink(destination: marketView()) {
-                        SimpleTitleRow(title: "Ledger Statement")
-                    }
-                    
-                    // Logout Row
-                    LogoutRow()
-                    // Spacer to push content to the top
-                    Spacer()
+                    .padding()
+                    .navigationBarTitle("Profile", displayMode: .inline)
+                    .navigationBarItems(
+                        leading:
+                            Button(action: {
+                                // Handle action for the first button
+                            }) {
+                                Image(uiImage: UIImage(named: "loading_nav_button")!)
+                            },
+                        trailing:
+                            Button(action: {
+                                // Handle action for the second button
+                            }) {
+                                Image(uiImage: UIImage(named: "alarm_nav_button")!)
+                                
+                            }
+                    )
                 }
                 
-                .padding()
-                .navigationBarTitle("Profile", displayMode: .inline)
-                .navigationBarItems(
-                    leading:
-                        Button(action: {
-                            // Handle action for the first button
-                        }) {
-                            Image(uiImage: UIImage(named: "loading_nav_button")!)
-                        },
-                    trailing:
-                        Button(action: {
-                            // Handle action for the second button
-                        }) {
-                            Image(uiImage: UIImage(named: "alarm_nav_button")!)
-                            
+                if isPopoverPresented {
+                    VStack {
+                        ForEach(popupTitles, id: \.self) { title in
+                            HStack {
+                                Text(title)
+                                    .onTapGesture {
+                                        // Update accountCodes when a popup title is selected
+                                        self.accountCodes = title
+                                        self.isPopoverPresented.toggle() // Close the popup
+                                    }
+                            }
+                            .padding()
                         }
-                )
+                    }
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(radius: 5)
+                    .frame(width: UIScreen.main.bounds.width - 20) // Set fixed width for the popup
+                    .position(x: UIScreen.main.bounds.width / 2, y: 150) // Position the popup above the rows
+                    .onTapGesture {
+                        // Close the popup when tapped anywhere outside of it
+                        self.isPopoverPresented.toggle()
+                    }
+                }
             }
         }
     }
 }
-
 
 struct UserProfileRow: View {
     var image: String
     var userName: String
     var accountCode: String
     var boId: String
+    @Binding var isModeUp: Bool
+    @Binding var isPopoverPresented: Bool
     
     @State private var selectedImage: UIImage?
     @State private var isImagePickerPresented = false
     
+    let rowHeight: CGFloat = 70 // Fixed height for the row
+    
     var body: some View {
-        HStack {
-            Button(action: {
-                self.isImagePickerPresented.toggle()
-            }) {
-                if let selectedImage = selectedImage {
-                    Image(uiImage: selectedImage)
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle()) // Apply circular clipping mask
-                } else {
-                    Image(systemName: image)
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle()) // Apply circular clipping mask
+        VStack(alignment: .leading) {
+            HStack {
+                Button(action: {
+                    self.isImagePickerPresented.toggle()
+                }) {
+                    if let selectedImage = selectedImage {
+                        Image(uiImage: selectedImage)
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
+                    } else {
+                        Image(systemName: image)
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
+                    }
                 }
-            }
-            .sheet(isPresented: $isImagePickerPresented) {
-                ImagePicker(selectedImage: $selectedImage)
-            }
-            
-            VStack(alignment: .leading) {
-                Text(userName)
-                    .font(.headline)
+                .sheet(isPresented: $isImagePickerPresented) {
+                    ImagePicker(selectedImage: $selectedImage)
+                }
                 
-                Text("Account Code: \(accountCode)")
-                Text("BO ID: \(boId)")
-                    .font(.subheadline)
+                VStack(alignment: .leading) {
+                    Text(userName)
+                        .font(.headline)
+                    
+                    HStack {
+                        Text("Account Code: \(accountCode)")
+                        
+                        // Mode buttons with popup
+                        Button(action: {
+                            self.isModeUp.toggle()
+                            self.isPopoverPresented.toggle()
+                        }) {
+                            Image(systemName: isModeUp ? "chevron.up" : "chevron.down")
+                        }
+                        .buttonStyle(PlainButtonStyle()) // Remove button default style
+                    }
+                    
+                    Text("BO ID: \(boId)")
+                        .font(.subheadline)
+                }
+                Spacer()
             }
-            Spacer()
+            .frame(height: rowHeight) // Set fixed height for the row
+            .padding()
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius: 5)
         }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
         .padding(.top, 20)
-        .shadow(radius: 5)
     }
 }
 
@@ -184,7 +234,6 @@ struct TitleRow: View {
     }
 }
 
-
 struct SimpleTitleRow: View {
     var title: String
     
@@ -223,4 +272,3 @@ struct ProfileView_Previews: PreviewProvider {
         ProfileView()
     }
 }
-
