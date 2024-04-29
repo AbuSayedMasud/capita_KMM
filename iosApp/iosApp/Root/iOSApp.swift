@@ -1,7 +1,9 @@
 import SwiftUI
+import shared
 
 @main
 struct iOSApp: App {
+
     
     init() {
         
@@ -15,7 +17,8 @@ struct iOSApp: App {
 	var body: some Scene {
 		WindowGroup {
 			//ContentView()
-            LoginView()
+            //LoginView(viewModel: LoginViewModel(identityService: IdentityService()))
+            LoginView(viewModel: LoginViewModel(identityService: IdentityServiceImpl()))
 		}
 	}
 }
