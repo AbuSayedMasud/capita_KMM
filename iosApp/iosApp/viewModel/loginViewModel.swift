@@ -41,6 +41,9 @@ class LoginViewModel: ObservableObject {
             // Handle authentication failure
             self.isAuthenticated = false
             self.errorMessage = "Authentication failed. Please check your username and password."
+           // showAlert = true
+            
         }
     }
 }
+

@@ -22,6 +22,7 @@ struct LoginView: View {
     @StateObject var viewModel: LoginViewModel
     
     @State private var isActive = false
+    @State private var showErrorAlert = false
 
     var body: some View {
         
@@ -122,11 +123,15 @@ struct LoginView: View {
                     //LOGIN button
                     // Login Button with NavigationLink
                     NavigationLink(destination: HomeView().navigationBarHidden(true), isActive: $isActive) {
-                        EmptyView() // Hidden NavigationLink
+                        EmptyView()
                     }
 
                              Button(action: {
                                  viewModel.login(username: username, password: password, isActive: $isActive)
+                                 
+                                 if !viewModel.isAuthenticated {
+                                                         showErrorAlert = true // Show error alert if authentication fails
+                                                     }
                              }) {
                                  Text("Login")
                                      .fontWeight(.semibold)
@@ -199,8 +204,13 @@ struct LoginView: View {
                     Spacer()
                 }
                 
+                .alert(isPresented: $showErrorAlert) {
+                                Alert(title: Text("Authentication Failed"), message: Text(viewModel.errorMessage ?? "Unknown Error"), dismissButton: .default(Text("OK")))
+                            }
+                
             }
             .topSafeAreaColor()
+          
         }
         
         
