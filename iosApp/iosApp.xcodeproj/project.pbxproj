@@ -10,6 +10,9 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		2B81ACA12BDE2B9D000FCEB7 /* loginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81ACA02BDE2B9D000FCEB7 /* loginViewModel.swift */; };
+		2B81ACA32BE0E8AD000FCEB7 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81ACA22BE0E8AD000FCEB7 /* ErrorAlertView.swift */; };
+		2B9AB0812BE2574D00CDD1E2 /* profileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9AB0802BE2574D00CDD1E2 /* profileViewModel.swift */; };
 		2BB9F3152BD7619E005AE48E /* password recovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F30F2BD7619E005AE48E /* password recovery.swift */; };
 		2BB9F3162BD7619E005AE48E /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3112BD7619E005AE48E /* RegistrationView.swift */; };
 		2BB9F3172BD7619E005AE48E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3132BD7619E005AE48E /* LoginView.swift */; };
@@ -73,6 +76,9 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		2B81ACA02BDE2B9D000FCEB7 /* loginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewModel.swift; sourceTree = "<group>"; };
+		2B81ACA22BE0E8AD000FCEB7 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
+		2B9AB0802BE2574D00CDD1E2 /* profileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileViewModel.swift; sourceTree = "<group>"; };
 		2BB9F30F2BD7619E005AE48E /* password recovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "password recovery.swift"; sourceTree = "<group>"; };
 		2BB9F3112BD7619E005AE48E /* RegistrationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		2BB9F3132BD7619E005AE48E /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -139,6 +145,22 @@
 				058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2B9AB07E2BE256F200CDD1E2 /* LoginViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2B81ACA02BDE2B9D000FCEB7 /* loginViewModel.swift */,
+			);
+			path = LoginViewModel;
+			sourceTree = "<group>";
+		};
+		2B9AB07F2BE2570C00CDD1E2 /* ProfileViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2B9AB0802BE2574D00CDD1E2 /* profileViewModel.swift */,
+			);
+			path = ProfileViewModel;
 			sourceTree = "<group>";
 		};
 		2BB9F30D2BD7619E005AE48E /* Authantication */ = {
@@ -223,8 +245,8 @@
 		2BB9F3212BD761DF005AE48E /* market */ = {
 			isa = PBXGroup;
 			children = (
-				2BB9F3222BD761DF005AE48E /* tabs */,
 				2BB9F3282BD761DF005AE48E /* marketView.swift */,
+				2BB9F3222BD761DF005AE48E /* tabs */,
 			);
 			path = market;
 			sourceTree = "<group>";
@@ -336,6 +358,8 @@
 		2BCBB7892BD278D800FAE429 /* viewModel */ = {
 			isa = PBXGroup;
 			children = (
+				2B9AB07F2BE2570C00CDD1E2 /* ProfileViewModel */,
+				2B9AB07E2BE256F200CDD1E2 /* LoginViewModel */,
 				2BCBB78A2BD279E400FAE429 /* IOSMockLoader.swift */,
 				2BCBB78C2BD27AC900FAE429 /* ContentViewModel.swift */,
 			);
@@ -357,6 +381,7 @@
 				2BCBB7972BD3D52200FAE429 /* dateFormatter.swift */,
 				2BCBB7982BD3D52200FAE429 /* Helper */,
 				2BCBB79B2BD3D52200FAE429 /* inputView.swift */,
+				2B81ACA22BE0E8AD000FCEB7 /* ErrorAlertView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -526,6 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BCBB7A12BD3D52300FAE429 /* inputView.swift in Sources */,
+				2B81ACA32BE0E8AD000FCEB7 /* ErrorAlertView.swift in Sources */,
 				2BCBB79E2BD3D52300FAE429 /* dateFormatter.swift in Sources */,
 				2BCBB78F2BD280B600FAE429 /* accountModel.swift in Sources */,
 				2BB9F3472BD761E7005AE48E /* Receivable.swift in Sources */,
@@ -542,6 +568,7 @@
 				2BB9F3342BD761DF005AE48E /* services.swift in Sources */,
 				2BB9F3172BD7619E005AE48E /* LoginView.swift in Sources */,
 				2BB9F32C2BD761DF005AE48E /* shantaHomeView.swift in Sources */,
+				2B9AB0812BE2574D00CDD1E2 /* profileViewModel.swift in Sources */,
 				2BB9F3442BD761E7005AE48E /* all_statements.swift in Sources */,
 				2BB9F3462BD761E7005AE48E /* Balance.swift in Sources */,
 				2BB9F32D2BD761DF005AE48E /* ProfileView.swift in Sources */,
@@ -551,6 +578,7 @@
 				2BCBB78B2BD279E400FAE429 /* IOSMockLoader.swift in Sources */,
 				2BCBB7A02BD3D52300FAE429 /* Helper.swift in Sources */,
 				2BB9F3332BD761DF005AE48E /* marketView.swift in Sources */,
+				2B81ACA12BDE2B9D000FCEB7 /* loginViewModel.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				2BB9F32B2BD761DF005AE48E /* HomeView.swift in Sources */,
 				2BB9F3182BD7619E005AE48E /* BiometricAuthView.swift in Sources */,
@@ -694,6 +722,7 @@
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Capita;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -723,6 +752,7 @@
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Capita;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
