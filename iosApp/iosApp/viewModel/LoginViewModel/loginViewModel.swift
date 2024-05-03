@@ -21,7 +21,7 @@ class LoginViewModel: ObservableObject {
     }
     
 
-    
+    /*
     func login(username: String, password: String, isActive: Binding<Bool>) {
         // Call the authenticate method from the IdentityService
         let isAuthenticated = identityService.authenticate(username: username, password: password)
@@ -45,5 +45,6 @@ class LoginViewModel: ObservableObject {
             
         }
     }
+    */
 }
 
