@@ -22,7 +22,10 @@ struct LoginView: View {
     @StateObject var viewModel: LoginViewModel
     
     @State private var isActive = false
-    @State private var showErrorAlert = false
+    //@State private var showErrorAlert = false
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+    @State private var isLoggedIn = false // Added state variable to track login status
     
     var body: some View {
         
@@ -122,16 +125,32 @@ struct LoginView: View {
                 
                 //LOGIN button
                 // Login Button with NavigationLink
-                NavigationLink(destination: HomeView().navigationBarHidden(true), isActive: $isActive) {
-                    EmptyView()
-                }
+//                NavigationLink(destination: HomeView().navigationBarHidden(true), isActive: $isActive) {
+//                    EmptyView()
+//                }
                 
                 Button(action: {
-                    viewModel.login(username: username, password: password, isActive: $isActive)
+                    //viewModel.login(username: username, password: password, isActive: $isActive)
                     
                     if !viewModel.isAuthenticated {
-                        showErrorAlert = true // Show error alert if authentication fails
+                        //showErrorAlert = true // Show error alert if authentication fails
                     }
+                    
+                    LoginManager().login(username: username, password: password) { result in
+                                     switch result {
+                                     case .success:
+                                         print("Login success")
+                                         // Set isLoggedIn to true upon successful login
+                                                                     isLoggedIn = true
+                                     case .invalid(let errorMessage):
+                                         print("Login failed: \(errorMessage)")
+                                         // Handle failed login
+                                         // Show alert with error message
+                                         showAlert = true
+                                         alertMessage = errorMessage.joined(separator: "\n")
+                                     }
+                                 }
+                    
                 }) {
                     Text("Login")
                         .fontWeight(.semibold)
@@ -203,10 +222,17 @@ struct LoginView: View {
                 
                 Spacer()
             }
-            
-            .alert(isPresented: $showErrorAlert) {
-                Alert(title: Text("Authentication Failed"), message: Text(viewModel.errorMessage ?? "Unknown Error"), dismissButton: .default(Text("OK")))
-            }
+            .alert(isPresented: $showAlert) {
+                      Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                  }
+            // Navigate to HomeView when isLoggedIn is true
+                      .background(
+                          NavigationLink(
+                            destination: HomeView().navigationBarHidden(true),
+                              isActive: $isLoggedIn,
+                              label: EmptyView.init
+                          )
+                      )
             
         }
         .topSafeAreaColor()
