@@ -13,6 +13,7 @@
 		2B81ACA12BDE2B9D000FCEB7 /* loginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81ACA02BDE2B9D000FCEB7 /* loginViewModel.swift */; };
 		2B81ACA32BE0E8AD000FCEB7 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81ACA22BE0E8AD000FCEB7 /* ErrorAlertView.swift */; };
 		2B9AB0812BE2574D00CDD1E2 /* profileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9AB0802BE2574D00CDD1E2 /* profileViewModel.swift */; };
+		2BA250FE2BE38A8000DA1997 /* loginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA250FD2BE38A8000DA1997 /* loginModel.swift */; };
 		2BB9F3152BD7619E005AE48E /* password recovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F30F2BD7619E005AE48E /* password recovery.swift */; };
 		2BB9F3162BD7619E005AE48E /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3112BD7619E005AE48E /* RegistrationView.swift */; };
 		2BB9F3172BD7619E005AE48E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3132BD7619E005AE48E /* LoginView.swift */; };
@@ -79,6 +80,7 @@
 		2B81ACA02BDE2B9D000FCEB7 /* loginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewModel.swift; sourceTree = "<group>"; };
 		2B81ACA22BE0E8AD000FCEB7 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
 		2B9AB0802BE2574D00CDD1E2 /* profileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileViewModel.swift; sourceTree = "<group>"; };
+		2BA250FD2BE38A8000DA1997 /* loginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginModel.swift; sourceTree = "<group>"; };
 		2BB9F30F2BD7619E005AE48E /* password recovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "password recovery.swift"; sourceTree = "<group>"; };
 		2BB9F3112BD7619E005AE48E /* RegistrationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		2BB9F3132BD7619E005AE48E /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				2B81ACA02BDE2B9D000FCEB7 /* loginViewModel.swift */,
+				2BA250FD2BE38A8000DA1997 /* loginModel.swift */,
 			);
 			path = LoginViewModel;
 			sourceTree = "<group>";
@@ -540,8 +543,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -579,6 +581,7 @@
 				2BCBB7A02BD3D52300FAE429 /* Helper.swift in Sources */,
 				2BB9F3332BD761DF005AE48E /* marketView.swift in Sources */,
 				2B81ACA12BDE2B9D000FCEB7 /* loginViewModel.swift in Sources */,
+				2BA250FE2BE38A8000DA1997 /* loginModel.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				2BB9F32B2BD761DF005AE48E /* HomeView.swift in Sources */,
 				2BB9F3182BD7619E005AE48E /* BiometricAuthView.swift in Sources */,
