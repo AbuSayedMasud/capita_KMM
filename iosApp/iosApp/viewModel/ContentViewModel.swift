@@ -12,8 +12,8 @@ class ContentViewModel: ObservableObject {
     
     init() {
         self.accountService = AccountServiceImpl(databaseDriverFactory: databaseDriverFactory)
-        self.accountBalanceList = accountService.getBalanceServices()
-        self.accountBalances = accountService.getBalanceServices()
+//        self.accountBalanceList = accountService.getBalanceServices()
+//        self.accountBalances = accountService.getBalanceServices()
         print("ContentViewModel initialized")
         
     }

@@ -33,7 +33,6 @@ class LoginManager {
         }
         
         // Now, you can use identityService to authenticate the user
-        //let identityLoginResponse = identityService.authenticate(username: username, password: password)
         let identityLoginResponse: String = identityService.authenticate(username: username, password: password)
         
         print(identityLoginResponse)
