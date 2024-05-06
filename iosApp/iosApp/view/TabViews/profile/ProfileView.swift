@@ -1,11 +1,19 @@
 import SwiftUI
+import shared
 
 struct ProfileView: View {
-    @State private var accountCodes = "F11" // Initial value for accountCodes
     
     @State private var isModeUp = true // Initial mode is "Up"
     @State private var isPopoverPresented = false // State to manage popover presentation
-    let popupTitles = ["F111", "F222", "F333"]  // Titles for the popup
+    //let popupTitles = ["F111", "F222", "F333"]
+    
+    
+    @ObservedObject private var viewModel: ProfileViewModel
+    
+    
+    init(viewModel: ProfileViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         NavigationView {
@@ -13,7 +21,7 @@ struct ProfileView: View {
                 ScrollView {
                     VStack(spacing: 20) {
                         // User Profile Row
-                        UserProfileRow(image: "person.crop.circle.fill", userName: "Md. Momtajul Karim", accountCode: accountCodes, boId: "5678", isModeUp: $isModeUp, isPopoverPresented: $isPopoverPresented)
+                        UserProfileRow(image: "person.crop.circle.fill", userName: viewModel.userName, accountCode: viewModel.accountCodes, boId: viewModel.boId, isModeUp: $isModeUp, isPopoverPresented: $isPopoverPresented)
                         
                         // 5 Different Rows with Titles
                         TitleRow(title: "Balances")
@@ -62,12 +70,13 @@ struct ProfileView: View {
                 
                 if isPopoverPresented {
                     VStack {
-                        ForEach(popupTitles, id: \.self) { title in
+                        ForEach(viewModel.popupTitles, id: \.self) { title in
                             HStack {
                                 Text(title)
                                     .onTapGesture {
                                         // Update accountCodes when a popup title is selected
-                                        self.accountCodes = title
+                                        //self.accountCodes = title
+                                        viewModel.accountCodes = title
                                         self.isPopoverPresented.toggle() // Close the popup
                                     }
                             }
@@ -269,6 +278,10 @@ struct LogoutRow: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        //ProfileView()
+        
+        let profileService = CustomerProfileServiceImpl(databaseDriverFactory: DatabaseDriverFactory())
+        let viewModel = ProfileViewModel(profileService: profileService)
+        return ProfileView(viewModel: viewModel)
     }
 }

@@ -43,8 +43,10 @@ struct HomeView: View {
                 //Image(systemName: "4.circle")
                 Image(uiImage: UIImage(named: "Services")!)
             }
-            
-            ProfileView()
+            let profileService = CustomerProfileServiceImpl(databaseDriverFactory: DatabaseDriverFactory())
+            let viewModel = ProfileViewModel(profileService: profileService)
+            ProfileView(viewModel: viewModel)
+            //ProfileView()
                 .tabItem {
                     Image(uiImage: UIImage(named: "profile")!)
                 }
