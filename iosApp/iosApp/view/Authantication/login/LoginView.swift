@@ -19,7 +19,7 @@ struct LoginView: View {
     @State private var isLogged = false
     @State private var navigateToHome = false
     
-    @StateObject var viewModel: LoginViewModel
+    // @StateObject var viewModel: LoginViewModel
     
     @State private var isActive = false
     //@State private var showErrorAlert = false
@@ -124,32 +124,21 @@ struct LoginView: View {
                 }
                 
                 //LOGIN button
-                // Login Button with NavigationLink
-//                NavigationLink(destination: HomeView().navigationBarHidden(true), isActive: $isActive) {
-//                    EmptyView()
-//                }
-                
                 Button(action: {
-                    //viewModel.login(username: username, password: password, isActive: $isActive)
-                    
-                    if !viewModel.isAuthenticated {
-                        //showErrorAlert = true // Show error alert if authentication fails
-                    }
-                    
                     LoginManager().login(username: username, password: password) { result in
-                                     switch result {
-                                     case .success:
-                                         print("Login success")
-                                         // Set isLoggedIn to true upon successful login
-                                                                     isLoggedIn = true
-                                     case .invalid(let errorMessage):
-                                         print("Login failed: \(errorMessage)")
-                                         // Handle failed login
-                                         // Show alert with error message
-                                         showAlert = true
-                                         alertMessage = errorMessage.joined(separator: "\n")
-                                     }
-                                 }
+                        switch result {
+                        case .success:
+                            print("Login success")
+                            // Set isLoggedIn to true upon successful login
+                            isLoggedIn = true
+                        case .invalid(let errorMessage):
+                            print("Login failed: \(errorMessage)")
+                            // Handle failed login
+                            // Show alert with error message
+                            showAlert = true
+                            alertMessage = errorMessage.joined(separator: "\n")
+                        }
+                    }
                     
                 }) {
                     Text("Login")
@@ -223,26 +212,28 @@ struct LoginView: View {
                 Spacer()
             }
             .alert(isPresented: $showAlert) {
-                      Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-                  }
+                Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            }
             // Navigate to HomeView when isLoggedIn is true
-                      .background(
-                          NavigationLink(
-                            destination: HomeView().navigationBarHidden(true),
-                              isActive: $isLoggedIn,
-                              label: EmptyView.init
-                          )
-                      )
+            .background(
+                NavigationLink(
+                    destination: HomeView().navigationBarHidden(true),
+                    isActive: $isLoggedIn,
+                    label: EmptyView.init
+                )
+            )
             
         }
         .topSafeAreaColor()
     }
-
+    
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         // LoginView(viewModel: <#T##LoginViewModel#>)
-        LoginView(viewModel: LoginViewModel(identityService: IdentityServiceImpl()))
+        //LoginView(viewModel: LoginViewModel(identityService: IdentityServiceImpl()))
+        
+        LoginView()
     }
 }
