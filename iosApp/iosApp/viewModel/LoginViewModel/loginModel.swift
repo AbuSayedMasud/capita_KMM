@@ -52,12 +52,13 @@ class LoginManager {
         } else {
             
             if let errorDetails = jsonObject["details"] as? [String], !errorDetails.isEmpty {
-                           // Use error details in the error message
-                           completion(.invalid(errorMessage: errorDetails))
-                       } else {
-                           // If error details are not available, provide a generic error message
-                           completion(.invalid(errorMessage: ["Authentication failed"]))
-                       }
+                // Use error details in the error message
+                completion(.invalid(errorMessage: errorDetails))
+                print(errorDetails)
+            } else {
+                // If error details are not available, provide a generic error message
+                completion(.invalid(errorMessage: ["Authentication failed"]))
+            }
             
         }
     }

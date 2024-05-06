@@ -18,7 +18,8 @@ struct iOSApp: App {
 		WindowGroup {
 			//ContentView()
             //LoginView(viewModel: LoginViewModel(identityService: IdentityService()))
-            LoginView(viewModel: LoginViewModel(identityService: IdentityServiceImpl()))
+            //LoginView(viewModel: LoginViewModel(identityService: IdentityServiceImpl()))
+            LoginView()
 		}
 	}
 }
