@@ -2,7 +2,13 @@ import SwiftUI
 
 struct Balance: View {
     // Define a variable to hold the amount
-    let currentBalance: Double = 12856.12
+    @ObservedObject var AccountsVM: AccountBalanceViewModel
+    
+    init() {
+        
+        self.AccountsVM = AccountBalanceViewModel()
+    }
+    //let currentBalance: Double = AccountsVM.currentBalance
     
     var body: some View {
         VStack {
@@ -13,7 +19,7 @@ struct Balance: View {
                     .bold()
                 Spacer()
                 // Display the amount from the variable
-                Text("\(currentBalance)")
+                Text(String(AccountsVM.currentBalance))
                     .bold()
             }
             
