@@ -10,18 +10,30 @@ import SwiftUI
 
 struct shantaHomeView: View {
     /*
+     init() {
+     // Customize navigation bar appearance
+     let appearance = UINavigationBarAppearance()
+     appearance.configureWithOpaqueBackground()
+     let color = UIColor(red: 0.592156862745098, green: 0.5490196078431373, blue: 0.12941176470588237, alpha: 1.0)
+     appearance.backgroundColor = color
+     
+     
+     UINavigationBar.appearance().standardAppearance = appearance
+     UINavigationBar.appearance().scrollEdgeAppearance = appearance
+     }
+     */
+    //@ObservedObject private var viewModel: ContentViewModel//AccountBalanceViewModel
+    //
+    //      init(viewModel: ContentViewModel) {
+    //          self.viewModel = viewModel
+    //      }
+    
+    @ObservedObject var viewModel: AccountBalanceViewModel
+    
     init() {
-        // Customize navigation bar appearance
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        let color = UIColor(red: 0.592156862745098, green: 0.5490196078431373, blue: 0.12941176470588237, alpha: 1.0)
-        appearance.backgroundColor = color
-
         
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        self.viewModel = AccountBalanceViewModel()
     }
-    */
     // Define arrays for news titles, details, and dates
     let newsTitles = ["ABBANK: Weekly NAV", "ACI: Dividend Disbursement"]
     let newsDetails = [
@@ -58,27 +70,28 @@ struct shantaHomeView: View {
                             //.fontWeight(.medium)
                             
                             Spacer()
-                            Text("Row 2")
+
+                            Text(String(viewModel.cashBalance))
                         }
                         ColoredDivider(color: dividerColor, height: 1)
                         
                         HStack {
                             Text("Current Balance")
                             Spacer()
-                            Text("Row 2")
+                            Text(String(viewModel.currentBalance))
                         }
                         ColoredDivider(color: dividerColor, height: 1)
                         HStack {
                             Text("Equtity")
                             Spacer()
-                            Text("Row 2")
+                            Text(String(viewModel.equity))
                         }
                         
                         ColoredDivider(color: dividerColor, height: 1)
                         HStack {
                             Text("Purchase Power")
                             Spacer()
-                            Text("Row 2")
+                            Text(String(viewModel.buyingPower))
                         }
                     }
                     .padding()
@@ -229,7 +242,7 @@ struct shantaHomeView: View {
                                 .font(.caption)
                                 .foregroundColor(.gray)
                         }
-                       
+                        
                     }
                     .padding()
                     .background(Color.white)
@@ -376,7 +389,7 @@ struct shantaHomeView: View {
                                     Spacer()
                                 }
                             }
-                           
+                            
                             // Add divider only if it's not the last news item
                             if index != self.newsTitles.count - 1 {
                                 ColoredDivider(color: dividerColor, height: 1)
@@ -407,8 +420,8 @@ struct shantaHomeView: View {
                         Image(uiImage: UIImage(named: "alarm_nav_button")!)
                     }
             )
-
-           
+            
+            
         }//navigationview
         
     }

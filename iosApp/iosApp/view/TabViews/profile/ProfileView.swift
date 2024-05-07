@@ -8,11 +8,18 @@ struct ProfileView: View {
     //let popupTitles = ["F111", "F222", "F333"]
     
     
-    @ObservedObject private var viewModel: ProfileViewModel
+    @ObservedObject private var profileVModel: ProfileViewModel
     
     
-    init(viewModel: ProfileViewModel) {
-        self.viewModel = viewModel
+    //    init(viewModel: ProfileViewModel) {
+    //        self.viewModel = viewModel
+    //    }
+    
+    
+    
+    init() {
+        self.profileVModel = ProfileViewModel()
+        
     }
     
     var body: some View {
@@ -21,16 +28,18 @@ struct ProfileView: View {
                 ScrollView {
                     VStack(spacing: 20) {
                         // User Profile Row
-                        UserProfileRow(image: "person.crop.circle.fill", userName: viewModel.userName, accountCode: viewModel.accountCodes, boId: viewModel.boId, isModeUp: $isModeUp, isPopoverPresented: $isPopoverPresented)
+                        UserProfileRow(image: "person.crop.circle.fill", userName: profileVModel.userName, accountCode: profileVModel.accountCodes, boId: profileVModel.boId, isModeUp: $isModeUp, isPopoverPresented: $isPopoverPresented)
                         
                         // 5 Different Rows with Titles
-                        TitleRow(title: "Balances")
+                        //TitleRow(title: "Balances")
+                        TitleRow(title: "Balances", balanceViewModel: AccountBalanceViewModel())
+
                             .onTapGesture {
                                 // Show description for Row 1
                                 print("Description for Row 1")
                             }
                         
-                        TitleRow(title: "Position")
+                        TitleRow(title: "Position", balanceViewModel: AccountBalanceViewModel())
                             .onTapGesture {
                                 // Show description for Row 2
                                 print("Description for Row 2")
@@ -70,13 +79,13 @@ struct ProfileView: View {
                 
                 if isPopoverPresented {
                     VStack {
-                        ForEach(viewModel.popupTitles, id: \.self) { title in
+                        ForEach(profileVModel.popupTitles, id: \.self) { title in
                             HStack {
                                 Text(title)
                                     .onTapGesture {
                                         // Update accountCodes when a popup title is selected
                                         //self.accountCodes = title
-                                        viewModel.accountCodes = title
+                                        profileVModel.accountCodes = title
                                         self.isPopoverPresented.toggle() // Close the popup
                                     }
                             }
@@ -166,9 +175,20 @@ struct UserProfileRow: View {
 }
 
 struct TitleRow: View {
+    
     var title: String
     
     @State private var isExpanded: Bool = false
+    @ObservedObject var balanceViewModel: AccountBalanceViewModel
+    
+//    init(){
+//        self.balanceViewModel = AccountBalanceViewModel()
+//    }
+    init(title: String, balanceViewModel: AccountBalanceViewModel) {
+        self.title = title
+        self.balanceViewModel = balanceViewModel
+    }
+    
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -191,10 +211,10 @@ struct TitleRow: View {
                 // Additional rows with data
                 VStack(alignment: .leading, spacing: 10) {
                     if title == "Balances" {
-                        additionalBalanceRow(title: "Available Balance", value: "500.00")
-                        additionalBalanceRow(title: "Current Balance", value: "500.00")
-                        additionalBalanceRow(title: "Equity", value: "500.00")
-                        additionalBalanceRow(title: "Purchase Power", value: "500.00")
+                        additionalBalanceRow(title: "Available Balance", value: String(balanceViewModel.cashBalance))
+                        additionalBalanceRow(title: "Current Balance", value: String(balanceViewModel.currentBalance))
+                        additionalBalanceRow(title: "Equity", value: String(balanceViewModel.equity))
+                        additionalBalanceRow(title: "Purchase Power", value: String(balanceViewModel.buyingPower))
                     } else if title == "Position" {
                         additionalPositionRow(name: "ACI", marketPrice: "500.00", averagePrice: "500.00")
                         additionalPositionRow(name: "ACME", marketPrice: "500.00", averagePrice: "500.00")
@@ -278,10 +298,10 @@ struct LogoutRow: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        //ProfileView()
+        ProfileView()
         
-        let profileService = CustomerProfileServiceImpl(databaseDriverFactory: DatabaseDriverFactory())
-        let viewModel = ProfileViewModel(profileService: profileService)
-        return ProfileView(viewModel: viewModel)
+        //        let profileService = CustomerProfileServiceImpl(databaseDriverFactory: DatabaseDriverFactory())
+        //        let viewModel = ProfileViewModel(profileService: profileService)
+        //        return ProfileView(viewModel: viewModel)
     }
 }
