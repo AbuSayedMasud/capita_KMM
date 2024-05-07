@@ -10,6 +10,9 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		2B48FCCF2BE73ACB0056CBFD /* CustomerProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48FCCE2BE73ACB0056CBFD /* CustomerProfileResponseModel.swift */; };
+		2B48FCD22BE73AEB0056CBFD /* addressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48FCD12BE73AEB0056CBFD /* addressModel.swift */; };
+		2B48FCD42BE73AFF0056CBFD /* acountsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48FCD32BE73AFF0056CBFD /* acountsModel.swift */; };
 		2B81ACA32BE0E8AD000FCEB7 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81ACA22BE0E8AD000FCEB7 /* ErrorAlertView.swift */; };
 		2B9AB0812BE2574D00CDD1E2 /* profileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9AB0802BE2574D00CDD1E2 /* profileViewModel.swift */; };
 		2BA250FE2BE38A8000DA1997 /* loginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA250FD2BE38A8000DA1997 /* loginModel.swift */; };
@@ -56,7 +59,6 @@
 		2BCBB79F2BD3D52300FAE429 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB7992BD3D52200FAE429 /* ImagePicker.swift */; };
 		2BCBB7A02BD3D52300FAE429 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB79A2BD3D52200FAE429 /* Helper.swift */; };
 		2BCBB7A12BD3D52300FAE429 /* inputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBB79B2BD3D52200FAE429 /* inputView.swift */; };
-		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,6 +78,9 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		2B48FCCE2BE73ACB0056CBFD /* CustomerProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerProfileResponseModel.swift; sourceTree = "<group>"; };
+		2B48FCD12BE73AEB0056CBFD /* addressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addressModel.swift; sourceTree = "<group>"; };
+		2B48FCD32BE73AFF0056CBFD /* acountsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = acountsModel.swift; sourceTree = "<group>"; };
 		2B81ACA22BE0E8AD000FCEB7 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
 		2B9AB0802BE2574D00CDD1E2 /* profileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileViewModel.swift; sourceTree = "<group>"; };
 		2BA250FD2BE38A8000DA1997 /* loginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginModel.swift; sourceTree = "<group>"; };
@@ -123,7 +128,6 @@
 		2BCBB79A2BD3D52200FAE429 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		2BCBB79B2BD3D52200FAE429 /* inputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = inputView.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +149,32 @@
 				058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2B48FCD02BE73AD20056CBFD /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				2B48FCCE2BE73ACB0056CBFD /* CustomerProfileResponseModel.swift */,
+				2B48FCD12BE73AEB0056CBFD /* addressModel.swift */,
+				2B48FCD32BE73AFF0056CBFD /* acountsModel.swift */,
+			);
+			path = profile;
+			sourceTree = "<group>";
+		};
+		2B48FCDA2BE9F1FC0056CBFD /* accountModel */ = {
+			isa = PBXGroup;
+			children = (
+				2BCBB78E2BD280B600FAE429 /* accountModel.swift */,
+			);
+			path = accountModel;
+			sourceTree = "<group>";
+		};
+		2B48FCDB2BEA25760056CBFD /* accountBalanceModel */ = {
+			isa = PBXGroup;
+			children = (
+				2BCBB78C2BD27AC900FAE429 /* ContentViewModel.swift */,
+			);
+			path = accountBalanceModel;
 			sourceTree = "<group>";
 		};
 		2B9AB07E2BE256F200CDD1E2 /* LoginViewModel */ = {
@@ -339,7 +369,8 @@
 		2BCBB7872BD278CA00FAE429 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				2BCBB78E2BD280B600FAE429 /* accountModel.swift */,
+				2B48FCDA2BE9F1FC0056CBFD /* accountModel */,
+				2B48FCD02BE73AD20056CBFD /* profile */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -350,7 +381,6 @@
 				2BB9F3352BD761E7005AE48E /* otherViews */,
 				2BB9F3192BD761DF005AE48E /* TabViews */,
 				2BB9F30D2BD7619E005AE48E /* Authantication */,
-				7555FF82242A565900829871 /* ContentView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -358,10 +388,10 @@
 		2BCBB7892BD278D800FAE429 /* viewModel */ = {
 			isa = PBXGroup;
 			children = (
+				2B48FCDB2BEA25760056CBFD /* accountBalanceModel */,
 				2B9AB07F2BE2570C00CDD1E2 /* ProfileViewModel */,
 				2B9AB07E2BE256F200CDD1E2 /* LoginViewModel */,
 				2BCBB78A2BD279E400FAE429 /* IOSMockLoader.swift */,
-				2BCBB78C2BD27AC900FAE429 /* ContentViewModel.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -550,6 +580,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BCBB7A12BD3D52300FAE429 /* inputView.swift in Sources */,
+				2B48FCD42BE73AFF0056CBFD /* acountsModel.swift in Sources */,
 				2B81ACA32BE0E8AD000FCEB7 /* ErrorAlertView.swift in Sources */,
 				2BCBB79E2BD3D52300FAE429 /* dateFormatter.swift in Sources */,
 				2BCBB78F2BD280B600FAE429 /* accountModel.swift in Sources */,
@@ -569,6 +600,7 @@
 				2BB9F32C2BD761DF005AE48E /* shantaHomeView.swift in Sources */,
 				2B9AB0812BE2574D00CDD1E2 /* profileViewModel.swift in Sources */,
 				2BB9F3442BD761E7005AE48E /* all_statements.swift in Sources */,
+				2B48FCD22BE73AEB0056CBFD /* addressModel.swift in Sources */,
 				2BB9F3462BD761E7005AE48E /* Balance.swift in Sources */,
 				2BB9F32D2BD761DF005AE48E /* ProfileView.swift in Sources */,
 				2BCBB79D2BD3D52300FAE429 /* Colors.swift in Sources */,
@@ -578,7 +610,7 @@
 				2BCBB7A02BD3D52300FAE429 /* Helper.swift in Sources */,
 				2BB9F3332BD761DF005AE48E /* marketView.swift in Sources */,
 				2BA250FE2BE38A8000DA1997 /* loginModel.swift in Sources */,
-				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				2B48FCCF2BE73ACB0056CBFD /* CustomerProfileResponseModel.swift in Sources */,
 				2BB9F32B2BD761DF005AE48E /* HomeView.swift in Sources */,
 				2BB9F3182BD7619E005AE48E /* BiometricAuthView.swift in Sources */,
 				2BCBB78D2BD27AC900FAE429 /* ContentViewModel.swift in Sources */,
@@ -715,6 +747,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -745,6 +778,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

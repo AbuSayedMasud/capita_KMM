@@ -19,7 +19,6 @@ struct HomeView: View {
                     Image(uiImage: UIImage(named: "home")!)
                 }
             
-            
             marketView()
                 .tabItem {
                     //Image(systemName: "2.circle")
@@ -27,7 +26,7 @@ struct HomeView: View {
                 }
             
             NavigationView {
-                Text("Trade")
+                Text("Trade is not implemented")
                     .navigationBarTitle("Trade", displayMode: .inline)
                     .background(Color.yellow) // Set the navigation bar color
             }
@@ -43,15 +42,14 @@ struct HomeView: View {
                 //Image(systemName: "4.circle")
                 Image(uiImage: UIImage(named: "Services")!)
             }
-            let profileService = CustomerProfileServiceImpl(databaseDriverFactory: DatabaseDriverFactory())
-            let viewModel = ProfileViewModel(profileService: profileService)
-            ProfileView(viewModel: viewModel)
-            //ProfileView()
+//            let profileService = CustomerProfileServiceImpl(databaseDriverFactory: DatabaseDriverFactory())
+//            let viewModel = ProfileViewModel(profileService: profileService)
+//            ProfileView(viewModel: viewModel)
+            ProfileView()
                 .tabItem {
                     Image(uiImage: UIImage(named: "profile")!)
                 }
-            
-            
+
         }
         //tabbar image color
         .accentColor(appColor)

@@ -21,8 +21,13 @@ class ProfileViewModel: ObservableObject {
     
     private let profileService: CustomerProfileService
     
-    init(profileService: CustomerProfileService) {
-        self.profileService = profileService
+//    init(profileService: CustomerProfileService) {
+//        self.profileService = profileService
+//        fetchProfileData()
+//    }
+    
+    init() {
+        self.profileService = CustomerProfileServiceImpl(databaseDriverFactory: DatabaseDriverFactory())
         fetchProfileData()
     }
     
