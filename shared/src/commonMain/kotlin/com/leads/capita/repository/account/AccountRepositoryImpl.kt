@@ -6,6 +6,7 @@ import com.leads.capita.account.AccountInstrument
 import com.leads.capita.account.AccountReceivable
 import com.leads.capita.account.AccountRepository
 import com.leads.capita.account.AccountTransaction
+import com.leads.capita.account.Instrument
 import com.leads.capita.repository.RestUtil.BASE_URL
 import com.leads.capita.repository.RestUtil.getClient
 import io.ktor.client.call.body
@@ -27,7 +28,7 @@ class AccountRepositoryImpl : AccountRepository {
         return response.toString()
     }
 
-    override fun getAccountInstrument(): List<AccountInstrument> {
+    override fun getAccountInstrument(): String {
         TODO("Not yet implemented")
     }
 
@@ -43,7 +44,7 @@ class AccountRepositoryImpl : AccountRepository {
         TODO("Not yet implemented")
     }
 
-    override fun createAccountInstrument(instruments: List<AccountInstrument>) {
+    override fun createAccountInstrument(instruments: AccountInstrument) {
         TODO("Not yet implemented")
     }
 

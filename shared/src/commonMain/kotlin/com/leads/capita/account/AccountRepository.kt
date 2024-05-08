@@ -4,11 +4,11 @@ package com.leads.capita.account
 interface AccountRepository {
     //    fun getAccountBalance(): List<AccountBalance>
     fun getAccountBalance(): String
-    fun getAccountInstrument(): List<AccountInstrument>
+    fun getAccountInstrument(): String
     fun getAccountReceivable(): List<AccountReceivable>
     fun getAccountTransaction(): List<AccountTransaction>
     fun createAccountTransaction(transactions: List<AccountTransaction>)
-    fun createAccountInstrument(instruments: List<AccountInstrument>)
+    fun createAccountInstrument(instruments: AccountInstrument)
     fun createAccountBalance(balances: List<AccountBalance>)
     fun createAccountReceivable(receivables: List<AccountReceivable>)
 }

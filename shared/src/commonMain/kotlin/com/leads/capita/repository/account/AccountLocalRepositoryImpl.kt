@@ -7,8 +7,8 @@ import com.leads.capita.account.AccountInstrument
 import com.leads.capita.account.AccountReceivable
 import com.leads.capita.account.AccountRepository
 import com.leads.capita.account.AccountTransaction
+import com.leads.capita.account.Instrument
 import com.leads.capita.repository.RestUtil
-import com.leads.capita.service.security.IdentityTokenManager
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import kotlinx.coroutines.runBlocking
@@ -18,12 +18,29 @@ class AccountLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
     AccountRepository {
     val db = CapitaDb(databaseDriverFactory.createDriver())
     private val ACCOUNT_BALANCE_PATH: String = "/accounts/balances/00DLB358"
+    private val ACCOUNT_POSITION: String = "/accounts/positions/00S18576"
     override fun getAccountBalance(): String {
         var response: String? = null
 
         runBlocking {
             try {
-                response = RestUtil.getClient().get(urlString = "${RestUtil.BASE_URL}$ACCOUNT_BALANCE_PATH").body()
+                response = RestUtil.getClient()
+                    .get(urlString = "${RestUtil.BASE_URL}$ACCOUNT_BALANCE_PATH").body()
+            } catch (e: Exception) {
+            }
+        }
+
+        return response.toString()
+    }
+
+    override fun getAccountInstrument(): String {
+
+        var response: String? = null
+
+        runBlocking {
+            try {
+                response = RestUtil.getClient()
+                    .get(urlString = "${RestUtil.BASE_URL}$ACCOUNT_POSITION").body()
             } catch (e: Exception) {
             }
         }
@@ -56,30 +73,25 @@ class AccountLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
 //            }
 //    }
 
-    override fun getAccountInstrument(): List<AccountInstrument> {
-
-        return db.accountInstrumentQueries.getAccountInstrumentData()
-            .executeAsList()
-            .map { accountInstrument ->
-                AccountInstrument(
-                    instrumentIndex = accountInstrument?.instrumentIndex!!,
-                    longName = accountInstrument?.long_name!!,
-                    shortName = accountInstrument?.short_name!!,
-                    value = accountInstrument?.value_!!,
-                    closedPrice = accountInstrument?.closed_price!!,
-                    change = accountInstrument?.change!!,
-                    changeIcon = accountInstrument?.change_icon!!,
-                    totalQuantity = accountInstrument?.total_quantity!!,
-                    salableQuantity = accountInstrument?.salable_quantity!!,
-                    averageCost = accountInstrument?.average_cost!!,
-                    totalCost = accountInstrument?.total_cost!!,
-                    closePrice = accountInstrument?.average_cost!!,
-                    unrealizedGain = accountInstrument?.unrealized_gain!!,
-                    gainPercent = accountInstrument?.gain_percent!!,
-                    costValue = accountInstrument?.cost_value!!,
-                )
-            }
-    }
+//    override fun getAccountInstrument(): List<Instrument> {
+//
+//        return db.accountInstrumentQueries.getAccountInstrumentData()
+//            .executeAsList()
+//            .map { accountInstrument ->
+//                Instrument(
+//                    costPrice = accountInstrument.costPrice,
+//                    costValue = accountInstrument.costValue,
+//                    gr = accountInstrument.gr,
+//                    marginable = if (accountInstrument.marginable?.toInt() ==0)false else true,
+//                    marketPrice = accountInstrument.marketPrice,
+//                    marketValue = accountInstrument.marketValue,
+//                    matureQuantity = accountInstrument.matureQuantity,
+//                    quantity = accountInstrument.quantity?.toInt(),
+//                    symbole = accountInstrument.symbol,
+//                    unrealizedGain = accountInstrument.unrealizedGain
+//                )
+//            }
+//    }
 
     override fun getAccountReceivable(): List<AccountReceivable> {
 
@@ -132,28 +144,28 @@ class AccountLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
         }
     }
 
-    override fun createAccountInstrument(instruments: List<AccountInstrument>) {
+    override fun createAccountInstrument(instruments: AccountInstrument) {
 
-
-        instruments.forEach { instrument ->
-            val existingInstrument = db.accountInstrumentQueries.getAccountInstrumentByUniqueId(instrument.shortName)
+        val accountCode = instruments.accountCode
+        val instrument: List<Instrument> = instruments.instruments
+        println("data is not found ${instrument.toString()}")
+        db.accountInstrumentQueries.deleteAccountInstrumentData()
+        instrument.forEach { instrument ->
+            val existingInstrument =
+                db.accountInstrumentQueries.getAccountInstrumentByUniqueId(instrument.symbole)
             if (existingInstrument.executeAsList().isEmpty()) {
                 db.accountInstrumentQueries.insertAccountInstrumentData(
-                    instrumentIndex = instrument.instrumentIndex,
-                    long_name = instrument.longName,
-                    short_name = instrument.shortName,
-                    value_ = instrument.value,
-                    closed_price = instrument.closedPrice,
-                    change = instrument.change,
-                    change_icon = instrument.changeIcon,
-                    total_quantity = instrument.totalQuantity,
-                    salable_quantity = instrument.salableQuantity,
-                    average_cost = instrument.averageCost,
-                    total_cost = instrument.totalCost,
-                    close_price = instrument.closePrice,
-                    unrealized_gain = instrument.unrealizedGain,
-                    gain_percent = instrument.gainPercent,
-                    cost_value = instrument.costValue
+                    accountCode = accountCode,
+                    costPrice = instrument.costPrice,
+                    costValue = instrument.costValue,
+                    gr = instrument.gr,
+                    marginable = if (instrument.marginable==false) 0 else 1,
+                    marketPrice = instrument.marketPrice,
+                    marketValue = instrument.marketValue,
+                    matureQuantity = instrument.matureQuantity,
+                    quantity = instrument.quantity?.toLong(),
+                    symbol = instrument.symbole,
+                    unrealizedGain = instrument.unrealizedGain
                 )
             }
         }
