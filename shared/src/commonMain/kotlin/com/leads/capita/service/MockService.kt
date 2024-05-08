@@ -24,7 +24,7 @@ class MockService(private val databaseDriverFactory: DatabaseDriverFactory) {
         val repo = AccountFactory.getRepository(databaseDriverFactory)
         repo.createAccountBalance(balances)
     }
-    fun loadAccountInstrument(instruments: List<AccountInstrument>) {
+    fun loadAccountInstrument(instruments: AccountInstrument) {
         val repo = AccountFactory.getRepository(databaseDriverFactory)
         repo.createAccountInstrument(instruments)
     }
