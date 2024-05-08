@@ -7,6 +7,7 @@ import com.leads.capita.account.AccountInstrument
 import com.leads.capita.account.AccountReceivable
 import com.leads.capita.account.AccountService
 import com.leads.capita.account.AccountTransaction
+import com.leads.capita.account.Instrument
 
 class AccountServiceImpl(private val databaseDriverFactory: DatabaseDriverFactory) :
     AccountService {
@@ -16,7 +17,7 @@ class AccountServiceImpl(private val databaseDriverFactory: DatabaseDriverFactor
         return repository.getAccountBalance()
     }
 
-    override fun getInstrumentServices(): List<AccountInstrument> {
+    override fun getInstrumentServices(): String {
         val repository=AccountFactory.getRepository(databaseDriverFactory)
         return repository.getAccountInstrument()
     }
