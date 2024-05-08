@@ -9,7 +9,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.leads.capita.android.activity.HomeActivity
-import com.leads.capita.android.mockJsonLoader.MockLoader
+import com.leads.capita.android.MockJsonLoader.MockLoader
 import kotlinx.coroutines.runBlocking
 
 class BioMetricPrompt {

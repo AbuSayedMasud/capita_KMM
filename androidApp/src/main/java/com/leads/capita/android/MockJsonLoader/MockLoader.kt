@@ -1,4 +1,4 @@
-package com.leads.capita.android.mockJsonLoader
+package com.leads.capita.android.MockJsonLoader
 
 import android.annotation.SuppressLint
 import android.content.Context

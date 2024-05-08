@@ -60,7 +60,7 @@ import com.leads.capita.android.theme.White
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
 import com.leads.capita.android.R
-import com.leads.capita.android.mockJsonLoader.MockLoader
+import com.leads.capita.android.MockJsonLoader.MockLoader
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
