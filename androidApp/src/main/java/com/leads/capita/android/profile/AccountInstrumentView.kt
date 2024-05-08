@@ -36,7 +36,12 @@ import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
 import com.leads.capita.account.AccountInstrument
+import com.leads.capita.account.Instrument
 import com.leads.capita.service.account.AccountServiceImpl
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 @Composable
 fun AccountInstrumentView(
@@ -50,13 +55,25 @@ fun AccountInstrumentView(
     val screenWidth = configuration.screenWidthDp.dp
     val textColumnWeight =
         if (screenWidth > 600.dp) 4f else 1f
-    val databaseDriverFactory: DatabaseDriverFactory = DatabaseDriverFactory(context)
-    val accountService = AccountServiceImpl(databaseDriverFactory)
-    var instruments: List<AccountInstrument>? by remember { mutableStateOf(null) }
-    val accountInstrument = accountService.getInstrumentServices()
-    instruments = accountInstrument
+//    var instruments: List<Instrument>? by remember { mutableStateOf(null) }
+//    var databaseDriverFactory = DatabaseDriverFactory(context)
+//    val accountInstrument = AccountServiceImpl(databaseDriverFactory)
+//    val homeInstrument = accountInstrument.getInstrumentServices()
+//    instruments = homeInstrument
 //    instruments = MockLoaderDemo(context).instruments
+    var instrumentsList:AccountInstrument? by remember { mutableStateOf(null) }
+    val databaseDriverFactory = DatabaseDriverFactory(context)
+    val accountInstrument = AccountServiceImpl(databaseDriverFactory)
+    // Fetch the account balance information from the service
+    val homeInstrument = accountInstrument.getInstrumentServices()
+    val jsonObject = Json.parseToJsonElement(homeInstrument ?: "").jsonObject
+    val instrumentData = jsonObject["accountCode"]?.jsonPrimitive?.contentOrNull
+    if (instrumentData?.isNotEmpty() == true) {
+        instrumentsList = Json.decodeFromString<AccountInstrument>(homeInstrument)
+    } else {
 
+    }
+    val instruments = instrumentsList?.instruments
     val (backgroundColor, contentColor) = getCardColors()
     val paddingValue = if (isSystemInDarkTheme()) {
         6.dp
@@ -118,111 +135,113 @@ fun AccountInstrumentView(
                     }
                 }
                 Spacer(modifier = Modifier.height(8.dp))
-                for (instrument in instruments!!) {
-                    AnimatedVisibility(expandedState.value && cardName == "instrument") {
-                        Column {
-                            Row(
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                modifier = Modifier.fillMaxWidth(),
-                            ) {
-                                Column {
-                                    Row {
-                                        Text(
-                                            text = instrument.shortName!!,
-                                            style = MaterialTheme.typography.body2
-                                                .copy(
-                                                    fontSize = 15.5.sp,
-                                                    color = contentColor,
-                                                    fontWeight = FontWeight.Bold,
+                if (instruments != null) {
+                    for (index in 0 until minOf(5, instruments.size)) {
+                        val instrument = instruments[index]
+                        AnimatedVisibility(expandedState.value && cardName == "instrument") {
+                            Column {
+                                Row(
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    modifier = Modifier.fillMaxWidth(),
+                                ) {
+                                    Column {
+                                        Row {
+                                            instrument.symbole?.let {
+                                                Text(
+                                                    text = it,
+                                                    style = MaterialTheme.typography.body2
+                                                        .copy(
+                                                            fontSize = 15.5.sp,
+                                                            color = contentColor,
+                                                            fontWeight = FontWeight.Bold,
+                                                        ),
+                                                )
+                                            }
+                                        }
+                                        Row(
+                                            Modifier
+                                                .padding(8.dp)
+                                                .fillMaxWidth(),
+                                            horizontalArrangement = Arrangement.SpaceBetween,
+                                        ) {
+                                            Text(
+                                                text = "Cost Price",
+                                                style = MaterialTheme.typography.body2
+                                                    .copy(fontSize = 13.sp, color = contentColor),
+                                            )
+
+                                            Text(
+                                                text = formatNumberWithCommas(instrument.costPrice ?: 0.0, 2),
+                                                style = MaterialTheme.typography.body2
+                                                    .copy(fontSize = 13.sp, color = contentColor),
+                                                modifier = Modifier.align(Alignment.CenterVertically),
+                                            )
+                                        }
+                                        Row(
+                                            Modifier
+                                                .padding(8.dp)
+                                                .fillMaxWidth(),
+                                            horizontalArrangement = Arrangement.SpaceBetween,
+                                        ) {
+                                            Text(
+                                                text = "Market Price",
+                                                style = MaterialTheme.typography.body2
+                                                    .copy(fontSize = 13.sp, color = contentColor),
+                                            )
+
+                                            Text(
+                                                text = formatNumberWithCommas(
+                                                    instrument.marketPrice ?: 0.0,
+                                                    2
                                                 ),
-                                        )
-                                    }
-                                    Row(
-                                        Modifier
-                                            .padding(8.dp)
-                                            .fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                    ) {
-                                        Text(
-                                            text = "Total Quantity",
-                                            style = MaterialTheme.typography.body2
-                                                .copy(fontSize = 13.sp, color = contentColor),
-                                        )
+                                                style = MaterialTheme.typography.body2
+                                                    .copy(fontSize = 13.sp, color = contentColor),
+                                                modifier = Modifier.align(Alignment.CenterVertically),
+                                            )
+                                        }
 
-                                        Text(
-                                            text = formatNumberWithCommas(
-                                                instrument.totalQuantity,
-                                                2
-                                            ),
-                                            style = MaterialTheme.typography.body2
-                                                .copy(fontSize = 13.sp, color = contentColor),
-                                            modifier = Modifier.align(Alignment.CenterVertically),
-                                        )
-                                    }
-                                    Row(
-                                        Modifier
-                                            .padding(8.dp)
-                                            .fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                    ) {
-                                        Text(
-                                            text = "Average Cost",
-                                            style = MaterialTheme.typography.body2
-                                                .copy(fontSize = 13.sp, color = contentColor),
-                                        )
+                                        Row(
+                                            Modifier
+                                                .padding(8.dp)
+                                                .fillMaxWidth(),
+                                            horizontalArrangement = Arrangement.SpaceBetween,
+                                        ) {
+                                            Text(
+                                                text = "Market Value",
+                                                style = MaterialTheme.typography.body2
+                                                    .copy(fontSize = 13.sp, color = contentColor),
+                                            )
 
-                                        Text(
-                                            text = formatNumberWithCommas(
-                                                instrument.averageCost,
-                                                2
-                                            ),
-                                            style = MaterialTheme.typography.body2
-                                                .copy(fontSize = 13.sp, color = contentColor),
-                                            modifier = Modifier.align(Alignment.CenterVertically),
-                                        )
-                                    }
+                                            Text(
+                                                text = formatNumberWithCommas(instrument.marketValue?: 0.0, 2),
+                                                style = MaterialTheme.typography.body2
+                                                    .copy(fontSize = 13.sp, color = contentColor),
+                                                modifier = Modifier.align(Alignment.CenterVertically),
+                                            )
+                                        }
+                                        Row(
+                                            Modifier
+                                                .padding(8.dp)
+                                                .fillMaxWidth(),
+                                            horizontalArrangement = Arrangement.SpaceBetween,
+                                        ) {
+                                            Text(
+                                                text = "Quantity",
+                                                style = MaterialTheme.typography.body2
+                                                    .copy(fontSize = 13.sp, color = contentColor),
+                                            )
 
-                                    Row(
-                                        Modifier
-                                            .padding(8.dp)
-                                            .fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                    ) {
-                                        Text(
-                                            text = "Total Cost",
-                                            style = MaterialTheme.typography.body2
-                                                .copy(fontSize = 13.sp, color = contentColor),
-                                        )
-
-                                        Text(
-                                            text = formatNumberWithCommas(instrument.totalCost, 2),
-                                            style = MaterialTheme.typography.body2
-                                                .copy(fontSize = 13.sp, color = contentColor),
-                                            modifier = Modifier.align(Alignment.CenterVertically),
-                                        )
-                                    }
-                                    Row(
-                                        Modifier
-                                            .padding(8.dp)
-                                            .fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                    ) {
-                                        Text(
-                                            text = "Close Cost",
-                                            style = MaterialTheme.typography.body2
-                                                .copy(fontSize = 13.sp, color = contentColor),
-                                        )
-
-                                        Text(
-                                            text = formatNumberWithCommas(instrument.closePrice, 2),
-                                            style = MaterialTheme.typography.body2
-                                                .copy(fontSize = 13.sp, color = contentColor),
-                                            modifier = Modifier.align(Alignment.CenterVertically),
-                                        )
+                                            Text(
+                                                text = "${instrument.quantity}",
+                                                style = MaterialTheme.typography.body2
+                                                    .copy(fontSize = 13.sp, color = contentColor),
+                                                modifier = Modifier.align(Alignment.CenterVertically),
+                                            )
+                                        }
                                     }
                                 }
+                                Spacer(modifier = Modifier.height(8.dp))
                             }
-                            Spacer(modifier = Modifier.height(8.dp))
                         }
                     }
                 }

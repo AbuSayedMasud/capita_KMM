@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
 import androidx.navigation.NavHostController
+import com.leads.capita.account.AccountBalance
 import com.leads.capita.repository.DatabaseDriverFactory
 import com.leads.capita.formatnumber.formatNumberWithCommas
 
@@ -37,17 +38,36 @@ import com.leads.capita.android.shell.BottomBar
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.R
 import com.leads.capita.account.AccountInstrument
+import com.leads.capita.account.Instrument
 import com.leads.capita.service.account.AccountServiceImpl
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 @Composable
 fun HomeInstrumentView(navController: NavHostController) {
     val context = LocalContext.current
 
-    var instrument: List<AccountInstrument>? by remember { mutableStateOf(null) }
-    var databaseDriverFactory = DatabaseDriverFactory(context)
+
+    var instruments: AccountInstrument? by remember { mutableStateOf(null) }
+//    var databaseDriverFactory = DatabaseDriverFactory(context)
+//    val accountInstrument = AccountServiceImpl(databaseDriverFactory)
+//    val homeInstrument = accountInstrument.getInstrumentServices()
+//    instrument = homeInstrument
+
+    val databaseDriverFactory = DatabaseDriverFactory(context)
     val accountInstrument = AccountServiceImpl(databaseDriverFactory)
+    // Fetch the account balance information from the service
     val homeInstrument = accountInstrument.getInstrumentServices()
-    instrument = homeInstrument
+    val jsonObject = Json.parseToJsonElement(homeInstrument ?: "").jsonObject
+    val instrumentData = jsonObject["accountCode"]?.jsonPrimitive?.contentOrNull
+    if (instrumentData?.isNotEmpty() == true) {
+        instruments = Json.decodeFromString<AccountInstrument>(homeInstrument)
+    } else {
+
+    }
+    val instrument = instruments?.instruments
     val paddingValue = if (isSystemInDarkTheme()) {
         6.dp
     } else {
@@ -125,7 +145,7 @@ fun HomeInstrumentView(navController: NavHostController) {
                     modifier = Modifier.padding(start = 20.dp, end = 20.dp),
                 ) {
                     for (index in 0 until instrument?.let { minOf(2, it.size) }!!) {
-                        val position = instrument?.get(index)
+                        val position = instrument[index]
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
@@ -136,38 +156,37 @@ fun HomeInstrumentView(navController: NavHostController) {
                                 modifier = Modifier
                                     .weight(3f),
                             ) {
-                                position?.let {
-                                    Text(
-                                        text = it.shortName,
-                                        textAlign = TextAlign.Start,
-                                        style = MaterialTheme.typography.body1
-                                            .copy(
-                                                fontSize = 15.5.sp,
-                                                color = contentColor,
-                                                fontWeight = FontWeight.Bold,
-                                            ),
-                                    )
+                                position.let {
+                                    it.symbole?.let { it1 ->
+                                        Text(
+                                            text = it1,
+                                            textAlign = TextAlign.Start,
+                                            style = MaterialTheme.typography.body1
+                                                .copy(
+                                                    fontSize = 15.5.sp,
+                                                    color = contentColor,
+                                                    fontWeight = FontWeight.Bold,
+                                                ),
+                                        )
+                                    }
                                 }
                             }
-                            Column(
-                                modifier = Modifier
-                                    .weight(1f),
-                                horizontalAlignment = Alignment.End,
-                            ) {
-                                Text(
-                                    text = formatNumberWithCommas(
-                                        position?.totalQuantity ?: 0.0,
-                                        2
-                                    ),
-                                    textAlign = TextAlign.Start,
-                                    style = MaterialTheme.typography.body1
-                                        .copy(
-                                            fontSize = 15.5.sp,
-                                            color = contentColor,
-                                            fontWeight = FontWeight.Bold,
-                                        ),
-                                )
-                            }
+//                            Column(
+//                                modifier = Modifier
+//                                    .weight(1f),
+//                                horizontalAlignment = Alignment.End,
+//                            ) {
+//                                Text(
+//                                    text = position?.quantity.toString() ,
+//                                    textAlign = TextAlign.Start,
+//                                    style = MaterialTheme.typography.body1
+//                                        .copy(
+//                                            fontSize = 15.5.sp,
+//                                            color = contentColor,
+//                                            fontWeight = FontWeight.Bold,
+//                                        ),
+//                                )
+//                            }
                         }
                         Spacer(modifier = Modifier.height(6.dp))
                         Row(
@@ -193,7 +212,7 @@ fun HomeInstrumentView(navController: NavHostController) {
                                 horizontalAlignment = Alignment.End,
                             ) {
                                 Text(
-                                    text = formatNumberWithCommas(position?.closePrice ?: 0.0, 2),
+                                    text = formatNumberWithCommas(position.marketPrice ?:0.0, 2),
                                     textAlign = TextAlign.End,
                                     style = MaterialTheme.typography.body2
                                         .copy(fontSize = 13.sp, color = contentColor),
@@ -212,7 +231,7 @@ fun HomeInstrumentView(navController: NavHostController) {
                                     .weight(3f),
                             ) {
                                 Text(
-                                    text = "Average Price",
+                                    text = "Cost Price",
                                     textAlign = TextAlign.Start,
                                     style = MaterialTheme.typography.body2
                                         .copy(fontSize = 13.sp, color = contentColor),
@@ -224,14 +243,14 @@ fun HomeInstrumentView(navController: NavHostController) {
                                 horizontalAlignment = Alignment.End,
                             ) {
                                 Text(
-                                    text = formatNumberWithCommas(position?.averageCost ?: 0.0, 2),
+                                    text = formatNumberWithCommas(position?.costPrice ?: 0.0, 2),
                                     textAlign = TextAlign.End,
                                     style = MaterialTheme.typography.body2
                                         .copy(fontSize = 13.sp, color = contentColor),
                                 )
                             }
                         }
-                        if (index < instrument!!.size - 1) {
+                        if (index < instrument.size - 1) {
                             Divider(
                                 modifier = Modifier.padding(vertical = 8.dp),
                             )

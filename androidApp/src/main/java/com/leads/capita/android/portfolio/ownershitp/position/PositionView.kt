@@ -37,19 +37,20 @@ import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.White
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
-import com.leads.capita.account.AccountInstrument
+import com.leads.capita.account.Instrument
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PositionView(
-    accountInstrument:AccountInstrument,
+    accountInstrument: Instrument,
     expandedIndexPosition: Int,
+    index: Int,
     onCardClicked: (Int) -> Unit,
 
     ) {
-    val change = accountInstrument.change
+//    val change = accountInstrument.change
 
-    val isExpanded = expandedIndexPosition == accountInstrument.instrumentIndex.toInt()
+    val isExpanded = expandedIndexPosition == index
 
     var expanded by remember { mutableStateOf(false) }
     val configuration = LocalConfiguration.current
@@ -72,10 +73,10 @@ fun PositionView(
     val window = rememberWindowSizeClass()
     CapitaTheme(window) {
         Card(
-            modifier = Modifier.padding(top =paddingValue, bottom = 0.dp),
+            modifier = Modifier.padding(top = paddingValue, bottom = 0.dp),
             elevation = if (isSystemInDarkTheme()) 8.dp else 2.dp,
             shape = MaterialTheme.shapes.large,
-            onClick = { onCardClicked(accountInstrument.instrumentIndex.toInt()) },
+            onClick = { onCardClicked(index) },
             backgroundColor = backgroundColor,
         ) {
             Column(
@@ -95,75 +96,78 @@ fun PositionView(
                     Spacer(modifier = Modifier.width(16.dp))
 
                     Column(modifier = Modifier.weight(textColumnWeight)) {
-                        Text(
-                            text = accountInstrument.shortName,
-                            style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.Bold),
-                            fontSize = 15.5.sp,
-                            color = contentColor,
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = accountInstrument.longName,
-                            style = MaterialTheme.typography.body2,
-                            fontSize = 13.sp,
-                            color = contentColor,
-                        )
-                    }
-
-                    Column(
-                        modifier = Modifier
-                            .weight(valueColumnWeight)
-                            .padding(top = screenWidth * 0.001f),
-                        horizontalAlignment = Alignment.End,
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.End,
-                        ) {
+                        accountInstrument.symbole?.let {
                             Text(
-                                text = formatNumberWithCommas(accountInstrument.value, 2),
+                                text = it,
                                 style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.Bold),
                                 fontSize = 15.5.sp,
-                                textAlign = TextAlign.End,
                                 color = contentColor,
                             )
                         }
-                        if (change < 0) {
-                            changeColor = Color(0xFFff0100)
-                        } else if (change == 0.00) {
-                            changeColor = Color(0xFF005826)
-                        }
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.End,
-                            modifier = Modifier.padding(top = 8.dp),
-                        ) {
-                            if (change > 0) {
-                                Text(text = "+", color = changeColor)
-                            }
-                            Text(
-                                text = accountInstrument.closedPrice.toString(),
-                                style = MaterialTheme.typography.body2,
-                                fontSize = 13.sp,
-                                textAlign = TextAlign.End,
-                                color = changeColor,
-                            )
-                            Text("(", color = changeColor)
-                            if (change > 0) {
-                                Text(text = "+", color = changeColor)
-                            }
-                            Text(
-                                text = accountInstrument.change.toString() + "%",
-                                style = MaterialTheme.typography.body2,
-                                fontSize = 13.sp,
-                                textAlign = TextAlign.End,
-                                color = changeColor,
-                            )
-                            Text(")", color = changeColor)
-                        }
+//                        Spacer(modifier = Modifier.height(8.dp))
+//                        Text(
+//                            text = accountInstrument.longName,
+//                            style = MaterialTheme.typography.body2,
+//                            fontSize = 13.sp,
+//                            color = contentColor,
+//                        )
                     }
-                    Spacer(modifier = Modifier.width(8.dp))
                 }
+
+//                    Column(
+//                        modifier = Modifier
+//                            .weight(valueColumnWeight)
+//                            .padding(top = screenWidth * 0.001f),
+//                        horizontalAlignment = Alignment.End,
+//                    ) {
+//                        Row(
+//                            verticalAlignment = Alignment.CenterVertically,
+//                            horizontalArrangement = Arrangement.End,
+//                        ) {
+//                            Text(
+//                                text = formatNumberWithCommas(accountInstrument.value, 2),
+//                                style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.Bold),
+//                                fontSize = 15.5.sp,
+//                                textAlign = TextAlign.End,
+//                                color = contentColor,
+//                            )
+//                        }
+//                        if (change < 0) {
+//                            changeColor = Color(0xFFff0100)
+//                        } else if (change == 0.00) {
+//                            changeColor = Color(0xFF005826)
+//                        }
+//                        Row(
+//                            verticalAlignment = Alignment.CenterVertically,
+//                            horizontalArrangement = Arrangement.End,
+//                            modifier = Modifier.padding(top = 8.dp),
+//                        ) {
+//                            if (change > 0) {
+//                                Text(text = "+", color = changeColor)
+//                            }
+//                            Text(
+//                                text = accountInstrument.closedPrice.toString(),
+//                                style = MaterialTheme.typography.body2,
+//                                fontSize = 13.sp,
+//                                textAlign = TextAlign.End,
+//                                color = changeColor,
+//                            )
+//                            Text("(", color = changeColor)
+//                            if (change > 0) {
+//                                Text(text = "+", color = changeColor)
+//                            }
+//                            Text(
+//                                text = accountInstrument.change.toString() + "%",
+//                                style = MaterialTheme.typography.body2,
+//                                fontSize = 13.sp,
+//                                textAlign = TextAlign.End,
+//                                color = changeColor,
+//                            )
+//                            Text(")", color = changeColor)
+//                        }
+//                    }
+//                    Spacer(modifier = Modifier.width(8.dp))
+//                }
 
                 AnimatedContent(
                     targetState = isExpanded,
@@ -185,20 +189,32 @@ fun PositionView(
                                 Column(
                                     modifier = Modifier.padding(16.dp),
                                 ) {
-                                    PositionItem("Total Quantity", accountInstrument.totalQuantity)
                                     PositionItem(
-                                        "Salable Quantity",
-                                        accountInstrument.salableQuantity
+                                        "Cost Price",
+                                        accountInstrument.costPrice.toString()
                                     )
-                                    PositionItem("Average Cost", accountInstrument.averageCost)
-                                    PositionItem("Total Cost", accountInstrument.totalCost)
-                                    PositionItem("Close Price", accountInstrument.closePrice)
                                     PositionItem(
-                                        "Unrealized Gain/Loss",
-                                        accountInstrument.unrealizedGain
+                                        "Cost Value",
+                                        accountInstrument.costValue.toString()
                                     )
-                                    PositionItem("%Gain(Loss)", accountInstrument.gainPercent)
-                                    PositionItem("%Cost value", accountInstrument.costValue)
+                                    PositionItem("Group", accountInstrument.gr)
+                                    PositionItem(
+                                        "Market Price",
+                                        accountInstrument.marketPrice.toString()
+                                    )
+                                    PositionItem(
+                                        "Market Value",
+                                        accountInstrument.marketValue.toString()
+                                    )
+                                    PositionItem(
+                                        "Mature Quantity",
+                                        accountInstrument.matureQuantity.toString()
+                                    )
+                                    PositionItem("Quantity", accountInstrument.quantity.toString())
+                                    PositionItem(
+                                        "Unrealized Gain",
+                                        accountInstrument.unrealizedGain.toString()
+                                    )
                                 }
                             }
                         }
@@ -209,8 +225,9 @@ fun PositionView(
     }
 }
 
+
 @Composable
-fun PositionItem(label: String, value: Double) {
+fun PositionItem(label: String, value: String?) {
     val textColor = if (isSystemInDarkTheme()) White else Black
     Row(
         modifier = Modifier
@@ -226,7 +243,7 @@ fun PositionItem(label: String, value: Double) {
             color = textColor,
         )
         Text(
-            text = formatNumberWithCommas(value, 2),
+            text = value.toString(),
             style = MaterialTheme.typography.body2,
             fontSize = 13.sp,
             textAlign = TextAlign.End,
