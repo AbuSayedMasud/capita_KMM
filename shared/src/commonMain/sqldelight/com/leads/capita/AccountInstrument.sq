@@ -1,33 +1,47 @@
-CREATE TABLE AccountInstrumentData (
-instrumentIndex REAL NOT NULL,
-    long_name TEXT,
-    short_name TEXT,
-    value REAL,
-    closed_price REAL,
-    change REAL,
-    change_icon REAL,
-    total_quantity REAL,
-    salable_quantity REAL,
-    average_cost REAL,
-    total_cost REAL,
-    close_price REAL,
-    unrealized_gain REAL,
-    gain_percent REAL,
-    cost_value REAL
+DROP TABLE IF EXISTS AccountInstrumentData;
+
+-- instruments.sql
+CREATE TABLE Instrument (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    accountCode TEXT,
+    costPrice REAL,
+    costValue REAL,
+    gr TEXT,
+    marginable INTEGER  DEFAULT 0,
+    marketPrice REAL,
+    marketValue REAL,
+    matureQuantity INTEGER,
+    quantity INTEGER,
+    symbol TEXT,
+    unrealizedGain REAL,
+    FOREIGN KEY(accountCode) REFERENCES AccountData(accountCode) ON DELETE CASCADE
 );
 
-insertAccountInstrumentData:
-INSERT INTO AccountInstrumentData(instrumentIndex, long_name, short_name,value,closed_price, change,change_icon,total_quantity,
-salable_quantity,average_cost,total_cost,close_price,unrealized_gain,gain_percent,cost_value)
-VALUES( ?, ?, ?, ?, ?,?,?,?,
-?,?,?,?,?,?,?);
+-- account_data.sql
+CREATE TABLE AccountData (
+    accountCode TEXT PRIMARY KEY
+);
 
+
+
+insertAccountInstrumentData:
+INSERT INTO Instrument(accountCode, costPrice, costValue,gr,marginable, marketPrice,marketValue,matureQuantity,
+quantity,symbol,unrealizedGain)
+VALUES( ?, ?, ?, ?, ?,?,?,?,
+?,?,?);
+insertAccountData:
+INSERT INTO AccountData(accountCode) VALUES (?);
+getAccounttData:
+SELECT *
+FROM AccountData;
 getAccountInstrumentData:
 SELECT *
-FROM AccountInstrumentData;
+FROM Instrument;
 
 getAccountInstrumentByUniqueId:
-SELECT * FROM AccountInstrumentData WHERE short_name = :uniqueName;
+SELECT * FROM Instrument WHERE symbol = :symbol;
 
 deleteAccountInstrumentData:
-DELETE FROM AccountInstrumentData;
+DELETE FROM Instrument;
+deleteAccountData:
+DELETE FROM AccountData;
