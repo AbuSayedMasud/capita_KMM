@@ -38,7 +38,7 @@ class MockLoader(private val context: Context) {
 
         // account instrument
         val jsonAccountInstrumentContent = loadJson("account_instruments");
-        val instruments = Json.decodeFromString<List<AccountInstrument>>(jsonAccountInstrumentContent)
+        val instruments = Json.decodeFromString<AccountInstrument>(jsonAccountInstrumentContent)
         service.loadAccountInstrument(instruments)
 
         // account Receivable
