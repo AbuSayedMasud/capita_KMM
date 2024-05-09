@@ -20,8 +20,8 @@
 		2BB9F3162BD7619E005AE48E /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3112BD7619E005AE48E /* RegistrationView.swift */; };
 		2BB9F3172BD7619E005AE48E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3132BD7619E005AE48E /* LoginView.swift */; };
 		2BB9F3182BD7619E005AE48E /* BiometricAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3142BD7619E005AE48E /* BiometricAuthView.swift */; };
-		2BB9F32B2BD761DF005AE48E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F31C2BD761DF005AE48E /* HomeView.swift */; };
-		2BB9F32C2BD761DF005AE48E /* shantaHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F31E2BD761DF005AE48E /* shantaHomeView.swift */; };
+		2BB9F32B2BD761DF005AE48E /* BaseHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F31C2BD761DF005AE48E /* BaseHomeView.swift */; };
+		2BB9F32C2BD761DF005AE48E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F31E2BD761DF005AE48E /* HomeView.swift */; };
 		2BB9F32D2BD761DF005AE48E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3202BD761DF005AE48E /* ProfileView.swift */; };
 		2BB9F32E2BD761DF005AE48E /* IndicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3232BD761DF005AE48E /* IndicesView.swift */; };
 		2BB9F32F2BD761DF005AE48E /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F3242BD761DF005AE48E /* NewsView.swift */; };
@@ -88,8 +88,8 @@
 		2BB9F3112BD7619E005AE48E /* RegistrationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		2BB9F3132BD7619E005AE48E /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2BB9F3142BD7619E005AE48E /* BiometricAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiometricAuthView.swift; sourceTree = "<group>"; };
-		2BB9F31C2BD761DF005AE48E /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		2BB9F31E2BD761DF005AE48E /* shantaHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shantaHomeView.swift; sourceTree = "<group>"; };
+		2BB9F31C2BD761DF005AE48E /* BaseHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseHomeView.swift; sourceTree = "<group>"; };
+		2BB9F31E2BD761DF005AE48E /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2BB9F3202BD761DF005AE48E /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		2BB9F3232BD761DF005AE48E /* IndicesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicesView.swift; sourceTree = "<group>"; };
 		2BB9F3242BD761DF005AE48E /* NewsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
@@ -233,7 +233,7 @@
 			children = (
 				2BB9F31A2BD761DF005AE48E /* trade */,
 				2BB9F31B2BD761DF005AE48E /* Home(BASE) */,
-				2BB9F31D2BD761DF005AE48E /* shantaHomeTab */,
+				2BB9F31D2BD761DF005AE48E /* HomeTab */,
 				2BB9F31F2BD761DF005AE48E /* profile */,
 				2BB9F3212BD761DF005AE48E /* market */,
 				2BB9F3292BD761DF005AE48E /* services */,
@@ -251,17 +251,17 @@
 		2BB9F31B2BD761DF005AE48E /* Home(BASE) */ = {
 			isa = PBXGroup;
 			children = (
-				2BB9F31C2BD761DF005AE48E /* HomeView.swift */,
+				2BB9F31C2BD761DF005AE48E /* BaseHomeView.swift */,
 			);
 			path = "Home(BASE)";
 			sourceTree = "<group>";
 		};
-		2BB9F31D2BD761DF005AE48E /* shantaHomeTab */ = {
+		2BB9F31D2BD761DF005AE48E /* HomeTab */ = {
 			isa = PBXGroup;
 			children = (
-				2BB9F31E2BD761DF005AE48E /* shantaHomeView.swift */,
+				2BB9F31E2BD761DF005AE48E /* HomeView.swift */,
 			);
-			path = shantaHomeTab;
+			path = HomeTab;
 			sourceTree = "<group>";
 		};
 		2BB9F31F2BD761DF005AE48E /* profile */ = {
@@ -597,7 +597,7 @@
 				2BB9F3422BD761E7005AE48E /* credit.swift in Sources */,
 				2BB9F3342BD761DF005AE48E /* services.swift in Sources */,
 				2BB9F3172BD7619E005AE48E /* LoginView.swift in Sources */,
-				2BB9F32C2BD761DF005AE48E /* shantaHomeView.swift in Sources */,
+				2BB9F32C2BD761DF005AE48E /* HomeView.swift in Sources */,
 				2B9AB0812BE2574D00CDD1E2 /* profileViewModel.swift in Sources */,
 				2BB9F3442BD761E7005AE48E /* all_statements.swift in Sources */,
 				2B48FCD22BE73AEB0056CBFD /* addressModel.swift in Sources */,
@@ -611,7 +611,7 @@
 				2BB9F3332BD761DF005AE48E /* marketView.swift in Sources */,
 				2BA250FE2BE38A8000DA1997 /* loginModel.swift in Sources */,
 				2B48FCCF2BE73ACB0056CBFD /* CustomerProfileResponseModel.swift in Sources */,
-				2BB9F32B2BD761DF005AE48E /* HomeView.swift in Sources */,
+				2BB9F32B2BD761DF005AE48E /* BaseHomeView.swift in Sources */,
 				2BB9F3182BD7619E005AE48E /* BiometricAuthView.swift in Sources */,
 				2BCBB78D2BD27AC900FAE429 /* AccountBalanceViewModel.swift in Sources */,
 				2BB9F3312BD761DF005AE48E /* OverviewView.swift in Sources */,
