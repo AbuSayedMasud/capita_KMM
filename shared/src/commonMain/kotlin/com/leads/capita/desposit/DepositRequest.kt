@@ -9,7 +9,7 @@ class DepositRequest(
     val transactionDate: String,
     val transactionCode:String,
     val transactionRef:String,
-    val amount:String,
+    val amount:Int,
     val description:String,
     val status:String
 )
