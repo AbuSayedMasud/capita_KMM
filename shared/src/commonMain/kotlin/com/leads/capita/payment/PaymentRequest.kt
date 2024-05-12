@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 data class PaymentRequest(
     val accountCode:String,
     val transactionCode:String,
-    val amount:String,
+    val currency:String,
+    val amount:Double,
     val description:String
 )
