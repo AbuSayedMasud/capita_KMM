@@ -1,5 +1,6 @@
 package com.leads.capita.android.home
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -26,15 +27,18 @@ import com.leads.capita.repository.DatabaseDriverFactory
 import com.leads.capita.formatnumber.formatNumberWithCommas
 
 
-
 import com.leads.capita.android.shell.BottomBar
 import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.getCardColors
 import com.leads.capita.android.theme.rememberWindowSizeClass
 import com.leads.capita.android.R
 import com.leads.capita.account.AccountBalance
+import com.leads.capita.android.customAlertDialog.CustomAlertDialog
+import com.leads.capita.payment.PaymentService
+import com.leads.capita.security.IdentityErrorResponse
 import com.leads.capita.security.IdentitySuccessResponse
 import com.leads.capita.service.account.AccountServiceImpl
+import com.leads.capita.service.payment.PaymentServiceImpl
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
@@ -47,17 +51,30 @@ fun HomeBalanceView(navController: NavHostController) {
     val context = LocalContext.current
 
     var balance: AccountBalance? by remember { mutableStateOf(null) }
+    val dismissState = remember { mutableStateOf(false) }
+    var databaseDriverFactory = DatabaseDriverFactory(context)
 
-   var  databaseDriverFactory= DatabaseDriverFactory(context)
+    //*** payment api check
+    val paymentService = PaymentServiceImpl(databaseDriverFactory)
+    val payment = paymentService.getPaymentServices()
+    val paymentStatus = paymentService.getPaymentStatusServices()
+    Log.d("payment data", payment.toString())
+    Log.d("paymentStatus data", paymentStatus.toString())
+    //**payment api check
     val accountService = AccountServiceImpl(databaseDriverFactory)
     // Fetch the account balance information from the service
     val homeBalance = accountService.getBalanceServices()
     val jsonObject = Json.parseToJsonElement(homeBalance ?: "").jsonObject
     var balancedata = jsonObject["status"]?.jsonPrimitive?.contentOrNull
-    if (balancedata?.isNotEmpty() == true){
-
-    }else{
-        balance=Json.decodeFromString<AccountBalance>(homeBalance)
+    if (balancedata?.isNotEmpty() == true) {
+        val error = Json.decodeFromString<IdentityErrorResponse>(homeBalance)
+        CustomAlertDialog(
+            message = error.details.toString(),
+            isSuccess = false,
+            dismissState = dismissState
+        )
+    } else {
+        balance = Json.decodeFromString<AccountBalance>(homeBalance)
     }
 
     val (backgroundColor, contentColor) = getCardColors()
@@ -83,8 +100,7 @@ fun HomeBalanceView(navController: NavHostController) {
             ) {
                 // Title Card
                 Surface(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     shadowElevation = 4.dp,
                     color = backgroundColor,
                 ) {
@@ -94,17 +110,15 @@ fun HomeBalanceView(navController: NavHostController) {
                         modifier = Modifier.padding(16.dp),
                     ) {
                         Column(
-                            modifier = Modifier
-                                .weight(3f),
+                            modifier = Modifier.weight(3f),
                         ) {
                             Text(
                                 text = "Balance",
-                                style = MaterialTheme.typography.body1
-                                    .copy(
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 18.sp,
-                                        color = contentColor,
-                                    ),
+                                style = MaterialTheme.typography.body1.copy(
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 18.sp,
+                                    color = contentColor,
+                                ),
                             )
                         }
                         // Column for navigation arrow
@@ -138,7 +152,7 @@ fun HomeBalanceView(navController: NavHostController) {
                     Column(
                         modifier = Modifier.padding(start = 20.dp, end = 20.dp),
 
-                    ) {
+                        ) {
                         Row(
                             modifier = Modifier
                                 .padding(5.dp)
@@ -148,8 +162,11 @@ fun HomeBalanceView(navController: NavHostController) {
                             Column {
                                 Text(
                                     text = "Available Balance",
-                                    style = MaterialTheme.typography.body2
-                                        .copy(fontSize = 15.5.sp, color = contentColor, fontWeight = FontWeight.Bold),
+                                    style = MaterialTheme.typography.body2.copy(
+                                        fontSize = 15.5.sp,
+                                        color = contentColor,
+                                        fontWeight = FontWeight.Bold
+                                    ),
                                 )
                             }
 
@@ -157,9 +174,14 @@ fun HomeBalanceView(navController: NavHostController) {
                                 horizontalAlignment = Alignment.End,
                             ) {
                                 Text(
-                                    text = formatNumberWithCommas((balance?.cashBalance ?: 0.0) as Double, 2),
-                                    style = MaterialTheme.typography.body2
-                                        .copy(fontSize = 15.5.sp, color = contentColor, fontWeight = FontWeight.Bold),
+                                    text = formatNumberWithCommas(
+                                        (balance?.cashBalance ?: 0.0) as Double, 2
+                                    ),
+                                    style = MaterialTheme.typography.body2.copy(
+                                        fontSize = 15.5.sp,
+                                        color = contentColor,
+                                        fontWeight = FontWeight.Bold
+                                    ),
                                 )
                             }
                         }
@@ -175,8 +197,11 @@ fun HomeBalanceView(navController: NavHostController) {
                             Column {
                                 Text(
                                     text = "Current Balance",
-                                    style = MaterialTheme.typography.body2
-                                        .copy(fontSize = 15.5.sp, color = contentColor, fontWeight = FontWeight.Bold),
+                                    style = MaterialTheme.typography.body2.copy(
+                                        fontSize = 15.5.sp,
+                                        color = contentColor,
+                                        fontWeight = FontWeight.Bold
+                                    ),
                                 )
                             }
 
@@ -184,9 +209,14 @@ fun HomeBalanceView(navController: NavHostController) {
                                 horizontalAlignment = Alignment.End,
                             ) {
                                 Text(
-                                    text = formatNumberWithCommas((balance?.currentBalance ?: 0.0) as Double, 2),
-                                    style = MaterialTheme.typography.body2
-                                        .copy(fontSize = 15.5.sp, color = contentColor, fontWeight = FontWeight.Bold),
+                                    text = formatNumberWithCommas(
+                                        (balance?.currentBalance ?: 0.0) as Double, 2
+                                    ),
+                                    style = MaterialTheme.typography.body2.copy(
+                                        fontSize = 15.5.sp,
+                                        color = contentColor,
+                                        fontWeight = FontWeight.Bold
+                                    ),
                                 )
                             }
                         }
@@ -202,8 +232,11 @@ fun HomeBalanceView(navController: NavHostController) {
                             Column {
                                 Text(
                                     text = "Equtity",
-                                    style = MaterialTheme.typography.body2
-                                        .copy(fontSize = 15.5.sp, color = contentColor, fontWeight = FontWeight.Bold),
+                                    style = MaterialTheme.typography.body2.copy(
+                                        fontSize = 15.5.sp,
+                                        color = contentColor,
+                                        fontWeight = FontWeight.Bold
+                                    ),
                                 )
                             }
 
@@ -211,9 +244,14 @@ fun HomeBalanceView(navController: NavHostController) {
                                 horizontalAlignment = Alignment.End,
                             ) {
                                 Text(
-                                    text = formatNumberWithCommas((balance?.equity ?: 0.0) as Double, 2),
-                                    style = MaterialTheme.typography.body2
-                                        .copy(fontSize = 15.5.sp, color = contentColor, fontWeight = FontWeight.Bold),
+                                    text = formatNumberWithCommas(
+                                        (balance?.equity ?: 0.0) as Double, 2
+                                    ),
+                                    style = MaterialTheme.typography.body2.copy(
+                                        fontSize = 15.5.sp,
+                                        color = contentColor,
+                                        fontWeight = FontWeight.Bold
+                                    ),
                                 )
                             }
                         }
@@ -229,8 +267,11 @@ fun HomeBalanceView(navController: NavHostController) {
                             Column {
                                 Text(
                                     text = "Purchase Power",
-                                    style = MaterialTheme.typography.body2
-                                        .copy(fontSize = 15.5.sp, color = contentColor, fontWeight = FontWeight.Bold),
+                                    style = MaterialTheme.typography.body2.copy(
+                                        fontSize = 15.5.sp,
+                                        color = contentColor,
+                                        fontWeight = FontWeight.Bold
+                                    ),
                                 )
                             }
 
@@ -238,9 +279,14 @@ fun HomeBalanceView(navController: NavHostController) {
                                 horizontalAlignment = Alignment.End,
                             ) {
                                 Text(
-                                    text = formatNumberWithCommas((balance?.buyingPower ?: 0.0) as Double, 2),
-                                    style = MaterialTheme.typography.body2
-                                        .copy(fontSize = 15.5.sp, color = contentColor, fontWeight = FontWeight.Bold),
+                                    text = formatNumberWithCommas(
+                                        (balance?.buyingPower ?: 0.0) as Double, 2
+                                    ),
+                                    style = MaterialTheme.typography.body2.copy(
+                                        fontSize = 15.5.sp,
+                                        color = contentColor,
+                                        fontWeight = FontWeight.Bold
+                                    ),
                                 )
                             }
                         }

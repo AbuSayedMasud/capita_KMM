@@ -12,13 +12,15 @@ import com.leads.capita.repository.RestUtil
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 
 class AccountLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
     AccountRepository {
     val db = CapitaDb(databaseDriverFactory.createDriver())
-    private val ACCOUNT_BALANCE_PATH: String = "/accounts/balances/00DLB358"
-    private val ACCOUNT_POSITION: String = "/accounts/positions/00S18576"
+    private val ACCOUNT_BALANCE_PATH: String = "/accounts/balances/1990"
+    private val ACCOUNT_POSITION: String = "/accounts/positions/1990"
     override fun getAccountBalance(): String {
         var response: String? = null
 
@@ -47,8 +49,9 @@ class AccountLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
 
         return response.toString()
     }
-//    override fun getAccountBalance(): List<AccountBalance> {
-//        return db.accountBalanceQueries.getAccountBalance()
+//    override fun getAccountBalance(): String {
+//
+//        val accountBalanceList= db.accountBalanceQueries.getAccountBalance()
 //            .executeAsList()
 //            .map { accountBalanceData ->
 //                AccountBalance(
@@ -71,6 +74,8 @@ class AccountLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
 //                    unclearCheque = accountBalanceData?.unclearCheque!!,
 //                )
 //            }
+//
+//        return Json.encodeToString(accountBalanceList)
 //    }
 
 //    override fun getAccountInstrument(): List<Instrument> {

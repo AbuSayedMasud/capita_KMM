@@ -15,7 +15,7 @@ import kotlinx.coroutines.runBlocking
 
 class PaymentLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) : PaymentRepository {
     private val paymentPath: String = "/payments"
-    private val paymentStatusPath: String = "/status/226475893"
+    private val paymentStatusPath: String = "/status/226475895"
     override fun getPayment(): String {
         val client = RestUtil.getClient()
         var responseContent: String? = null
@@ -27,7 +27,7 @@ class PaymentLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
                     contentType(ContentType.Application.Json)
                     setBody(
                         PaymentRequest(
-                            accountCode = "00DLB358",
+                            accountCode = "1990",
                             transactionCode = "CHEQUE",
                             currency = "BDT",
                             amount = 50.00,
