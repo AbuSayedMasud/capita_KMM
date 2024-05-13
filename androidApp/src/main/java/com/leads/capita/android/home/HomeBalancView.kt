@@ -52,7 +52,7 @@ fun HomeBalanceView(navController: NavHostController) {
     val context = LocalContext.current
 
     var balance: AccountBalance? by remember { mutableStateOf(null) }
-    val dismissState = remember { mutableStateOf(false) }
+    val dismissState = remember { mutableStateOf(true) }
     var databaseDriverFactory = DatabaseDriverFactory(context)
 
     //*** payment api check
@@ -67,10 +67,21 @@ fun HomeBalanceView(navController: NavHostController) {
     val deposit = depositService.getDepositServices()
     val depositStatus = paymentService.getPaymentStatusServices()
     Log.d("deposit data", deposit.toString())
-    Log.d("depositStatus data", depositStatus.toString())
+//    Log.d("depositStatus data", depositStatus.toString())
+//    val errors = Json.decodeFromString<IdentityErrorResponse>(deposit)
+//    if (dismissState.value) {
+//    CustomAlertDialog(
+//        message = errors.details.toString(),
+//        isSuccess = false,
+//        dismissState = dismissState
+//    )}
     //**deposit api check
+
     val accountService = AccountServiceImpl(databaseDriverFactory)
     // Fetch the account balance information from the service
+    //* account details
+    Log.d("account details",accountService.getAccountDetailsServices())
+    //*account details
     val homeBalance = accountService.getBalanceServices()
     val jsonObject = Json.parseToJsonElement(homeBalance ?: "").jsonObject
     var balancedata = jsonObject["status"]?.jsonPrimitive?.contentOrNull

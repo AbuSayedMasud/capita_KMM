@@ -21,6 +21,7 @@ class AccountLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
     val db = CapitaDb(databaseDriverFactory.createDriver())
     private val ACCOUNT_BALANCE_PATH: String = "/accounts/balances/1990"
     private val ACCOUNT_POSITION: String = "/accounts/positions/1990"
+    private  val accountDetails:String="/accounts/details/1990"
     override fun getAccountBalance(): String {
         var response: String? = null
 
@@ -129,6 +130,20 @@ class AccountLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
                     identity = accountTransactionData?.identity!!
                 )
             }
+    }
+
+    override fun getAccountDetails(): String {
+        var response: String? = null
+
+        runBlocking {
+            try {
+                response = RestUtil.getClient()
+                    .get(urlString = "${RestUtil.BASE_URL}$accountDetails").body()
+            } catch (e: Exception) {
+            }
+        }
+
+        return response.toString()
     }
 
     override fun createAccountTransaction(transactions: List<AccountTransaction>) {

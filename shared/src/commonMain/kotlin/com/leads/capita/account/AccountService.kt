@@ -7,4 +7,5 @@ interface AccountService {
     fun getInstrumentServices(): String
     fun getReceivableServices(): List<AccountReceivable>
     fun getTransactionServices(): List<AccountTransaction>
+    fun getAccountDetailsServices():String
 }

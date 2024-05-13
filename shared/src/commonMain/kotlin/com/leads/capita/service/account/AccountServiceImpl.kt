@@ -32,5 +32,10 @@ class AccountServiceImpl(private val databaseDriverFactory: DatabaseDriverFactor
         return repository.getAccountTransaction()
     }
 
+    override fun getAccountDetailsServices(): String {
+        val repository=AccountFactory.getRepository(databaseDriverFactory)
+        return repository.getAccountDetails()
+    }
+
 
 }

@@ -1,5 +1,6 @@
-package com.leads.capita.customerProfile
+package com.leads.capita.account
 
+import com.leads.capita.customerProfile.Customer
 import kotlinx.serialization.Serializable
 
 @Serializable

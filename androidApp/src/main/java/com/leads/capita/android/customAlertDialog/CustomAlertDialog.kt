@@ -85,9 +85,9 @@ fun CustomAlertDialog(
                 Button(
                     onClick = {
                         if (isSuccess) {
-                            dismissState.value = true
+                            dismissState.value = false
                         } else {
-                            dismissState.value = true
+                            dismissState.value = false
                         }
                     },
                     colors = ButtonDefaults.buttonColors(

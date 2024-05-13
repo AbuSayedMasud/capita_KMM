@@ -40,6 +40,10 @@ class AccountRepositoryImpl : AccountRepository {
         TODO("Not yet implemented")
     }
 
+    override fun getAccountDetails(): String {
+        TODO("Not yet implemented")
+    }
+
     override fun createAccountTransaction(transactions: List<AccountTransaction>) {
         TODO("Not yet implemented")
     }
