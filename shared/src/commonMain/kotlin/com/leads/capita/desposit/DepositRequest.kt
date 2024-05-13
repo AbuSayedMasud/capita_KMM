@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 class DepositRequest(
     val accountCode: String,
     val routingNumber: String,
+    val bankAccountNumber:String,
     val transactionDate: String,
     val transactionCode:String,
     val transactionRef:String,

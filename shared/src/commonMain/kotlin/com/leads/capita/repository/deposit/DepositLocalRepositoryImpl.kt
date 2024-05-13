@@ -14,7 +14,7 @@ import kotlinx.coroutines.runBlocking
 
 class DepositLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) : DepositRepository {
     private val depositPath = "/deposits"
-    private val depositStatusPath = "/status/124"
+    private val depositStatusPath = "/status/20506008723"
     override fun getDeposit(): String {
         val client = RestUtil.getClient()
         var responseContent: String? = null
@@ -26,11 +26,12 @@ class DepositLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
                     contentType(ContentType.Application.Json)
                     setBody(
                         DepositRequest(
-                            accountCode = "00DLB358",
-                            routingNumber = "300150168",
+                            accountCode = "1990",
+                            routingNumber = "175272321",
                             transactionDate = "2023-03-19",
+                            bankAccountNumber="2905102001430",
                             transactionCode = "CASH",
-                            transactionRef = "feb-08-5",
+                            transactionRef = "feb-08-10",
                             amount = 140,
                             description = "Dev-Test",
                             status = "C"

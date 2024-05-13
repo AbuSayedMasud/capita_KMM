@@ -38,6 +38,7 @@ import com.leads.capita.payment.PaymentService
 import com.leads.capita.security.IdentityErrorResponse
 import com.leads.capita.security.IdentitySuccessResponse
 import com.leads.capita.service.account.AccountServiceImpl
+import com.leads.capita.service.deposit.DepositServiceImpl
 import com.leads.capita.service.payment.PaymentServiceImpl
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.contentOrNull
@@ -61,6 +62,13 @@ fun HomeBalanceView(navController: NavHostController) {
     Log.d("payment data", payment.toString())
     Log.d("paymentStatus data", paymentStatus.toString())
     //**payment api check
+    //*** deposit api check
+    val depositService = DepositServiceImpl(databaseDriverFactory)
+    val deposit = depositService.getDepositServices()
+    val depositStatus = paymentService.getPaymentStatusServices()
+    Log.d("deposit data", deposit.toString())
+    Log.d("depositStatus data", depositStatus.toString())
+    //**deposit api check
     val accountService = AccountServiceImpl(databaseDriverFactory)
     // Fetch the account balance information from the service
     val homeBalance = accountService.getBalanceServices()
