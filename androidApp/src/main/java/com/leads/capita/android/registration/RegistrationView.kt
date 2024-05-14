@@ -64,14 +64,17 @@ fun RegistrationView(navController: NavHostController) {
         email,
         mobileNumber,
         accountCode,
+        "",
+        "",
         password,
         confirmPassword,
-        null,
-
+        "",
+        "",
         isForgetPasswordView = false,
         isRegistrationView = true,
         isBiometricRegistrationView = false,
         isBiometricFingerprintRegistrationView = false,
+        isPaymentView = false
     )
 
     var isUsernameError by remember { mutableStateOf(false) }
@@ -122,7 +125,7 @@ fun RegistrationView(navController: NavHostController) {
                 leadingIconColor = contentColor,
                 placeholderColor = placeholderTextColor,
 
-            ),
+                ),
             modifier = Modifier.fillMaxWidth(),
         )
         TextField(
@@ -149,7 +152,7 @@ fun RegistrationView(navController: NavHostController) {
                 leadingIconColor = contentColor,
                 placeholderColor = placeholderTextColor,
 
-            ),
+                ),
             modifier = Modifier.fillMaxWidth(),
         )
         TextField(
@@ -175,7 +178,7 @@ fun RegistrationView(navController: NavHostController) {
                 leadingIconColor = textColor,
                 placeholderColor = placeholderTextColor,
 
-            ),
+                ),
             modifier = Modifier.fillMaxWidth(),
         )
         TextField(
@@ -199,7 +202,7 @@ fun RegistrationView(navController: NavHostController) {
                 leadingIconColor = textColor,
                 placeholderColor = placeholderTextColor,
 
-            ),
+                ),
             modifier = Modifier.fillMaxWidth(),
         )
         TextField(
@@ -222,7 +225,7 @@ fun RegistrationView(navController: NavHostController) {
                 leadingIconColor = textColor,
                 placeholderColor = placeholderTextColor,
 
-            ),
+                ),
             modifier = Modifier.fillMaxWidth(),
         )
         TextField(
@@ -248,7 +251,7 @@ fun RegistrationView(navController: NavHostController) {
                 leadingIconColor = textColor,
                 placeholderColor = placeholderTextColor,
 
-            ),
+                ),
             modifier = Modifier.fillMaxWidth(),
         )
         TextField(
@@ -273,7 +276,7 @@ fun RegistrationView(navController: NavHostController) {
                 leadingIconColor = textColor,
                 placeholderColor = placeholderTextColor,
 
-            ),
+                ),
             trailingIcon = {
                 val visibilityIcon =
                     if (passwordVisible) R.drawable.baseline_visibility_off_24 else R.drawable.baseline_visibility_24
@@ -310,7 +313,7 @@ fun RegistrationView(navController: NavHostController) {
                 leadingIconColor = textColor,
                 placeholderColor = placeholderTextColor,
 
-            ),
+                ),
             trailingIcon = {
                 val visibilityIcon =
                     if (confirmPasswordVisible) R.drawable.baseline_visibility_off_24 else R.drawable.baseline_visibility_24

@@ -100,7 +100,10 @@ fun BiometricRegistrationView(navController: NavHostController) {
         "",
         "",
         "",
+        "",
+        "",
         password,
+        "",
         "",
         "",
 
@@ -108,6 +111,7 @@ fun BiometricRegistrationView(navController: NavHostController) {
         isRegistrationView = false,
         isBiometricRegistrationView = true,
         isBiometricFingerprintRegistrationView = false,
+        isPaymentView = false
     )
 
     val executor = remember { ContextCompat.getMainExecutor(context) }

@@ -1,10 +1,11 @@
-package com.leads.capita.android.service
+package com.leads.capita.android.service.payment
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -13,25 +14,28 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.leads.capita.android.R
 import com.leads.capita.android.shell.MyAppBar
 import com.leads.capita.android.theme.BackgroundColor
+import com.leads.capita.android.theme.CapitaTheme
+import com.leads.capita.android.theme.rememberWindowSizeClass
 
 @Composable
-fun ServiceScreen(navController:NavHostController) {
+fun PaymentScreen (navController: NavHostController){
     val profilePhoto: Painter = painterResource(id = R.drawable.profile)
     val onProfileClick: () -> Unit = {
-        // Handle the profile photo click event here
     }
+    val context = LocalContext.current
     val currentRoute =
         remember { mutableStateOf(navController.currentBackStackEntry?.destination?.route) }
-    Column {
+
+    Column{
         MyAppBar(
             navController = navController,
             context = LocalContext.current,
-            title = "Services",
+            title = "Payment",
             onSearch = { searchText ->
             },
             showSearchBar = false,
@@ -40,15 +44,19 @@ fun ServiceScreen(navController:NavHostController) {
             showSearchIcon = true,
             showNotificationIcon = true,
             currentRoute = currentRoute,
-            showArrow = false,
+            showArrow = true,
         )
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(if (isSystemInDarkTheme()) BackgroundColor else Color(0xfff9f9f9))
-
+                .background(if (isSystemInDarkTheme()) BackgroundColor else Color.White)
+                .padding(bottom = 40.dp),
         ) {
-            ServiceView(navController)
+            val window = rememberWindowSizeClass()
+            CapitaTheme(window) {
+                PaymentView(navController)
+            }
         }
     }
+
 }

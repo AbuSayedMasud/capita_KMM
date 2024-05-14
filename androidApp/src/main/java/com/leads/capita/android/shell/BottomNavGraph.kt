@@ -17,6 +17,7 @@ import com.leads.capita.android.portfolio.PortfolioScreen
 import com.leads.capita.android.profile.ProfileScreen
 import com.leads.capita.android.search.SearchScreen
 import com.leads.capita.android.service.ServiceScreen
+import com.leads.capita.android.service.payment.PaymentScreen
 import com.leads.capita.android.theme.themeactivity.ColorSelectionViewModel
 import com.leads.capita.android.trade.TradeScreen
 import com.leads.capita.android.transaction.TransactionScreen
@@ -61,7 +62,7 @@ fun BottomNavGraph(navController: NavHostController) {
         }
 
         composable(BottomBar.Service.route) {
-            ServiceScreen()
+            ServiceScreen(navController)
         }
         composable(BottomBar.Profile.route) {
             ProfileScreen(
@@ -77,6 +78,9 @@ fun BottomNavGraph(navController: NavHostController) {
         }
         composable("settings") {
             SettingsScreen()
+        }
+        composable("payment") {
+            PaymentScreen(navController)
         }
     }
 }

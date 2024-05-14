@@ -34,11 +34,8 @@ import com.leads.capita.android.theme.rememberWindowSizeClass
 import com.leads.capita.android.R
 import com.leads.capita.account.AccountBalance
 import com.leads.capita.android.customAlertDialog.CustomAlertDialog
-import com.leads.capita.payment.PaymentService
 import com.leads.capita.security.IdentityErrorResponse
-import com.leads.capita.security.IdentitySuccessResponse
 import com.leads.capita.service.account.AccountServiceImpl
-import com.leads.capita.service.deposit.DepositServiceImpl
 import com.leads.capita.service.payment.PaymentServiceImpl
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.contentOrNull
@@ -52,21 +49,21 @@ fun HomeBalanceView(navController: NavHostController) {
     val context = LocalContext.current
 
     var balance: AccountBalance? by remember { mutableStateOf(null) }
-    val dismissState = remember { mutableStateOf(true) }
+    var dismissState = remember { mutableStateOf(true) }
     var databaseDriverFactory = DatabaseDriverFactory(context)
 
     //*** payment api check
-    val paymentService = PaymentServiceImpl(databaseDriverFactory)
-    val payment = paymentService.getPaymentServices()
-    val paymentStatus = paymentService.getPaymentStatusServices()
-    Log.d("payment data", payment.toString())
-    Log.d("paymentStatus data", paymentStatus.toString())
+//    val paymentService = PaymentServiceImpl(databaseDriverFactory)
+//    val payment = paymentService.getPaymentServices()
+//    val paymentStatus = paymentService.getPaymentStatusServices()
+//    Log.d("payment data", payment.toString())
+//    Log.d("paymentStatus data", paymentStatus.toString())
     //**payment api check
     //*** deposit api check
-    val depositService = DepositServiceImpl(databaseDriverFactory)
-    val deposit = depositService.getDepositServices()
-    val depositStatus = paymentService.getPaymentStatusServices()
-    Log.d("deposit data", deposit.toString())
+//    val depositService = DepositServiceImpl(databaseDriverFactory)
+//    val deposit = depositService.getDepositServices()
+//    val depositStatus = paymentService.getPaymentStatusServices()
+//    Log.d("deposit data", deposit.toString())
 //    Log.d("depositStatus data", depositStatus.toString())
 //    val errors = Json.decodeFromString<IdentityErrorResponse>(deposit)
 //    if (dismissState.value) {

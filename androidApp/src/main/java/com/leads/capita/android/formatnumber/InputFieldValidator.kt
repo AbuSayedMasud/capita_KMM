@@ -3,6 +3,7 @@ package com.leads.capita.android.formatnumber
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import java.time.temporal.TemporalAmount
 
 object InputFieldValidator {
     /**
@@ -37,13 +38,17 @@ object InputFieldValidator {
         email: String,
         mobileNumber: String,
         accountCode: String?,
+        paymentType: String,
+        amount: String,
         password: String,
         confirmPassword: String,
         birthday: String?,
+        description: String,
         isForgetPasswordView: Boolean,
         isRegistrationView: Boolean,
         isBiometricRegistrationView: Boolean,
         isBiometricFingerprintRegistrationView: Boolean,
+        isPaymentView: Boolean
     ): Triple<Boolean, String, Pair<Boolean, Boolean>> {
         var isUsernameError = false
         var isFirstNameError = false
@@ -54,6 +59,9 @@ object InputFieldValidator {
         var isPasswordError = false
         var isConfirmPasswordError = false
         var isBirthdayError = false
+        var isPaymentTypeError = false
+        var isAmountError = false
+        var isDescriptionError = false
 
         if (username.isEmpty()) {
             isUsernameError = true
@@ -70,7 +78,15 @@ object InputFieldValidator {
         if (accountCode.isNullOrEmpty()) {
             isAccountCodeError = true
         }
-
+        if (paymentType.isNullOrEmpty()) {
+            isPaymentTypeError = true
+        }
+        if (amount.isNullOrEmpty()) {
+            isAmountError = true
+        }
+        if (description.isNullOrEmpty()) {
+            isDescriptionError = true
+        }
         val phoneRegex = Regex("^(013|014|015|016|017|018|019)\\d{8}$")
         if (!phoneRegex.matches(mobileNumber)) {
             isMobileNumberError = true
@@ -81,7 +97,8 @@ object InputFieldValidator {
             isEmailError = true
         }
 
-        val passwordRegex = Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@\$%^&*-_]).{8,}\$")
+        val passwordRegex =
+            Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@\$%^&*-_]).{8,}\$")
         if (!passwordRegex.matches(password)) {
             isPasswordError = true
         }
@@ -114,7 +131,7 @@ object InputFieldValidator {
         // Check for the "Success" condition
         if (!isUsernameError && !isFirstNameError && !isLastNameError && !isAccountCodeError &&
             !isMobileNumberError && !isEmailError && !isPasswordError && !isConfirmPasswordError &&
-            !isBirthdayError
+            !isBirthdayError && !isPaymentTypeError && !isAmountError && isDescriptionError
         ) {
             return Triple(true, "Success", Pair(isUsernameError, isPasswordError))
         }
@@ -130,11 +147,13 @@ object InputFieldValidator {
                         "Enter a valid date of birth"
                     }
                 }
+
                 isMobileNumberError -> "Enter valid phone number"
                 isEmailError -> "Enter valid email"
 
                 else -> "Your password is successfully changed. Please check your E-mail."
             }
+
             isRegistrationView -> when {
                 isUsernameError -> "Enter valid username"
                 isFirstNameError -> "Enter valid first name"
@@ -148,17 +167,28 @@ object InputFieldValidator {
 
                 else -> "Account has been successfully registered. Please check your E-mail."
             }
+
             isBiometricRegistrationView -> when {
                 isUsernameError -> "Enter valid username"
                 isPasswordError -> "Please enter a valid password that is eight characters long, and includes one uppercase letter, one lowercase letter, one number, and one special character"
 
                 else -> "Unknown error"
             }
+
             isBiometricRegistrationView -> when {
                 isUsernameError -> "Enter valid username"
                 isPasswordError -> "Please enter a valid password that is eight characters long, and includes one uppercase letter, one lowercase letter, one number, and one special character"
 
                 else -> "Unknown error"
+            }
+
+            isPaymentView -> when {
+                isAccountCodeError -> "Enter valid account code"
+                isPaymentTypeError -> "Enter valid payment type"
+                isAmountError -> "Enter your amount"
+                isDescriptionError -> "Enter your description"
+                else -> "Unknown error"
+
             }
 
             else -> "Unknown error"

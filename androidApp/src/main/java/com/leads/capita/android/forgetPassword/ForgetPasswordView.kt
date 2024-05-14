@@ -74,12 +74,15 @@ fun ForgetPasswordView(navController: NavHostController) {
         "",
         "",
         "",
+        "",
+        "",
         birthday,
-
+        "",
         isForgetPasswordView = true,
         isRegistrationView = false,
         isBiometricRegistrationView = false,
         isBiometricFingerprintRegistrationView = false,
+        isPaymentView = false,
     )
 
     var isUsernameError by remember { mutableStateOf(false) }

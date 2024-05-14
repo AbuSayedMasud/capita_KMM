@@ -1,6 +1,7 @@
 package com.leads.capita.android.service
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -21,13 +23,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.leads.capita.android.R
 import com.leads.capita.android.theme.getCardColors
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ServiceView() {
+fun ServiceView(navController: NavHostController) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
 
@@ -43,7 +48,7 @@ fun ServiceView() {
 
     val serviceItems = listOf(
         ServiceItem("Deposit", R.drawable.cheque, R.drawable.cheque2),
-        ServiceItem("Withdraw", R.drawable.stop_cheque, R.drawable.withdraw2),
+        ServiceItem("Payment", R.drawable.stop_cheque, R.drawable.withdraw2),
         ServiceItem("IPO", R.drawable.pay, R.drawable.ipo2),
         ServiceItem("Tax Certificate", R.drawable.certificate, R.drawable.certificate2),
         ServiceItem("Product Switch", R.drawable.pay_order, R.drawable.pay_order2),
@@ -62,6 +67,10 @@ fun ServiceView() {
                 elevation = if (isSystemInDarkTheme()) 8.dp else 2.dp,
                 shape = MaterialTheme.shapes.large,
                 backgroundColor = backgroundColor,
+                onClick = {
+                    navController.navigate(serviceItem.title.toLowerCase())
+                }
+
             ) {
                 Row(
                     modifier = Modifier
