@@ -1,6 +1,9 @@
 package com.leads.capita.android.service.deposit
 
+import android.net.Uri
 import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -11,8 +14,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -38,11 +43,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
@@ -53,6 +61,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
 import com.leads.capita.android.R
 import com.leads.capita.android.theme.Gray
 import com.leads.capita.android.theme.LightGray
@@ -184,6 +193,16 @@ fun DepositView(navController: NavHostController) {
             pickedDate = it
         }
     }
+    var imageUri by remember {
+        mutableStateOf<Uri?>(null)
+    }
+    val launcher = rememberLauncherForActivityResult(
+        contract =
+        ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        imageUri = uri
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -525,13 +544,28 @@ fun DepositView(navController: NavHostController) {
 
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Image(
-                    painter = painterResource(id = R.drawable.uploadpic),
-                    contentDescription = "upload",
-                    modifier = Modifier
-                        .size(100.dp)
-                        .padding(16.dp)
-                )
+                if (imageUri != null) {
+                    AsyncImage(
+                        model = imageUri,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .height(250.dp)
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp)),
+                        contentScale = ContentScale.FillBounds,
+                        filterQuality= FilterQuality.High
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(id = R.drawable.uploadpic),
+                        contentDescription = "upload",
+                        modifier = Modifier
+                            .size(100.dp)
+                            .padding(16.dp)
+                    )
+                }
+
                 Text(
                     text = "Let’s upload receipt",
                     color = contentColor,
@@ -548,11 +582,16 @@ fun DepositView(navController: NavHostController) {
                 )
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(bottom = 16.dp, top = 8.dp, start = 8.dp,end=8.dp)
+                    modifier = Modifier.padding(
+                        bottom = 16.dp,
+                        top = 8.dp,
+                        start = 8.dp,
+                        end = 8.dp
+                    )
                 ) {
                     Button(
                         onClick = {
-
+                            launcher.launch("image/*")
                         },
                         modifier = Modifier
                             .weight(1f)
@@ -588,6 +627,7 @@ fun DepositView(navController: NavHostController) {
                         ),
                         shape = RoundedCornerShape(20.dp),
                     ) {
+
                         Icon(
                             painter = painterResource(id = R.drawable.photo_camera_24px),
                             contentDescription = "camera"
