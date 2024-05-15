@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -65,27 +66,50 @@ fun PaymentView(navController: NavHostController) {
     val paymentOptions = listOf("Cash", "Cheque", "BFTN", "NPSB", "RTGS")
     var paymentExpanded by remember { mutableStateOf(false) }
     var paymentSelectedOptionText by remember { mutableStateOf("Select payment type") }
+    val bankNameOptions =
+        listOf("AB Bank", "Bangladesh Bank", "City Bank", "Citizen Bank", "FSIBL Bank")
+    var bankNameExpanded by remember { mutableStateOf(false) }
+    var bankNameSelectedOptionText by remember { mutableStateOf("Select Bank Name") }
+    val branchNameOptions =
+        listOf("Mirpur", "Motijheel", "Savar", "Baipail", "Chandra")
+    var branchNameExpanded by remember { mutableStateOf(false) }
+    var branchNameSelectedOptionText by remember { mutableStateOf("Select Branch Name") }
     var amount by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
-    var isAccountCodeError by remember { mutableStateOf(false) }
-    var isPaymentTypeError by remember { mutableStateOf(false) }
-    var isAmountError by remember { mutableStateOf(false) }
-    var isDescriptionError by remember { mutableStateOf(false) }
+    val isAccountCodeError by remember { mutableStateOf(false) }
+    val isPaymentTypeError by remember { mutableStateOf(false) }
+    val isBankNameError by remember { mutableStateOf(false) }
+    val isBranchNameError by remember { mutableStateOf(false) }
+    val isAmountError by remember { mutableStateOf(false) }
+    val isDescriptionError by remember { mutableStateOf(false) }
 
     val placeholderTextColor = if (isSystemInDarkTheme()) Color(0x83F1F3F4) else Color.DarkGray
-    var showDialog = remember { mutableStateOf(false) }
+    val showDialog = remember { mutableStateOf(false) }
     var optionData: String = ""
     var optionPaymentData: String = ""
-    if (selectedOptionText == "Select account code") {
-        optionData = ""
+    var optionBankData: String = ""
+    var optionBranchData: String = ""
+    optionData = if (selectedOptionText == "Select account code") {
+        ""
     } else {
-        optionData = selectedOptionText
+        selectedOptionText
     }
-    if (paymentSelectedOptionText == "Select payment type") {
-        optionPaymentData = ""
+    optionPaymentData = if (paymentSelectedOptionText == "Select payment type") {
+        ""
     } else {
-        optionPaymentData = paymentSelectedOptionText
+        paymentSelectedOptionText
     }
+    optionBankData = if (bankNameSelectedOptionText == "Select Bank Name") {
+        ""
+    } else {
+        paymentSelectedOptionText
+    }
+    optionBranchData = if (branchNameSelectedOptionText == "Select Branch Name") {
+        ""
+    } else {
+        paymentSelectedOptionText
+    }
+    var isBankAndBranchName by remember { mutableStateOf(false) }
     val (isValidationSuccess, errorMessage) = validateFields(
         "",
         "",
@@ -94,12 +118,15 @@ fun PaymentView(navController: NavHostController) {
         "",
         optionData,
         optionPaymentData,
+        optionBankData,
+        optionBranchData,
         amount,
         "",
         "",
         "",
         description,
         isForgetPasswordView = false,
+        isBankAndBranchVisible = isBankAndBranchName,
         isRegistrationView = false,
         isBiometricRegistrationView = false,
         isBiometricFingerprintRegistrationView = false,
@@ -111,12 +138,9 @@ fun PaymentView(navController: NavHostController) {
             .padding(top = 16.dp, start = 32.dp, end = 32.dp, bottom = 0.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = {
-                expanded = !expanded
-            }
-        ) {
+        ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = {
+            expanded = !expanded
+        }) {
             TextField(
                 readOnly = true,
                 value = selectedOptionText,
@@ -145,29 +169,23 @@ fun PaymentView(navController: NavHostController) {
                 modifier = Modifier.fillMaxWidth(),
             )
             ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = {
+                expanded = expanded, onDismissRequest = {
                     expanded = false
                 }, Modifier.background(backgroundColor)
             ) {
                 options.forEach { selectionOption ->
-                    DropdownMenuItem(
-                        onClick = {
-                            selectedOptionText = selectionOption
-                            expanded = false
-                        }
-                    ) {
+                    DropdownMenuItem(onClick = {
+                        selectedOptionText = selectionOption
+                        expanded = false
+                    }) {
                         Text(text = selectionOption)
                     }
                 }
             }
         }
-        ExposedDropdownMenuBox(
-            expanded = paymentExpanded,
-            onExpandedChange = {
-                paymentExpanded = !paymentExpanded
-            }
-        ) {
+        ExposedDropdownMenuBox(expanded = paymentExpanded, onExpandedChange = {
+            paymentExpanded = !paymentExpanded
+        }) {
             TextField(
                 readOnly = true,
                 value = paymentSelectedOptionText,
@@ -196,19 +214,111 @@ fun PaymentView(navController: NavHostController) {
                 modifier = Modifier.fillMaxWidth(),
             )
             ExposedDropdownMenu(
-                expanded = paymentExpanded,
-                onDismissRequest = {
+                expanded = paymentExpanded, onDismissRequest = {
                     paymentExpanded = false
                 }, Modifier.background(backgroundColor)
             ) {
                 paymentOptions.forEach { selectionOption ->
-                    DropdownMenuItem(
-                        onClick = {
-                            paymentSelectedOptionText = selectionOption
-                            paymentExpanded = false
-                        }
-                    ) {
+                    DropdownMenuItem(onClick = {
+                        paymentSelectedOptionText = selectionOption
+                        paymentExpanded = false
+                    }) {
                         Text(text = selectionOption)
+                    }
+                }
+            }
+        }
+        if (paymentSelectedOptionText == "NPSB" || paymentSelectedOptionText == "BFTN" || paymentSelectedOptionText == "RTGS") {
+            isBankAndBranchName = true
+            ExposedDropdownMenuBox(expanded = bankNameExpanded, onExpandedChange = {
+                bankNameExpanded = !bankNameExpanded
+            }) {
+                TextField(
+                    readOnly = true,
+                    value = bankNameSelectedOptionText,
+                    onValueChange = {
+                    },
+                    label = { Text(text = "Bank Name") },
+                    trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(
+                            expanded = bankNameExpanded
+                        )
+                    },
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Ascii,
+                    ),
+                    singleLine = true,
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        textColor = contentColor,
+                        unfocusedLabelColor = contentColor,
+                        focusedLabelColor = if (isBankNameError) Color.Red else contentColor,
+                        unfocusedBorderColor = if (isBankNameError) Color.Red else contentColor,
+                        focusedBorderColor = contentColor,
+                        cursorColor = contentColor,
+                        leadingIconColor = contentColor,
+                        placeholderColor = placeholderTextColor,
+
+                        ),
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                ExposedDropdownMenu(
+                    expanded = bankNameExpanded, onDismissRequest = {
+                        bankNameExpanded = false
+                    }, Modifier.background(backgroundColor)
+                ) {
+                    bankNameOptions.forEach { selectionOption ->
+                        DropdownMenuItem(onClick = {
+                            bankNameSelectedOptionText = selectionOption
+                            bankNameExpanded = false
+                        }) {
+                            Text(text = selectionOption)
+                        }
+                    }
+                }
+            }
+            ExposedDropdownMenuBox(expanded = branchNameExpanded, onExpandedChange = {
+                branchNameExpanded = !branchNameExpanded
+            }) {
+                TextField(
+                    readOnly = true,
+                    value = branchNameSelectedOptionText,
+                    onValueChange = {
+                    },
+                    label = { Text(text = "Bank Name") },
+                    trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(
+                            expanded = bankNameExpanded
+                        )
+                    },
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Ascii,
+                    ),
+                    singleLine = true,
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        textColor = contentColor,
+                        unfocusedLabelColor = contentColor,
+                        focusedLabelColor = if (isBranchNameError) Color.Red else contentColor,
+                        unfocusedBorderColor = if (isBranchNameError) Color.Red else contentColor,
+                        focusedBorderColor = contentColor,
+                        cursorColor = contentColor,
+                        leadingIconColor = contentColor,
+                        placeholderColor = placeholderTextColor,
+
+                        ),
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                ExposedDropdownMenu(
+                    expanded = branchNameExpanded, onDismissRequest = {
+                        bankNameExpanded = false
+                    }, Modifier.background(backgroundColor)
+                ) {
+                    branchNameOptions.forEach { selectionOption ->
+                        DropdownMenuItem(onClick = {
+                            branchNameSelectedOptionText = selectionOption
+                            branchNameExpanded = false
+                        }) {
+                            Text(text = selectionOption)
+                        }
                     }
                 }
             }
@@ -223,7 +333,7 @@ fun PaymentView(navController: NavHostController) {
             placeholder = { Text("Enter amount", color = contentColor) },
             label = { Text("Amount", color = contentColor) },
             keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Ascii,
+                keyboardType = KeyboardType.Number,
             ),
             singleLine = true,
             colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -296,3 +406,4 @@ fun PaymentView(navController: NavHostController) {
         CustomAlertDialog(message = errorMessage, isSuccess = false, dismissState = showDialog)
     }
 }
+
