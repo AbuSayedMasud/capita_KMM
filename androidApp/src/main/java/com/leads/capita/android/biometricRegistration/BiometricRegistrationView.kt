@@ -102,12 +102,15 @@ fun BiometricRegistrationView(navController: NavHostController) {
         "",
         "",
         "",
+        "",
+        "",
         password,
         "",
         "",
         "",
 
         isForgetPasswordView = false,
+        isBankAndBranchVisible = false,
         isRegistrationView = false,
         isBiometricRegistrationView = true,
         isBiometricFingerprintRegistrationView = false,
@@ -328,7 +331,7 @@ fun BiometricRegistrationView(navController: NavHostController) {
                         shape = RoundedCornerShape(20.dp),
                         enabled = enableButtonEnabled,
 
-                    ) {
+                        ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.SpaceBetween,
@@ -420,6 +423,7 @@ fun BiometricRegistrationView(navController: NavHostController) {
     }
 
 }
+
 fun showToast(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }

@@ -1,5 +1,6 @@
 package com.leads.capita.android.formatnumber
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -39,12 +40,15 @@ object InputFieldValidator {
         mobileNumber: String,
         accountCode: String?,
         paymentType: String,
+        bankName: String,
+        branchName: String,
         amount: String,
         password: String,
         confirmPassword: String,
         birthday: String?,
         description: String,
         isForgetPasswordView: Boolean,
+        isBankAndBranchVisible: Boolean,
         isRegistrationView: Boolean,
         isBiometricRegistrationView: Boolean,
         isBiometricFingerprintRegistrationView: Boolean,
@@ -60,6 +64,8 @@ object InputFieldValidator {
         var isConfirmPasswordError = false
         var isBirthdayError = false
         var isPaymentTypeError = false
+        var isBankNameError = false
+        var isBranchNameError = false
         var isAmountError = false
         var isDescriptionError = false
 
@@ -78,13 +84,19 @@ object InputFieldValidator {
         if (accountCode.isNullOrEmpty()) {
             isAccountCodeError = true
         }
-        if (paymentType.isNullOrEmpty()) {
+        if (paymentType.isEmpty()) {
             isPaymentTypeError = true
         }
-        if (amount.isNullOrEmpty()) {
+        if (bankName.isEmpty()) {
+            isBankNameError = true
+        }
+        if (branchName.isEmpty()) {
+            isBranchNameError = true
+        }
+        if (amount.isEmpty()) {
             isAmountError = true
         }
-        if (description.isNullOrEmpty()) {
+        if (description.isEmpty()) {
             isDescriptionError = true
         }
         val phoneRegex = Regex("^(013|014|015|016|017|018|019)\\d{8}$")
@@ -127,12 +139,26 @@ object InputFieldValidator {
                 }
             }
         }
-
+        Log.d("value check", (!isUsernameError && !isFirstNameError && !isLastNameError && !isAccountCodeError && !isPaymentTypeError && !isBankNameError && !isBranchNameError
+                && !isMobileNumberError && !isEmailError && !isPasswordError && !isConfirmPasswordError &&
+                !isBirthdayError && !isAmountError && !isDescriptionError).toString()
+        )
         // Check for the "Success" condition
-        if (!isUsernameError && !isFirstNameError && !isLastNameError && !isAccountCodeError &&
-            !isMobileNumberError && !isEmailError && !isPasswordError && !isConfirmPasswordError &&
-            !isBirthdayError && !isPaymentTypeError && !isAmountError && isDescriptionError
+        if (isBankAndBranchVisible){
+            if (isAccountCodeError==false && isPaymentTypeError==false && isBankNameError==false && isBranchNameError==false && isAmountError==false && isDescriptionError==false){
+                return Triple(true, "Success", Pair(isUsernameError, isPasswordError))
+            }
+        } else if(isPaymentView){
+            if (isAccountCodeError==false && isPaymentTypeError==false && isAmountError==false && isDescriptionError==false){
+                return Triple(true, "Success", Pair(isUsernameError, isPasswordError))
+            }
+        }
+        if (!isUsernameError && !isFirstNameError && !isLastNameError && !isAccountCodeError && !isPaymentTypeError && !isBankNameError && !isBranchNameError
+            && !isMobileNumberError && !isEmailError && !isPasswordError && !isConfirmPasswordError &&
+            !isBirthdayError && !isAmountError && !isDescriptionError
+
         ) {
+
             return Triple(true, "Success", Pair(isUsernameError, isPasswordError))
         }
 
@@ -182,13 +208,22 @@ object InputFieldValidator {
                 else -> "Unknown error"
             }
 
-            isPaymentView -> when {
+            isBankAndBranchVisible && isPaymentView -> when {
+                isAccountCodeError -> "Enter valid account code"
+                isPaymentTypeError -> "Enter valid payment type"
+                isBankNameError -> "Enter Your Bank Name"
+                isBranchNameError -> "Enter Your Branch Name"
+                isAmountError -> "Enter your amount"
+                isDescriptionError -> "Enter your description"
+                else -> "Unknown error"
+            }
+
+            !isBankAndBranchVisible && isPaymentView -> when {
                 isAccountCodeError -> "Enter valid account code"
                 isPaymentTypeError -> "Enter valid payment type"
                 isAmountError -> "Enter your amount"
                 isDescriptionError -> "Enter your description"
                 else -> "Unknown error"
-
             }
 
             else -> "Unknown error"
