@@ -222,7 +222,6 @@ struct LoginView: View {
                     label: EmptyView.init
                 )
             )
-            
         }
         .topSafeAreaColor()
     }

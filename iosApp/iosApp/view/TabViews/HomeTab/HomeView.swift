@@ -28,11 +28,12 @@ struct shantaHomeView: View {
     //          self.viewModel = viewModel
     //      }
     
-    @ObservedObject var viewModel: AccountBalanceViewModel
+    @ObservedObject var AccountBalnceViewModel: AccountBalanceViewModel
+    @ObservedObject var instrumentViewModel = InstrumentViewModel()
     
     init() {
         
-        self.viewModel = AccountBalanceViewModel()
+        self.AccountBalnceViewModel = AccountBalanceViewModel()
     }
     // Define arrays for news titles, details, and dates
     let newsTitles = ["ABBANK: Weekly NAV", "ACI: Dividend Disbursement"]
@@ -70,28 +71,28 @@ struct shantaHomeView: View {
                             //.fontWeight(.medium)
                             
                             Spacer()
-
-                            Text(String(viewModel.cashBalance))
+                            
+                            Text(String(AccountBalnceViewModel.cashBalance))
                         }
                         ColoredDivider(color: dividerColor, height: 1)
                         
                         HStack {
                             Text("Current Balance")
                             Spacer()
-                            Text(String(viewModel.currentBalance))
+                            Text(String(AccountBalnceViewModel.currentBalance))
                         }
                         ColoredDivider(color: dividerColor, height: 1)
                         HStack {
                             Text("Equtity")
                             Spacer()
-                            Text(String(viewModel.equity))
+                            Text(String(AccountBalnceViewModel.equity))
                         }
                         
                         ColoredDivider(color: dividerColor, height: 1)
                         HStack {
                             Text("Purchase Power")
                             Spacer()
-                            Text(String(viewModel.buyingPower))
+                            Text(String(AccountBalnceViewModel.buyingPower))
                         }
                     }
                     .padding()
@@ -132,7 +133,14 @@ struct shantaHomeView: View {
                             
                             Spacer()
                             VStack{
-                                Text("500.00")
+                                //Text(instrumentViewModel.accountInstrument as! DateInterval)
+                                if let instrumentsList = instrumentViewModel.instrumentsList {
+                                    let numberOfInstruments = instrumentsList.instruments.count
+                                    Text("Number of instruments: \(numberOfInstruments)")
+                                } else {
+                                    Text("No instruments found")
+                                }
+
                                 Text("800.00")
                                     .font(.caption)
                                     .foregroundColor(.gray)
