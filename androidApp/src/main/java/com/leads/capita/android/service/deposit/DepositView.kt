@@ -187,7 +187,7 @@ fun DepositView(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 16.dp, start = 32.dp, end = 32.dp, bottom = 0.dp),
+            .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 0.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = {
