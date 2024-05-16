@@ -68,7 +68,11 @@ fun ServiceView(navController: NavHostController) {
                 shape = MaterialTheme.shapes.large,
                 backgroundColor = backgroundColor,
                 onClick = {
-                    navController.navigate(serviceItem.title.toLowerCase())
+                    if (serviceItem.title == "Deposit") {
+                        navController.navigate("depositStatus")
+                    } else {
+                        navController.navigate(serviceItem.title.toLowerCase())
+                    }
                 }
 
             ) {
@@ -97,7 +101,10 @@ fun ServiceView(navController: NavHostController) {
                     }
                     Text(
                         text = serviceItem.title,
-                        style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.Bold, color = contentColor),
+                        style = MaterialTheme.typography.body1.copy(
+                            fontWeight = FontWeight.Bold,
+                            color = contentColor
+                        ),
                     )
                 }
             }

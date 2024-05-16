@@ -1,5 +1,7 @@
 package com.leads.capita.android.shell
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,12 +20,14 @@ import com.leads.capita.android.profile.ProfileScreen
 import com.leads.capita.android.search.SearchScreen
 import com.leads.capita.android.service.ServiceScreen
 import com.leads.capita.android.service.deposit.DepositScreen
+import com.leads.capita.android.service.deposit.DepositStatusScreen
 import com.leads.capita.android.service.payment.PaymentScreen
 import com.leads.capita.android.theme.themeactivity.ColorSelectionViewModel
 import com.leads.capita.android.trade.TradeScreen
 import com.leads.capita.android.transaction.TransactionScreen
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun BottomNavGraph(navController: NavHostController) {
     val profilePhoto: Painter = painterResource(id = R.drawable.profile_photo)
@@ -85,6 +89,9 @@ fun BottomNavGraph(navController: NavHostController) {
         }
         composable("deposit") {
             DepositScreen(navController)
+        }
+        composable("depositStatus") {
+            DepositStatusScreen(navController)
         }
     }
 }
