@@ -52,7 +52,7 @@ struct shantaHomeView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     VStack {
-                        NavigationLink(destination: password_recovery()) {
+                        NavigationLink(destination: Protfolio_statement(defaultSelectedTabIndex: 1)) {
                             HStack{
                                 Text("Balance")
                                     .foregroundColor(Color.black)
@@ -105,7 +105,7 @@ struct shantaHomeView: View {
                     .shadow(radius: 5) // Add shadow here
                     
                     VStack {
-                        NavigationLink(destination: password_recovery()) {
+                        NavigationLink(destination: Protfolio_statement(defaultSelectedTabIndex: 0)) {
                             HStack{
                                 Text("Position")
                                     .foregroundColor(Color.black)
@@ -184,7 +184,7 @@ struct shantaHomeView: View {
                     .shadow(radius: 5) // Add shadow here
                     
                     VStack {//3rd vstack
-                        NavigationLink(destination: password_recovery()) {
+                        NavigationLink(destination: Protfolio_statement(defaultSelectedTabIndex: 2)) {
                             HStack{
                                 Text("Receivable")
                                     .foregroundColor(Color.black)
@@ -262,7 +262,7 @@ struct shantaHomeView: View {
                     .shadow(radius: 5)
                     
                     VStack {
-                        NavigationLink(destination: password_recovery()) {
+                        NavigationLink(destination: Ledger_Statement()) {
                             HStack{
                                 Text("Transaction")
                                     .foregroundColor(Color.black)
@@ -358,7 +358,7 @@ struct shantaHomeView: View {
                     
                     // News Section
                     VStack {
-                        NavigationLink(destination: password_recovery()) {
+                        NavigationLink(destination: marketView(defaultSelectedTabIndex: 4)) {
                             HStack{
                                 Text("News")
                                     .foregroundColor(Color.black)

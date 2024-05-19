@@ -9,8 +9,14 @@
 import SwiftUI
 
 struct marketView: View {
-    @State private var selectedTabIndex = 0
+    //@State private var selectedTabIndex = 0
+    @State private var selectedTabIndex: Int
     let names = ["Overview", "Indices", "Stocks", "Watchlist", "News"]
+    
+    // Initializer to set the default selected tab index
+      init(defaultSelectedTabIndex: Int = 0) {
+          _selectedTabIndex = State(initialValue: defaultSelectedTabIndex)
+      }
     
     var body: some View {
         NavigationView {

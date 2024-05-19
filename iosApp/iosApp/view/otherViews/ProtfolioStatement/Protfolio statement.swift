@@ -1,9 +1,14 @@
 import SwiftUI
 
 struct Protfolio_statement: View {
-    @State private var selectedTabIndex = 0
+    //@State private var selectedTabIndex = 0
+    @State private var selectedTabIndex: Int
     let names = ["Position", "Balance", "Receivable"]
     
+    // Initializer to set the default selected tab index
+     init(defaultSelectedTabIndex: Int = 0) {
+         _selectedTabIndex = State(initialValue: defaultSelectedTabIndex)
+     }
     var body: some View {
         VStack {
             ScrollView(.horizontal, showsIndicators: false) {

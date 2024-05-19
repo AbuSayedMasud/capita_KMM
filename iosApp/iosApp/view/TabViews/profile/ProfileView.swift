@@ -50,7 +50,7 @@ struct ProfileView: View {
                             SimpleTitleRow(title: "Portfolio Statement")
                         }
                         
-                        NavigationLink(destination: marketView()) {
+                        NavigationLink(destination: Ledger_Statement()) {
                             SimpleTitleRow(title: "Ledger Statement")
                         }
                         
