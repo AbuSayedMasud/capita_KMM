@@ -12,33 +12,33 @@ struct shantaHomeView: View {
     @ObservedObject var AccountBalnceViewModel: AccountBalanceViewModel
     @ObservedObject var instrumentViewModel = InstrumentViewModel()
     
-     init() {
-     // Customize navigation bar appearance
-     let appearance = UINavigationBarAppearance()
-     appearance.configureWithOpaqueBackground()
-     let color = UIColor(red: 0.592156862745098, green: 0.5490196078431373, blue: 0.12941176470588237, alpha: 1.0)
-     appearance.backgroundColor = color
-     
-     
-     UINavigationBar.appearance().standardAppearance = appearance
-     UINavigationBar.appearance().scrollEdgeAppearance = appearance
-         
-         self.AccountBalnceViewModel = AccountBalanceViewModel()
-     }
-     
+    init() {
+        // Customize navigation bar appearance
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        let color = UIColor(red: 0.592156862745098, green: 0.5490196078431373, blue: 0.12941176470588237, alpha: 1.0)
+        appearance.backgroundColor = color
+        
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        
+        self.AccountBalnceViewModel = AccountBalanceViewModel()
+    }
+    
     //@ObservedObject private var viewModel: ContentViewModel//AccountBalanceViewModel
     //
     //      init(viewModel: ContentViewModel) {
     //          self.viewModel = viewModel
     //      }
     
-
     
-//    init() {
-//        
-//        self.AccountBalnceViewModel = AccountBalanceViewModel()
-//    }
-//
+    
+    //    init() {
+    //
+    //        self.AccountBalnceViewModel = AccountBalanceViewModel()
+    //    }
+    //
     // Define arrays for news titles, details, and dates
     let newsTitles = ["ABBANK: Weekly NAV", "ACI: Dividend Disbursement"]
     let newsDetails = [
@@ -144,7 +144,7 @@ struct shantaHomeView: View {
                                 } else {
                                     Text("No instruments found")
                                 }
-
+                                
                                 Text("800.00")
                                     .font(.caption)
                                     .foregroundColor(.gray)
