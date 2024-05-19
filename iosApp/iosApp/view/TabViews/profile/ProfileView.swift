@@ -4,7 +4,8 @@ import shared
 struct ProfileView: View {
     
     @State private var isModeUp = true // Initial mode is "Up"
-    @State private var isPopoverPresented = false // State to manage popover presentation
+    @State private var isPopoverPresented = false // State to manage popover
+    @State private var showAlert = false // State to manage alert presentation
     //let popupTitles = ["F111", "F222", "F333"]
     
     
@@ -33,7 +34,7 @@ struct ProfileView: View {
                         // 5 Different Rows with Titles
                         //TitleRow(title: "Balances")
                         TitleRow(title: "Balances", balanceViewModel: AccountBalanceViewModel())
-
+                        
                             .onTapGesture {
                                 // Show description for Row 1
                                 print("Description for Row 1")
@@ -54,7 +55,8 @@ struct ProfileView: View {
                         }
                         
                         // Logout Row
-                        LogoutRow()
+                        //LogoutRow()
+                        LogoutRow(showAlert: $showAlert)
                         // Spacer to push content to the top
                         Spacer()
                     }
@@ -104,7 +106,25 @@ struct ProfileView: View {
                 }
             }
         }
+        .alert(isPresented: $showAlert) {
+                   Alert(
+                       title: Text("Logout"),
+                       message: Text("Are you sure you want to logout?"),
+                       primaryButton: .default(Text("Cancel")),
+                       secondaryButton: .destructive(Text("Logout")) {
+                           // Handle logout action here
+                           print("User logged out")
+                           navigateToLogin()
+                       }
+                   )
+               }
     }
+    private func navigateToLogin() {
+         if let window = UIApplication.shared.windows.first {
+             window.rootViewController = UIHostingController(rootView: LoginView())
+             window.makeKeyAndVisible()
+         }
+     }
 }
 
 struct UserProfileRow: View {
@@ -181,9 +201,9 @@ struct TitleRow: View {
     @State private var isExpanded: Bool = false
     @ObservedObject var balanceViewModel: AccountBalanceViewModel
     
-//    init(){
-//        self.balanceViewModel = AccountBalanceViewModel()
-//    }
+    //    init(){
+    //        self.balanceViewModel = AccountBalanceViewModel()
+    //    }
     init(title: String, balanceViewModel: AccountBalanceViewModel) {
         self.title = title
         self.balanceViewModel = balanceViewModel
@@ -280,6 +300,7 @@ struct SimpleTitleRow: View {
     }
 }
 struct LogoutRow: View {
+    @Binding var showAlert: Bool
     var body: some View {
         HStack {
             Text("Logout")
@@ -293,6 +314,9 @@ struct LogoutRow: View {
         .cornerRadius(10)
         .padding(.bottom, 20)
         .shadow(radius: 5)
+        .onTapGesture {
+                    self.showAlert = true
+                }
     }
 }
 

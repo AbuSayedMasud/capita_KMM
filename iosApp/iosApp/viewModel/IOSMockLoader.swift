@@ -32,6 +32,11 @@ class IOSMockLoader {
         }
         
         // Add similar code for other data types if needed
+         if let instrumentsJSON = loadJSON(fileName: "instrument") {
+             //parseAndLoadinstruments(jsonString: instrumentsJSON)
+         } else {
+             print("Failed to load other entity JSON file.")
+         }
     }
     
     // Function to load JSON from file
@@ -107,4 +112,7 @@ class IOSMockLoader {
             print("Error decoding JSON: \(error)")
         }
     }
+    
+  
+
 }

@@ -9,7 +9,9 @@
 import SwiftUI
 
 struct shantaHomeView: View {
-    /*
+    @ObservedObject var AccountBalnceViewModel: AccountBalanceViewModel
+    @ObservedObject var instrumentViewModel = InstrumentViewModel()
+    
      init() {
      // Customize navigation bar appearance
      let appearance = UINavigationBarAppearance()
@@ -20,21 +22,23 @@ struct shantaHomeView: View {
      
      UINavigationBar.appearance().standardAppearance = appearance
      UINavigationBar.appearance().scrollEdgeAppearance = appearance
+         
+         self.AccountBalnceViewModel = AccountBalanceViewModel()
      }
-     */
+     
     //@ObservedObject private var viewModel: ContentViewModel//AccountBalanceViewModel
     //
     //      init(viewModel: ContentViewModel) {
     //          self.viewModel = viewModel
     //      }
     
-    @ObservedObject var AccountBalnceViewModel: AccountBalanceViewModel
-    @ObservedObject var instrumentViewModel = InstrumentViewModel()
+
     
-    init() {
-        
-        self.AccountBalnceViewModel = AccountBalanceViewModel()
-    }
+//    init() {
+//        
+//        self.AccountBalnceViewModel = AccountBalanceViewModel()
+//    }
+//
     // Define arrays for news titles, details, and dates
     let newsTitles = ["ABBANK: Weekly NAV", "ACI: Dividend Disbursement"]
     let newsDetails = [
