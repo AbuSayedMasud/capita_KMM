@@ -10,7 +10,7 @@ import SwiftUI
 
 struct shantaHomeView: View {
     @ObservedObject var AccountBalnceViewModel: AccountBalanceViewModel
-    @ObservedObject var instrumentViewModel = InstrumentViewModel()
+    @ObservedObject var instrumentViewModel: InstrumentViewModel
     
     init() {
         // Customize navigation bar appearance
@@ -24,6 +24,7 @@ struct shantaHomeView: View {
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         
         self.AccountBalnceViewModel = AccountBalanceViewModel()
+        self.instrumentViewModel = InstrumentViewModel()
     }
     
     //@ObservedObject private var viewModel: ContentViewModel//AccountBalanceViewModel
@@ -123,65 +124,56 @@ struct shantaHomeView: View {
                             .background(Color(red: 0.929, green: 0.929, blue: 0.929))
                             .padding(.horizontal, -20)
                         
-                        HStack {
-                            VStack{
-                                Text("ACI")
-                                Text("Market Price")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                                Text("Average Price")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                                
-                            }
-                            
-                            Spacer()
-                            VStack{
-                                //Text(instrumentViewModel.accountInstrument as! DateInterval)
-                                if let instrumentsList = instrumentViewModel.instrumentsList {
-                                    let numberOfInstruments = instrumentsList.instruments.count
-                                    Text("Number of instruments: \(numberOfInstruments)")
-                                } else {
-                                    Text("No instruments found")
+                        
+                        ForEach(instrumentViewModel.instrumentsList.indices.prefix(2), id: \.self) { index in
+                            let instrument = instrumentViewModel.instrumentsList[index]
+                            if let symbole = instrument["symbole"] as? String,
+                                   let marketPrice = instrument["marketPrice"] as? Double,
+                               let costPrice = instrument["costPrice"] as? Double {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        if let symbole = instrument["symbole"] as? String {
+                                            Text(symbole)
+                                        }
+                                        
+                                        Text("Market Price")
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                        
+                                        
+                                        Text("Cost Price")
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                        
+                                    }
+                                    Spacer()
+                                    VStack(alignment: .trailing) {
+                                        Text("")
+                                        Text(String(format: "%.2f", marketPrice))
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                        
+                                        Text(String(format: "%.2f", costPrice))
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                    }
+                                }
+                                // Show the divider after the first instrument
+                                if index == 0 {
+                                    ColoredDivider(color: dividerColor, height: 1)
                                 }
                                 
-                                Text("800.00")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                                Text("800.00")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
                             }
-                        }
-                        ColoredDivider(color: dividerColor, height: 1)
-                        HStack {
-                            VStack{
-                                Text("ACME")
-                                Text("Market Price")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                                Text("Average Price")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                            }
-                            
-                            Spacer()
-                            VStack{
-                                Text("500.00")
-                                Text("800.00")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                                Text("800.00")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                            }
+                            //ColoredDivider(color: dividerColor, height: 1)
                         }
                         
                     }
+                    
                     .padding()
                     .background(Color.white)
                     .cornerRadius(10)
-                    .shadow(radius: 5) // Add shadow here
+                    .shadow(radius: 5)
+                    
                     
                     VStack {//3rd vstack
                         NavigationLink(destination: Protfolio_statement(defaultSelectedTabIndex: 2)) {
@@ -432,8 +424,6 @@ struct shantaHomeView: View {
                         Image(uiImage: UIImage(named: "alarm_nav_button")!)
                     }
             )
-            
-            
         }//navigationview
         
     }
