@@ -11,6 +11,7 @@ struct ProfileView: View {
     
     @ObservedObject private var profileVModel: ProfileViewModel
     
+    private var instrumentViewModel = InstrumentViewModel()
     
     //    init(viewModel: ProfileViewModel) {
     //        self.viewModel = viewModel
@@ -32,17 +33,28 @@ struct ProfileView: View {
                         UserProfileRow(image: "person.crop.circle.fill", userName: profileVModel.userName, accountCode: profileVModel.accountCodes, boId: profileVModel.boId, isModeUp: $isModeUp, isPopoverPresented: $isPopoverPresented)
                         
                         // 5 Different Rows with Titles
-                        //TitleRow(title: "Balances")
-                        TitleRow(title: "Balances", balanceViewModel: AccountBalanceViewModel())
-                        
+                        //                        //TitleRow(title: "Balances")
+                        //                        TitleRow(title: "Balances", ViewModel: AccountBalanceViewModel())
+                        //
+                        //                            .onTapGesture {
+                        //                                // Show description for Row 1
+                        //                                print("Description for Row 1")
+                        //                            }
+                        //
+                        //                        TitleRow(title: "Position", ViewModel: AccountBalanceViewModel(), positionViewModel: InstrumentViewModel)
+                        //                            .onTapGesture {
+                        //                                // Show description for Row 2
+                        //                                print("Description for Row 2")
+                        //                            }
+                        // Balances Row
+                        BalanceTitleRow(title: "Balances", balanceViewModel: AccountBalanceViewModel())
                             .onTapGesture {
-                                // Show description for Row 1
                                 print("Description for Row 1")
                             }
                         
-                        TitleRow(title: "Position", balanceViewModel: AccountBalanceViewModel())
+                        // Position Row
+                        PositionTitleRow(title: "Position", positionViewModel: instrumentViewModel)
                             .onTapGesture {
-                                // Show description for Row 2
                                 print("Description for Row 2")
                             }
                         
@@ -107,24 +119,24 @@ struct ProfileView: View {
             }
         }
         .alert(isPresented: $showAlert) {
-                   Alert(
-                       title: Text("Logout"),
-                       message: Text("Are you sure you want to logout?"),
-                       primaryButton: .default(Text("Cancel")),
-                       secondaryButton: .destructive(Text("Logout")) {
-                           // Handle logout action here
-                           print("User logged out")
-                           navigateToLogin()
-                       }
-                   )
-               }
+            Alert(
+                title: Text("Logout"),
+                message: Text("Are you sure you want to logout?"),
+                primaryButton: .default(Text("Cancel")),
+                secondaryButton: .destructive(Text("Logout")) {
+                    // Handle logout action here
+                    print("User logged out")
+                    navigateToLogin()
+                }
+            )
+        }
     }
     private func navigateToLogin() {
-         if let window = UIApplication.shared.windows.first {
-             window.rootViewController = UIHostingController(rootView: LoginView())
-             window.makeKeyAndVisible()
-         }
-     }
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = UIHostingController(rootView: LoginView())
+            window.makeKeyAndVisible()
+        }
+    }
 }
 
 struct UserProfileRow: View {
@@ -193,22 +205,17 @@ struct UserProfileRow: View {
         .padding(.top, 20)
     }
 }
-
-struct TitleRow: View {
+struct BalanceTitleRow: View {
     
     var title: String
     
     @State private var isExpanded: Bool = false
     @ObservedObject var balanceViewModel: AccountBalanceViewModel
     
-    //    init(){
-    //        self.balanceViewModel = AccountBalanceViewModel()
-    //    }
     init(title: String, balanceViewModel: AccountBalanceViewModel) {
         self.title = title
         self.balanceViewModel = balanceViewModel
     }
-    
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -230,19 +237,69 @@ struct TitleRow: View {
                 
                 // Additional rows with data
                 VStack(alignment: .leading, spacing: 10) {
-                    if title == "Balances" {
-                        additionalBalanceRow(title: "Available Balance", value: String(balanceViewModel.cashBalance))
-                        additionalBalanceRow(title: "Current Balance", value: String(balanceViewModel.currentBalance))
-                        additionalBalanceRow(title: "Equity", value: String(balanceViewModel.equity))
-                        additionalBalanceRow(title: "Purchase Power", value: String(balanceViewModel.buyingPower))
-                    } else if title == "Position" {
-                        additionalPositionRow(name: "ACI", marketPrice: "500.00", averagePrice: "500.00")
-                        additionalPositionRow(name: "ACME", marketPrice: "500.00", averagePrice: "500.00")
-                    }
+                    additionalBalanceRow(title: "Available Balance", value: String(balanceViewModel.cashBalance))
+                    additionalBalanceRow(title: "Current Balance", value: String(balanceViewModel.currentBalance))
+                    additionalBalanceRow(title: "Equity", value: String(balanceViewModel.equity))
+                    additionalBalanceRow(title: "Purchase Power", value: String(balanceViewModel.buyingPower))
                 }
             }
         }
     }
+    //struct TitleRow: View {
+    //
+    //    var title: String
+    //
+    //    @State private var isExpanded: Bool = false
+    //    @ObservedObject var balanceViewModel: AccountBalanceViewModel
+    //    //@ObservedObject var instrumentProfileViewModel: InstrumentViewModel
+    //    @ObservedObject var positionViewModel: InstrumentViewModel? // Optional position view model
+    //
+    //
+    //    //    init(){
+    //    //        self.balanceViewModel = AccountBalanceViewModel()
+    //    //    }
+    //    init(title: String, ViewModel: AccountBalanceViewModel, positionViewModel: InstrumentViewModel? = nil) {
+    //        self.title = title
+    //        self.balanceViewModel = ViewModel
+    //        self.positionViewModel = positionViewModel
+    //        //self.instrumentProfileViewModel =
+    //    }
+    //
+    //
+    //    var body: some View {
+    //        VStack(alignment: .leading, spacing: 0) {
+    //            HStack {
+    //                Text(title)
+    //                    .font(.headline)
+    //                Spacer()
+    //                Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+    //            }
+    //            .padding()
+    //            .background(Color.white)
+    //            .cornerRadius(10)
+    //            .shadow(radius: 5)
+    //            .onTapGesture {
+    //                isExpanded.toggle()
+    //            }
+    //
+    //            if isExpanded {
+    //
+    //                // Additional rows with data
+    //                VStack(alignment: .leading, spacing: 10) {
+    //                    if title == "Balances" {
+    //                        additionalBalanceRow(title: "Available Balance", value: String(balanceViewModel.cashBalance))
+    //                        additionalBalanceRow(title: "Current Balance", value: String(balanceViewModel.currentBalance))
+    //                        additionalBalanceRow(title: "Equity", value: String(balanceViewModel.equity))
+    //                        additionalBalanceRow(title: "Purchase Power", value: String(balanceViewModel.buyingPower))
+    //                    } else if title == "Position" {
+    //
+    //                        additionalPositionRow(name: "ACI", marketPrice: "500.00", averagePrice: balanceViewModel.)
+    //                        additionalPositionRow(name: "ACME", marketPrice: "500.00", averagePrice: "500.00")
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
     // Additional row for balance with title and value
     private func additionalBalanceRow(title: String, value: String) -> some View {
@@ -255,32 +312,105 @@ struct TitleRow: View {
         }
         .padding([.leading, .trailing, .top])
     }
+}
+
+struct PositionTitleRow: View {
+    
+    var title: String
+    
+    @State private var isExpanded: Bool = false
+    @ObservedObject var positionViewModel: InstrumentViewModel
+    
+    
+    init(title: String, positionViewModel: InstrumentViewModel) {
+        self.title = title
+        self.positionViewModel = positionViewModel
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Text(title)
+                    .font(.headline)
+                Spacer()
+                Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+            }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius: 5)
+            .onTapGesture {
+                isExpanded.toggle()
+            }
+            
+            if isExpanded {
+                
+                // Additional rows with data
+                VStack(alignment: .leading, spacing: 10) {
+                    
+                    ForEach(positionViewModel.instrumentsList.indices, id: \.self) { index in
+                        let instrument = positionViewModel.instrumentsList[index]
+                        
+                        if let symbole = instrument["symbole"] as? String,
+                           let marketPrice = instrument["marketPrice"] as? Double,
+                           let costPrice = instrument["costPrice"] as? Double,
+                            let marketValue = instrument["marketValue"] as? Double,
+                            let Quantity = instrument["quantity"] as? Double
+                        {
+                            additionalPositionRow(
+                                name: symbole,
+                                marketPrice: String(format: "%.2f", marketPrice),
+                                costPrice: String(format: "%.2f", costPrice),
+                                marketValue: String(format: "%.2f", marketValue),
+                                Quantity: String(format: "%.2f", Quantity)
+                            )
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
     
     // Additional row for position with name, market price, and average price
-    private func additionalPositionRow(name: String, marketPrice: String, averagePrice: String) -> some View {
+    private func additionalPositionRow(name: String, marketPrice: String, costPrice: String,marketValue:String, Quantity: String) -> some View {
         HStack {
             VStack(alignment: .leading) {
                 Text(name)
+                Text("Cost Price")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
                 Text("Market Price")
                     .font(.subheadline)
                     .foregroundColor(.gray)
-                Text("Average Price")
+                Text("Market Value")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                Text("Quantity")
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
             Spacer()
             VStack(alignment: .trailing) {
-                //Text(marketPrice)
+                Text(costPrice)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
                 Text(marketPrice)
                     .font(.subheadline)
                     .foregroundColor(.gray)
-                Text(averagePrice)
+                Text(marketValue)
                     .font(.subheadline)
                     .foregroundColor(.gray)
+                Text(Quantity)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                
             }
         }
-        .padding([.leading, .trailing,.top])
+        .padding([.leading, .trailing, .top])
     }
+    
+    
 }
 
 struct SimpleTitleRow: View {
@@ -315,8 +445,8 @@ struct LogoutRow: View {
         .padding(.bottom, 20)
         .shadow(radius: 5)
         .onTapGesture {
-                    self.showAlert = true
-                }
+            self.showAlert = true
+        }
     }
 }
 

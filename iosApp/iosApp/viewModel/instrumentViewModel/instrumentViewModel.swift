@@ -110,6 +110,7 @@ class InstrumentViewModel: ObservableObject {
                    let instrumentsData = jsonDict["instruments"] as? [[String: Any]] {
                     DispatchQueue.main.async {
                         self.instrumentsList = instrumentsData
+                        print(self.instrumentsList)
                     }
                 }
             } catch {
