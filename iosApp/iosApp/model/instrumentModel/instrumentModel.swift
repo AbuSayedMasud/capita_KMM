@@ -9,7 +9,7 @@
 
 import Foundation
 
-struct AccountInstrument: Codable {
+struct iOSAccountAccountInstrument: Codable {
     let accountCode: String
     let instruments: [Instrument]
 }

@@ -1,11 +1,11 @@
-////
-////  position.swift
-////  iosApp
-////
-////  Created by LEADS Corporation Limited on 9/4/24.
-////  Copyright © 2024 orgName. All rights reserved.
-////
 //
+//  position.swift
+//  iosApp
+//
+//  Created by LEADS Corporation Limited on 9/4/24.
+//  Copyright © 2024 orgName. All rights reserved.
+//
+
 import SwiftUI
 
 struct PositionRowView: View {
@@ -17,6 +17,7 @@ struct PositionRowView: View {
     var costValue: Double?
     var marketPrice: Double?
     var matureQuantity: Int?
+    var group: String?
     var quantity: Int?
     var marketValue: Double?
     
@@ -39,7 +40,10 @@ struct PositionRowView: View {
                 if let costValue = costValue {
                     detailRow(label: "Cost Value:", value: String(format: "%.2f", costValue))
                 }
-               
+                if let group = group {
+                    detailRow(label: "Group:", value: group)
+                }
+                
                 if let marketPrice = marketPrice {
                     detailRow(label: "Market Price:", value: String(format: "%.2f", marketPrice))
                 }
@@ -52,11 +56,11 @@ struct PositionRowView: View {
                 if let quantity = quantity {
                     detailRow(label: "Quantity:", value: "\(quantity)")
                 }
-               
+                
                 if let unrealizedGain = unrealizedGain {
                     detailRow(label: "Unrealized Gain:", value: String(format: "%.2f", unrealizedGain))
                 }
-               
+                
             }
         }
         .padding()
@@ -80,7 +84,7 @@ struct PositionRowView: View {
         }
         .padding(.top, 5)
     }
-
+    
     // Function to get color for value based on its content
     private func getValueColor(_ value: String) -> Color {
         if value.contains("+") {
@@ -96,7 +100,7 @@ struct PositionRowView: View {
 struct Positions: View {
     @ObservedObject var instrumentViewModel: InstrumentViewModel
     @State private var expandedIndex: Int? = nil
-
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
@@ -109,7 +113,8 @@ struct Positions: View {
                        let costValue = instrument["costValue"] as? Double,
                        let matureQuantity = instrument["matureQuantity"] as? Int,
                        let quantity = instrument["quantity"] as? Int,
-                       let marketValue = instrument["marketValue"] as? Double {
+                       let marketValue = instrument["marketValue"] as? Double,
+                       let group = instrument["gr"] as? String{
                         
                         let title = "\(symbol)"
                         let value = " "//String(format: "%.2f", marketPrice)
@@ -124,7 +129,7 @@ struct Positions: View {
                             costValue: costValue,
                             marketPrice: marketPrice,
                             matureQuantity: matureQuantity,
-                            quantity: quantity,
+                            group: group, quantity: quantity,
                             marketValue: marketValue,
                             isExpanded: Binding(
                                 get: { expandedIndex == index },

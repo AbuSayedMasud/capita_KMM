@@ -32,11 +32,12 @@ class IOSMockLoader {
         }
         
         // Add similar code for other data types if needed
-         if let instrumentsJSON = loadJSON(fileName: "instrument") {
-             //parseAndLoadinstruments(jsonString: instrumentsJSON)
-         } else {
-             print("Failed to load other entity JSON file.")
-         }
+        if let instrumentsJSON = loadJSON(fileName: "accountinstruments") {
+            parseAndLoadInstruments(jsonString: instrumentsJSON)
+            print("file found account instrument")
+        } else {
+            print("Failed to load other entity JSON file.")
+        }
     }
     
     // Function to load JSON from file
@@ -113,6 +114,42 @@ class IOSMockLoader {
         }
     }
     
-  
-
+    // Function to parse JSON into shared Instrument objects and load them
+    private func parseAndLoadInstruments(jsonString: String) {
+        print("Parsing instruments data...")
+        
+        guard let jsonData = jsonString.data(using: .utf8) else {
+            print("Failed to convert JSON string to data.")
+            return
+        }
+        do {
+                   let decoder = JSONDecoder()
+                   let accountInstrument = try decoder.decode(iOSAccountAccountInstrument.self, from: jsonData)
+                   
+                   // Convert iOSAccountInstrument object to shared AccountInstrument object
+                   let sharedAccountInstrument = shared.AccountInstrument(
+                       accountCode: accountInstrument.accountCode,
+                       instruments: accountInstrument.instruments.map { iosInstrument in
+                           return shared.Instrument_(
+                               costPrice: iosInstrument.costPrice as? KotlinDouble,
+                               costValue: iosInstrument.costValue as? KotlinDouble,
+                               gr: iosInstrument.gr,
+                               marginable: iosInstrument.marginable as? KotlinBoolean,
+                               marketPrice: iosInstrument.marketPrice as? KotlinDouble,
+                               marketValue: iosInstrument.marketValue as? KotlinDouble,
+                               matureQuantity: iosInstrument.matureQuantity as? KotlinLong,
+                               quantity: iosInstrument.quantity as? KotlinInt,
+                               symbole: iosInstrument.symbole,
+                               unrealizedGain: iosInstrument.unrealizedGain as? KotlinDouble
+                           )
+                       }
+                   )
+                   
+                   // Call the service to load the account instrument
+            service.loadAccountInstrument(instruments: sharedAccountInstrument)
+        } catch {
+            print("Error decoding JSON: \(error)")
+        }
+    }
+    
 }
