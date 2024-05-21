@@ -37,7 +37,7 @@ struct Protfolio_statement: View {
             // Placeholder for content
             switch selectedTabIndex {
             case 0:
-                positions()
+                Positions(instrumentViewModel: InstrumentViewModel())
             case 1:
                 Balance()
             case 2:
