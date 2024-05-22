@@ -56,7 +56,7 @@ struct shantaHomeView: View {
                         NavigationLink(destination: Protfolio_statement(defaultSelectedTabIndex: 1)) {
                             HStack{
                                 Text("Balance")
-                                    .foregroundColor(Color.black)
+                                    .foregroundColor(Color.primary)
                                     .bold()
                                 
                                 Spacer()
@@ -101,7 +101,8 @@ struct shantaHomeView: View {
                         }
                     }
                     .padding()
-                    .background(Color.white)
+                    //.background(Color.primary)
+                    .background(Color(UIColor(named: "sectionTheme")!))
                     .cornerRadius(10)
                     .shadow(radius: 5) // Add shadow here
                     
@@ -109,7 +110,7 @@ struct shantaHomeView: View {
                         NavigationLink(destination: Protfolio_statement(defaultSelectedTabIndex: 0)) {
                             HStack{
                                 Text("Position")
-                                    .foregroundColor(Color.black)
+                                    .foregroundColor(Color.primary)
                                     .bold()
                                 
                                 Spacer()
@@ -170,7 +171,8 @@ struct shantaHomeView: View {
                     }
                     
                     .padding()
-                    .background(Color.white)
+                    //.background(Color.white)
+                    .background(Color(UIColor(named: "sectionTheme")!))
                     .cornerRadius(10)
                     .shadow(radius: 5)
                     
@@ -179,7 +181,7 @@ struct shantaHomeView: View {
                         NavigationLink(destination: Protfolio_statement(defaultSelectedTabIndex: 2)) {
                             HStack{
                                 Text("Receivable")
-                                    .foregroundColor(Color.black)
+                                    .foregroundColor(Color.primary)
                                     .bold()
                                 
                                 Spacer()
@@ -196,7 +198,7 @@ struct shantaHomeView: View {
                         
                         HStack {
                             Text("Right Share Receivable")
-                                .foregroundColor(Color.black)
+                                .foregroundColor(Color.primary)
                                 .bold()
                             Spacer()
                         }
@@ -223,7 +225,7 @@ struct shantaHomeView: View {
                         
                         HStack {
                             Text("Cash Dividend Receivable")
-                                .foregroundColor(Color.black)
+                                .foregroundColor(Color.primary)
                                 .bold()
                             Spacer()
                         }
@@ -249,7 +251,8 @@ struct shantaHomeView: View {
                         
                     }
                     .padding()
-                    .background(Color.white)
+                    //.background(Color.white)
+                    .background(Color(UIColor(named: "sectionTheme")!))
                     .cornerRadius(10)
                     .shadow(radius: 5)
                     
@@ -257,7 +260,7 @@ struct shantaHomeView: View {
                         NavigationLink(destination: Ledger_Statement()) {
                             HStack{
                                 Text("Transaction")
-                                    .foregroundColor(Color.black)
+                                    .foregroundColor(Color.primary)
                                     .bold()
                                 
                                 Spacer()
@@ -274,7 +277,7 @@ struct shantaHomeView: View {
                         
                         HStack {
                             Text("Cash Deposit")
-                                .foregroundColor(Color.black)
+                                .foregroundColor(Color.primary)
                                 .bold()
                             Spacer()
                             
@@ -294,7 +297,7 @@ struct shantaHomeView: View {
                         
                         HStack {
                             Text("cdbl charge Ac opening (own)")
-                                .foregroundColor(Color.black)
+                                .foregroundColor(Color.primary)
                                 .bold()
                             Spacer()
                             
@@ -314,7 +317,7 @@ struct shantaHomeView: View {
                         
                         HStack {
                             Text("BUY - ABBANK")
-                                .foregroundColor(Color.black)
+                                .foregroundColor(Color.primary)
                                 .bold()
                             Spacer()
                             
@@ -344,7 +347,8 @@ struct shantaHomeView: View {
                         
                     }
                     .padding()
-                    .background(Color.white)
+                    //.background(Color.white)
+                    .background(Color(UIColor(named: "sectionTheme")!))
                     .cornerRadius(10)
                     .shadow(radius: 5)
                     
@@ -353,7 +357,7 @@ struct shantaHomeView: View {
                         NavigationLink(destination: marketView(defaultSelectedTabIndex: 4)) {
                             HStack{
                                 Text("News")
-                                    .foregroundColor(Color.black)
+                                    .foregroundColor(Color.primary)
                                     .bold()
                                 
                                 Spacer()
@@ -373,7 +377,7 @@ struct shantaHomeView: View {
                             VStack {
                                 HStack {
                                     Text(self.newsTitles[index])
-                                        .foregroundColor(Color.black)
+                                        .foregroundColor(Color.primary)
                                         .bold()
                                     Spacer()
                                 }
@@ -401,7 +405,8 @@ struct shantaHomeView: View {
                         }
                     }
                     .padding()
-                    .background(Color.white)
+                    //.background(Color.white)
+                    .background(Color(UIColor(named: "sectionTheme")!))
                     .cornerRadius(10)
                     .shadow(radius: 5)
                 }//full-vstack

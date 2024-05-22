@@ -23,13 +23,13 @@ struct OverviewView: View {
                   ["7,000","-183"],
                   ["+Value4", "-Value5", "Value6"], ["Value7", "Value8", "Value9"]]
     let colors: [[Color]] = [
-        [.black, .black, .black],
-        [.black, .gray],
-        [.black, .gray],
-        [.black, .gray],
-        [.black, .gray],
-        [.black, .black, .black],
-        [.black, .black, .black]
+        [.primary, .primary, .primary],
+        [.primary, .gray],
+        [.primary, .gray],
+        [.primary, .gray],
+        [.primary, .gray],
+        [.primary, .primary, .primary],
+        [.primary, .primary, .primary]
     ]
     
     var body: some View {
@@ -82,7 +82,8 @@ struct RowViews: View {
             }
         }
         .padding()
-        .background(Color.white)
+        //.background(Color.white)
+        .background(Color(UIColor(named: "sectionTheme")!))
         .cornerRadius(10)
         .shadow(radius: 5)
     }
@@ -96,7 +97,7 @@ struct RowViews: View {
             return .red
         }
         else {
-            return .black
+            return .primary
         }
     }
 }

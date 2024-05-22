@@ -22,7 +22,8 @@ struct IndicesRow: View {
             }
         }
         .padding()
-        .background(Color.white)
+        //.background(Color.white)
+        .background(Color(UIColor(named: "sectionTheme")!))
         .cornerRadius(10)
         .shadow(radius: 5)
         .padding(.horizontal)
@@ -64,6 +65,7 @@ struct IndicesView: View {
                     .padding()
                     //.background(Color.blue)
                     .foregroundColor(.white)
+                    //.background(Color(UIColor(named: "sectionTheme")!))
                     .clipShape(Circle())
                     .shadow(radius: 5)
             }

@@ -25,7 +25,7 @@ struct NewsView: View {
                     VStack {
                         HStack {
                             Text(self.titles[index])
-                                .foregroundColor(Color.black)
+                                .foregroundColor(Color.primary)
                                 .bold()
                             Spacer()
                         }
@@ -47,7 +47,8 @@ struct NewsView: View {
                         }
                     }
                     .padding()
-                    .background(Color.white)
+                    //.background(Color.white)
+                    .background(Color(UIColor(named: "sectionTheme")!))
                     .cornerRadius(10)
                     .shadow(radius: 5)
                     // Add additional padding only to the first row

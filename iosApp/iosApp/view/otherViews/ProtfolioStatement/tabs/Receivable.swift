@@ -23,7 +23,7 @@ struct Receivable: View {
             VStack(spacing: 20) {
                 // Iterate over data array
                 ForEach(data) { item in
-                    RecebableViews(data: item, color: .black)
+                    RecebableViews(data: item, color: .primary)
                 }
             }
             .padding(.top, 20) // Add padding to the top
@@ -41,7 +41,7 @@ struct RecebableViews: View {
         VStack {
             HStack {
                 Text(data.title)
-                    .foregroundColor(.black) // Use color provided
+                    .foregroundColor(.primary) // Use color provided
                     .bold()
                 Spacer()
             }
@@ -63,7 +63,8 @@ struct RecebableViews: View {
             }
         }
         .padding()
-        .background(Color.white)
+        //.background(Color.white)
+        .background(Color(UIColor(named: "sectionTheme")!))
         .cornerRadius(10)
         .shadow(radius: 5)
     }
@@ -77,7 +78,7 @@ struct RecebableViews: View {
             return .red
         }
         else {
-            return .black
+            return .primary
         }
     }
 }

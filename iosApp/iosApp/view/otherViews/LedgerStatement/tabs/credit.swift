@@ -28,7 +28,8 @@ struct creditRowViews: View {
             }
         }
         .padding()
-        .background(Color.white)
+        //.background(Color.white)
+        .background(Color(UIColor(named: "sectionTheme")!))
         .cornerRadius(10)
         .shadow(radius: 5)
     }
@@ -60,11 +61,11 @@ struct credit: View {
                  
                   ]
     let colors: [[Color]] = [
-        [.black, .gray, .gray],
-        [.black, .gray, .gray],
-        [.black, .gray, .gray],
-        [.black, .gray, .gray],
-        [.black, .gray, .gray]
+        [.primary, .gray, .gray],
+        [.primary, .gray, .gray],
+        [.primary, .gray, .gray],
+        [.primary, .gray, .gray],
+        [.primary, .gray, .gray]
     ]
     
     var body: some View {

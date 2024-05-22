@@ -106,7 +106,8 @@ struct ProfileView: View {
                             .padding()
                         }
                     }
-                    .background(Color.white)
+                    //.background(Color.white)
+                    .background(Color(UIColor(named: "sectionTheme")!))
                     .cornerRadius(10)
                     .shadow(radius: 5)
                     .frame(width: UIScreen.main.bounds.width - 20) // Set fixed width for the popup
@@ -198,7 +199,8 @@ struct UserProfileRow: View {
             }
             .frame(height: rowHeight) // Set fixed height for the row
             .padding()
-            .background(Color.white)
+            //.background(Color.white)
+            .background(Color(UIColor(named: "sectionTheme")!))
             .cornerRadius(10)
             .shadow(radius: 5)
         }
@@ -226,7 +228,8 @@ struct BalanceTitleRow: View {
                 Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
             }
             .padding()
-            .background(Color.white)
+            //.background(Color.white)
+            .background(Color(UIColor(named: "sectionTheme")!))
             .cornerRadius(10)
             .shadow(radius: 5)
             .onTapGesture {
@@ -336,7 +339,8 @@ struct PositionTitleRow: View {
                 Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
             }
             .padding()
-            .background(Color.white)
+            //.background(Color.white)
+            .background(Color(UIColor(named: "sectionTheme")!))
             .cornerRadius(10)
             .shadow(radius: 5)
             .onTapGesture {
@@ -424,7 +428,8 @@ struct SimpleTitleRow: View {
             Image(systemName: "chevron.right")
         }
         .padding()
-        .background(Color.white)
+        //.background(Color.white)
+        .background(Color(UIColor(named: "sectionTheme")!))
         .cornerRadius(10)
         .shadow(radius: 5)
     }
@@ -440,7 +445,8 @@ struct LogoutRow: View {
             Image(systemName: "power")
         }
         .padding()
-        .background(Color.white)
+        //.background(Color.white)
+        .background(Color(UIColor(named: "sectionTheme")!))
         .cornerRadius(10)
         .padding(.bottom, 20)
         .shadow(radius: 5)

@@ -64,7 +64,8 @@ struct PositionRowView: View {
             }
         }
         .padding()
-        .background(Color.white)
+        //.background(Color.white)
+        .background(Color(UIColor(named: "sectionTheme")!))
         .cornerRadius(10)
         .shadow(radius: 5)
         .onTapGesture {
@@ -92,7 +93,7 @@ struct PositionRowView: View {
         } else if value.contains("-") {
             return .red
         } else {
-            return .black
+            return .primary
         }
     }
 }
@@ -118,7 +119,7 @@ struct Positions: View {
                         
                         let title = "\(symbol)"
                         let value = " "//String(format: "%.2f", marketPrice)
-                        let color: Color = .black
+                        let color: Color = .primary
                         
                         PositionRowView(
                             title: title,

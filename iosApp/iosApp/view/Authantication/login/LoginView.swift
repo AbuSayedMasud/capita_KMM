@@ -36,7 +36,7 @@ struct LoginView: View {
                 Image("Capita")
                     .resizable()
                     .frame(width: 123, height: 46)
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
                 //Spacer()
                 //form
                 
@@ -49,7 +49,7 @@ struct LoginView: View {
                         .padding(.horizontal, 10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.black, lineWidth: 1)
+                                .stroke(Color.primary, lineWidth: 1)
                         )
                 }
                 .padding(.horizontal)
@@ -72,13 +72,13 @@ struct LoginView: View {
                         .padding(.horizontal, 10)
                         .overlay(alignment: .leading){
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.black, lineWidth: 1)
+                                .stroke(Color.primary, lineWidth: 1)
                             
                             Button(action: {
                                 isShowingPassword.toggle()
                             }) {
                                 Image(systemName: isShowingPassword ? "eye.slash.fill" : "eye.fill")
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.primary)
                             }
                             .padding(.leading, 280)
                             
@@ -95,7 +95,7 @@ struct LoginView: View {
                         Image(systemName: rememberMe ? "checkmark.square.fill" : "square") // Use system icons for checkbox appearance
                             .resizable()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary)
                             .onTapGesture {
                                 rememberMe.toggle() // Toggle the state variable on tap
                             }
@@ -159,7 +159,7 @@ struct LoginView: View {
                 } label: {
                     HStack{
                         Text("I don't have an account?")
-                            .foregroundColor(Color.black)
+                            .foregroundColor(Color.primary)
                         Text("Sign Up")
                             .fontWeight(.medium)
                             .underline()
@@ -175,7 +175,7 @@ struct LoginView: View {
                 Image("face_id") // Display Face ID or Touch ID image
                     .resizable()
                     .frame(width: 60, height: 60)
-                    .foregroundColor(.black) // Set the image color if needed
+                    .foregroundColor(.primary) // Set the image color if needed
                     .padding(.top,30)
                 
                 //ADDING FACE OR TOUCHID
@@ -186,7 +186,7 @@ struct LoginView: View {
                 }) {
                     HStack{
                         Text("Don't have TouchID yet?")
-                            .foregroundColor(Color.black)
+                            .foregroundColor(Color.primary)
                         Text("TouchID")
                             .fontWeight(.medium)
                             .underline()
@@ -201,7 +201,7 @@ struct LoginView: View {
                     Image("ShantaLogo")
                         .resizable()
                         .frame(width: 60, height: 46)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                     
                     Text("SHANTA")
                         .fontWeight(.medium)

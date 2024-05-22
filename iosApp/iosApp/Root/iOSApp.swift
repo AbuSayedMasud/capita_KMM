@@ -11,17 +11,17 @@ struct iOSApp: App {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
         UIBarButtonItem.appearance().tintColor = .white
         
-        // Set the preferred color scheme to light mode
-              if #available(iOS 15.0, *) {
-                  UIWindow.appearance().overrideUserInterfaceStyle = .light
-              }
+//        // Set the preferred color scheme to light mode
+//              if #available(iOS 15.0, *) {
+//                  UIWindow.appearance().overrideUserInterfaceStyle = .light
+//              }
     }
 
     
 	var body: some Scene {
 		WindowGroup {
             LoginView()
-                .preferredColorScheme(.light)
+//                .preferredColorScheme(.light)
 		}
 	}
 }

@@ -39,7 +39,7 @@ struct RegistrationView: View {
                     }) {
                         Text("Sign Up")
                             .fontWeight(.semibold)
-                            .foregroundColor(.white)
+                            .foregroundColor(.primary)
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color("AccentColor"))
@@ -51,7 +51,8 @@ struct RegistrationView: View {
                 .padding(.top, 40)
                 //.topSafeAreaColor()
             }
-            .background(Color.white)
+            //.background(Color.white)
+            .background(Color(UIColor(named: "sectionTheme")!))
         }
         //.ignoresSafeArea(.all, edges: .vertical)
     }

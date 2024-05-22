@@ -34,9 +34,13 @@ struct password_recovery: View {
                 print("Forget submit button tapped ..")
             }) {
                 Text("Submit")
-                    .fontWeight(.semibold)
+                    .font(.caption)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                    //.foregroundColor(Color("sectionTheme"))
             }
-            .foregroundColor(.white)
+            //.foregroundColor(.white)
+            .background(Color(UIColor(named: "sectionTheme")!))
             .frame(width: UIScreen.main.bounds.width - 80, height: 48)
             .background(Color("AccentColor"))
             .cornerRadius(30)

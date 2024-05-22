@@ -65,11 +65,12 @@ struct RowView: View {
                 .frame(width: 30, height: 30)
             Text(title)
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
             Spacer()
         }
         .padding()
-        .background(Color.white)
+        //.background(Color.white)
+        .background(Color(UIColor(named: "sectionTheme")!))
         .cornerRadius(10)
         .shadow(radius: 5)
     }
