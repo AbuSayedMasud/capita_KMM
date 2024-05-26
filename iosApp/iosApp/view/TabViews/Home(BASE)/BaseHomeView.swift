@@ -15,13 +15,11 @@ struct HomeView: View {
         TabView {
             shantaHomeView()
                 .tabItem {
-                    //Image(systemName: "house.fill")
                     Image(uiImage: UIImage(named: "home")!)
                 }
             
             marketView()
                 .tabItem {
-                    //Image(systemName: "2.circle")
                     Image(uiImage: UIImage(named: "market")!)
                 }
             
@@ -31,7 +29,6 @@ struct HomeView: View {
                     .background(Color.yellow) // Set the navigation bar color
             }
             .tabItem {
-                //Image(systemName: "3.circle")
                 Image(uiImage: UIImage(named: "trade")!)
             }
             
@@ -39,17 +36,14 @@ struct HomeView: View {
                 ServicesView()
             }
             .tabItem {
-                //Image(systemName: "4.circle")
                 Image(uiImage: UIImage(named: "Services")!)
             }
-//            let profileService = CustomerProfileServiceImpl(databaseDriverFactory: DatabaseDriverFactory())
-//            let viewModel = ProfileViewModel(profileService: profileService)
-//            ProfileView(viewModel: viewModel)
+            
             ProfileView()
                 .tabItem {
                     Image(uiImage: UIImage(named: "profile")!)
                 }
-
+            
         }
         //tabbar image color
         .accentColor(appColor)
