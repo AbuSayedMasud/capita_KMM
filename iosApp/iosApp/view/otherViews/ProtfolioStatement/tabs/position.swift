@@ -98,6 +98,57 @@ struct PositionRowView: View {
     }
 }
 
+//struct Positions: View {
+//    @ObservedObject var instrumentViewModel: InstrumentViewModel
+//    @State private var expandedIndex: Int? = nil
+//    
+//    var body: some View {
+//        ScrollView {
+//            VStack(spacing: 20) {
+//
+//                ForEach(instrumentViewModel.instrumentsList.indices, id: \.self) { index in
+//                    let instrument = instrumentViewModel.instrumentsList[index]
+//                    if let symbol = instrument["symbole"] as? String,
+//                       let marketPrice = instrument["marketPrice"] as? Double,
+//                       let costPrice = instrument["costPrice"] as? Double,
+//                       let unrealizedGain = instrument["unrealizedGain"] as? Double,
+//                       let costValue = instrument["costValue"] as? Double,
+//                       let matureQuantity = instrument["matureQuantity"] as? Int,
+//                       let quantity = instrument["quantity"] as? Int,
+//                       let marketValue = instrument["marketValue"] as? Double,
+//                       let group = instrument["gr"] as? String{
+//                        
+//                        let title = "\(symbol)"
+//                        let value = " "//String(format: "%.2f", marketPrice)
+//                        let color: Color = .primary
+//                        
+//                        PositionRowView(
+//                            title: title,
+//                            value: value,
+//                            color: color,
+//                            costPrice: costPrice,
+//                            unrealizedGain: unrealizedGain,
+//                            costValue: costValue,
+//                            marketPrice: marketPrice,
+//                            matureQuantity: matureQuantity,
+//                            group: group, quantity: quantity,
+//                            marketValue: marketValue,
+//                            isExpanded: Binding(
+//                                get: { expandedIndex == index },
+//                                set: { newValue in
+//                                    expandedIndex = newValue ? index : nil
+//                                }
+//                            )
+//                        )
+//                    }
+//                }
+//            }
+//            .padding(.top, 20)
+//            .padding(.bottom, 20)
+//            .padding(.horizontal, 20)
+//        }
+//    }
+//}
 struct Positions: View {
     @ObservedObject var instrumentViewModel: InstrumentViewModel
     @State private var expandedIndex: Int? = nil
@@ -105,20 +156,38 @@ struct Positions: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                ForEach(instrumentViewModel.instrumentsList.indices, id: \.self) { index in
-                    let instrument = instrumentViewModel.instrumentsList[index]
-                    if let symbol = instrument["symbole"] as? String,
-                       let marketPrice = instrument["marketPrice"] as? Double,
-                       let costPrice = instrument["costPrice"] as? Double,
-                       let unrealizedGain = instrument["unrealizedGain"] as? Double,
-                       let costValue = instrument["costValue"] as? Double,
-                       let matureQuantity = instrument["matureQuantity"] as? Int,
-                       let quantity = instrument["quantity"] as? Int,
-                       let marketValue = instrument["marketValue"] as? Double,
-                       let group = instrument["gr"] as? String{
+                // Ensure there are instruments to display, otherwise show default values
+                if instrumentViewModel.instrumentsList.isEmpty {
+                    PositionRowView(
+                        title: "N/A",
+                        value: "0.00",
+                        color: .primary,
+                        costPrice: 0.0,
+                        unrealizedGain: 0.0,
+                        costValue: 0.0,
+                        marketPrice: 0.0,
+                        matureQuantity: 0,
+                        group: "N/A",
+                        quantity: 0,
+                        marketValue: 0.0,
+                        isExpanded: .constant(false)
+                    )
+                } else {
+                    ForEach(instrumentViewModel.instrumentsList.indices, id: \.self) { index in
+                        let instrument = instrumentViewModel.instrumentsList[index]
+                        
+                        let symbol = instrument["symbole"] as? String ?? "N/A"
+                        let marketPrice = instrument["marketPrice"] as? Double ?? 0.0
+                        let costPrice = instrument["costPrice"] as? Double ?? 0.0
+                        let unrealizedGain = instrument["unrealizedGain"] as? Double ?? 0.0
+                        let costValue = instrument["costValue"] as? Double ?? 0.0
+                        let matureQuantity = instrument["matureQuantity"] as? Int ?? 0
+                        let quantity = instrument["quantity"] as? Int ?? 0
+                        let marketValue = instrument["marketValue"] as? Double ?? 0.0
+                        let group = instrument["gr"] as? String ?? "N/A"
                         
                         let title = "\(symbol)"
-                        let value = " "//String(format: "%.2f", marketPrice)
+                        let value = " " //String(format: "%.2f", marketPrice)
                         let color: Color = .primary
                         
                         PositionRowView(
@@ -130,7 +199,8 @@ struct Positions: View {
                             costValue: costValue,
                             marketPrice: marketPrice,
                             matureQuantity: matureQuantity,
-                            group: group, quantity: quantity,
+                            group: group,
+                            quantity: quantity,
                             marketValue: marketValue,
                             isExpanded: Binding(
                                 get: { expandedIndex == index },
@@ -148,7 +218,6 @@ struct Positions: View {
         }
     }
 }
-
 #Preview {
     Positions(instrumentViewModel: InstrumentViewModel())
 }

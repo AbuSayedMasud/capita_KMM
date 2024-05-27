@@ -125,47 +125,53 @@ struct shantaHomeView: View {
                             .background(Color(red: 0.929, green: 0.929, blue: 0.929))
                             .padding(.horizontal, -20)
                         
-                        
-                        ForEach(instrumentViewModel.instrumentsList.indices.prefix(2), id: \.self) { index in
-                            let instrument = instrumentViewModel.instrumentsList[index]
-                            if let symbole = instrument["symbole"] as? String,
+                        if instrumentViewModel.instrumentsList.isEmpty {
+                            Text("No position available")
+                                .foregroundColor(.gray)
+                        }
+                        else{
+                            
+                            ForEach(instrumentViewModel.instrumentsList.indices.prefix(2), id: \.self) { index in
+                                let instrument = instrumentViewModel.instrumentsList[index]
+                                if let symbole = instrument["symbole"] as? String,
                                    let marketPrice = instrument["marketPrice"] as? Double,
-                               let costPrice = instrument["costPrice"] as? Double {
-                                HStack {
-                                    VStack(alignment: .leading) {
-                                        if let symbole = instrument["symbole"] as? String {
-                                            Text(symbole)
+                                   let costPrice = instrument["costPrice"] as? Double {
+                                    HStack {
+                                        VStack(alignment: .leading) {
+                                            if let symbole = instrument["symbole"] as? String {
+                                                Text(symbole)
+                                            }
+                                            
+                                            Text("Market Price")
+                                                .font(.caption)
+                                                .foregroundColor(.gray)
+                                            
+                                            
+                                            Text("Cost Price")
+                                                .font(.caption)
+                                                .foregroundColor(.gray)
+                                            
                                         }
-                                        
-                                        Text("Market Price")
-                                            .font(.caption)
-                                            .foregroundColor(.gray)
-                                        
-                                        
-                                        Text("Cost Price")
-                                            .font(.caption)
-                                            .foregroundColor(.gray)
-                                        
+                                        Spacer()
+                                        VStack(alignment: .trailing) {
+                                            Text("")
+                                            Text(String(format: "%.2f", marketPrice))
+                                                .font(.caption)
+                                                .foregroundColor(.gray)
+                                            
+                                            Text(String(format: "%.2f", costPrice))
+                                                .font(.caption)
+                                                .foregroundColor(.gray)
+                                        }
                                     }
-                                    Spacer()
-                                    VStack(alignment: .trailing) {
-                                        Text("")
-                                        Text(String(format: "%.2f", marketPrice))
-                                            .font(.caption)
-                                            .foregroundColor(.gray)
-                                        
-                                        Text(String(format: "%.2f", costPrice))
-                                            .font(.caption)
-                                            .foregroundColor(.gray)
+                                    // Show the divider after the first instrument
+                                    if index == 0 {
+                                        ColoredDivider(color: dividerColor, height: 1)
                                     }
+                                    
                                 }
-                                // Show the divider after the first instrument
-                                if index == 0 {
-                                    ColoredDivider(color: dividerColor, height: 1)
-                                }
-                                
+                                //ColoredDivider(color: dividerColor, height: 1)
                             }
-                            //ColoredDivider(color: dividerColor, height: 1)
                         }
                         
                     }

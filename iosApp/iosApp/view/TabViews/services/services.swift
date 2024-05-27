@@ -11,7 +11,7 @@ import SwiftUI
 struct ServicesView: View {
     var body: some View {
         VStack(spacing: 20) {
-            NavigationLink(destination: marketView()) {
+            NavigationLink(destination: deposit()) {
                 RowView(title: "Deposite", icon: "Deposite")
             }
             

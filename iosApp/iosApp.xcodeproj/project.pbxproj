@@ -15,6 +15,8 @@
 		2B48FCD42BE73AFF0056CBFD /* acountsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48FCD32BE73AFF0056CBFD /* acountsModel.swift */; };
 		2B48FCE12BEE3E760056CBFD /* instrumentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48FCE02BEE3E760056CBFD /* instrumentViewModel.swift */; };
 		2B48FCE32BEE40630056CBFD /* instrumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48FCE22BEE40630056CBFD /* instrumentModel.swift */; };
+		2B780CE02C048FCA007E54E9 /* depositStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B780CDF2C048FCA007E54E9 /* depositStatus.swift */; };
+		2B780CE22C0498C9007E54E9 /* depositeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B780CE12C0498C9007E54E9 /* depositeRequest.swift */; };
 		2B81ACA32BE0E8AD000FCEB7 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81ACA22BE0E8AD000FCEB7 /* ErrorAlertView.swift */; };
 		2B9AB0812BE2574D00CDD1E2 /* profileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9AB0802BE2574D00CDD1E2 /* profileViewModel.swift */; };
 		2BA250FE2BE38A8000DA1997 /* loginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA250FD2BE38A8000DA1997 /* loginModel.swift */; };
@@ -85,6 +87,8 @@
 		2B48FCD32BE73AFF0056CBFD /* acountsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = acountsModel.swift; sourceTree = "<group>"; };
 		2B48FCE02BEE3E760056CBFD /* instrumentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = instrumentViewModel.swift; sourceTree = "<group>"; };
 		2B48FCE22BEE40630056CBFD /* instrumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = instrumentModel.swift; sourceTree = "<group>"; };
+		2B780CDF2C048FCA007E54E9 /* depositStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = depositStatus.swift; sourceTree = "<group>"; };
+		2B780CE12C0498C9007E54E9 /* depositeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = depositeRequest.swift; sourceTree = "<group>"; };
 		2B81ACA22BE0E8AD000FCEB7 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
 		2B9AB0802BE2574D00CDD1E2 /* profileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileViewModel.swift; sourceTree = "<group>"; };
 		2BA250FD2BE38A8000DA1997 /* loginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginModel.swift; sourceTree = "<group>"; };
@@ -195,6 +199,15 @@
 				2B48FCE02BEE3E760056CBFD /* instrumentViewModel.swift */,
 			);
 			path = instrumentViewModel;
+			sourceTree = "<group>";
+		};
+		2B780CDE2C048F30007E54E9 /* Redirect-pages */ = {
+			isa = PBXGroup;
+			children = (
+				2B780CDF2C048FCA007E54E9 /* depositStatus.swift */,
+				2B780CE12C0498C9007E54E9 /* depositeRequest.swift */,
+			);
+			path = "Redirect-pages";
 			sourceTree = "<group>";
 		};
 		2B9AB07E2BE256F200CDD1E2 /* LoginViewModel */ = {
@@ -317,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				2BB9F32A2BD761DF005AE48E /* services.swift */,
+				2B780CDE2C048F30007E54E9 /* Redirect-pages */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -633,11 +647,13 @@
 				2BCBB78B2BD279E400FAE429 /* IOSMockLoader.swift in Sources */,
 				2BCBB7A02BD3D52300FAE429 /* Helper.swift in Sources */,
 				2BB9F3332BD761DF005AE48E /* marketView.swift in Sources */,
+				2B780CE22C0498C9007E54E9 /* depositeRequest.swift in Sources */,
 				2BA250FE2BE38A8000DA1997 /* loginModel.swift in Sources */,
 				2B48FCCF2BE73ACB0056CBFD /* CustomerProfileResponseModel.swift in Sources */,
 				2BB9F32B2BD761DF005AE48E /* BaseHomeView.swift in Sources */,
 				2BB9F3182BD7619E005AE48E /* BiometricAuthView.swift in Sources */,
 				2BCBB78D2BD27AC900FAE429 /* AccountBalanceViewModel.swift in Sources */,
+				2B780CE02C048FCA007E54E9 /* depositStatus.swift in Sources */,
 				2BB9F3312BD761DF005AE48E /* OverviewView.swift in Sources */,
 				2BB9F3482BD761E7005AE48E /* position.swift in Sources */,
 				2BB9F3452BD761E7005AE48E /* Ledger Statement.swift in Sources */,
@@ -771,7 +787,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 882P3LHU42;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -789,7 +805,7 @@
 					"-framework",
 					shared,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -802,7 +818,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 882P3LHU42;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -820,7 +836,7 @@
 					"-framework",
 					shared,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
