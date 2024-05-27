@@ -16,6 +16,8 @@ import com.leads.capita.android.R
 import com.leads.capita.android.home.HomeScreen
 import com.leads.capita.android.market.MarketScreen
 import com.leads.capita.android.portfolio.PortfolioScreen
+import com.leads.capita.android.profile.AccountDetailsScreen
+import com.leads.capita.android.profile.AccountDetailsView
 import com.leads.capita.android.profile.ProfileScreen
 import com.leads.capita.android.search.SearchScreen
 import com.leads.capita.android.service.ServiceScreen
@@ -92,6 +94,9 @@ fun BottomNavGraph(navController: NavHostController) {
         }
         composable("depositStatus") {
             DepositStatusScreen(navController)
+        }
+        composable("accountDetails") {
+            AccountDetailsView(navController)
         }
     }
 }

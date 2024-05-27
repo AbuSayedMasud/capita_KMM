@@ -116,6 +116,9 @@ fun ProfileScreen(
                         AccountTransactionStatementView(navController)
                     }
                     item {
+                        AccountDetailsScreen(navController)
+                    }
+                    item {
                         Logout(navController)
                     }
                     item {

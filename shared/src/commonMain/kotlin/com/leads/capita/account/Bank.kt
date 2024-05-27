@@ -4,5 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Bank(
-    val accountNumber: String
+    val accountNumber: String,
+    val routingNumber :String
 )
