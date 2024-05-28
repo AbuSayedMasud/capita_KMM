@@ -60,7 +60,7 @@ struct iOSApp: App {
                 .onAppear {
                     updateAppearance()
                 }
-                .environment(\.colorScheme, .light) // Override to always use light mode for preview
+                //.environment(\.colorScheme, .light) // Override to always use light mode for preview
         }
     }
     

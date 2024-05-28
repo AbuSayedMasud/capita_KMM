@@ -428,7 +428,6 @@ struct SimpleTitleRow: View {
             Image(systemName: "chevron.right")
         }
         .padding()
-        //.background(Color.white)
         .background(Color(UIColor(named: "sectionTheme")!))
         .cornerRadius(10)
         .shadow(radius: 5)
@@ -445,7 +444,6 @@ struct LogoutRow: View {
             Image(systemName: "power")
         }
         .padding()
-        //.background(Color.white)
         .background(Color(UIColor(named: "sectionTheme")!))
         .cornerRadius(10)
         .padding(.bottom, 20)
