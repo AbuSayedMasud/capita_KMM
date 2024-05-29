@@ -39,13 +39,14 @@ struct RegistrationView: View {
                     }) {
                         Text("Sign Up")
                             .fontWeight(.semibold)
-                            .foregroundColor(.primary)
+                            .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color("AccentColor"))
                             .cornerRadius(30)
                     }
                     .padding(.horizontal, 20)
+                    .padding(.top, 30)
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 40)

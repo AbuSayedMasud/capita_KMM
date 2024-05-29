@@ -15,7 +15,7 @@ struct ServicesView: View {
                 RowView(title: "Deposite", icon: "Deposite")
             }
             
-            NavigationLink(destination: marketView()) {
+            NavigationLink(destination: PaymentRequest()) {
                 RowView(title: "Withdraw", icon: "Withdraw")
             }
             

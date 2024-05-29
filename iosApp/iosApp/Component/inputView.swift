@@ -31,7 +31,10 @@ struct inputView: View {
                 TextField(placeHolder, text: $text)
                     .font(.system(size: 14))
             }
+                
             Divider()
+                .overlay(Color.black)
+
         }
             
     }

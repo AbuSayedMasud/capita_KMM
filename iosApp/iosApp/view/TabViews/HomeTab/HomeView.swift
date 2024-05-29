@@ -133,7 +133,8 @@ struct shantaHomeView: View {
                             
                             ForEach(instrumentViewModel.instrumentsList.indices.prefix(2), id: \.self) { index in
                                 let instrument = instrumentViewModel.instrumentsList[index]
-                                if let symbole = instrument["symbole"] as? String,
+                                if let symbole = instrument["symbole"] as?
+                                    String,
                                    let marketPrice = instrument["marketPrice"] as? Double,
                                    let costPrice = instrument["costPrice"] as? Double {
                                     HStack {

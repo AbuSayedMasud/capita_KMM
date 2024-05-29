@@ -19,7 +19,7 @@ struct deposit: View {
     var body: some View {
         ScrollView {
             VStack {
-                NavigationLink(destination: depositeRequest()) {
+                NavigationLink(destination: DepositRequest()) {
                     Text("+ New Request")
                         .padding()
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -41,7 +41,8 @@ struct deposit: View {
                     HStack {
                         TextField("🔍 Search Name..", text: $searchText)
                             .padding()
-                            .frame(width: 174)
+                        //.frame(width: 174)
+                            .frame(width: UIScreen.main.bounds.width - 200)
                             .background(Color(UIColor(named: "sectionTheme")!))
                             .cornerRadius(10)
                             .shadow(color: .gray, radius: 5, x: 0, y: 5)
@@ -133,7 +134,7 @@ struct deposit: View {
                 .padding(.horizontal , 20)
             }
         }
-        .navigationBarTitle("Deposit", displayMode: .inline)
+        .navigationBarTitle("Deposit Status", displayMode: .inline)
         .navigationBarItems(
             leading: Button(action: {
                 // Action for the first button
