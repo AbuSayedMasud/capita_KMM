@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct DepositRequest: View {
     
@@ -9,6 +10,10 @@ struct DepositRequest: View {
     @State private var depositType = ""
     @State private var date = ""
     @State private var transectionRef = ""
+    @State private var showImagePicker = false
+    @State private var showCameraPicker = false
+    @State private var selectedImage: UIImage?
+    @State private var isCamera = false
     
     var body: some View {
         ScrollView {
@@ -30,43 +35,49 @@ struct DepositRequest: View {
                 
                 // Image with buttons and labels inside the image border
                 ZStack {
-                    Image("image border")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 307 ,height: 220)
-                    
+                    Rectangle()
+                        //.strokeBorder(Color.gray, lineWidth: 1)
+                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [5]))
+                        .frame(width: 307, height: 220)
+                        .border(appColor)
+                        
                     VStack {
-                        Image(uiImage: UIImage(named: "download-image-logo")!)
-                            .padding(.top, 10)
-                        Text("Let’s upload receipt")
-                        Text("Upload your receipt for your deposit request from your gallery or open camera")
-                            .font(.subheadline)
-                            .fontWeight(.ultraLight)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 25)
-                            .foregroundColor(.secondary)
-                        //Spacer()
+                        if let selectedImage = selectedImage {
+                            Image(uiImage: selectedImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 150)
+                        } else {
+                            Image("download-image-logo")
+                                .padding(.top, 10)
+                            Text("Let’s upload receipt")
+                            Text("Upload your receipt for your deposit request from your gallery or open camera")
+                                .font(.subheadline)
+                                .fontWeight(.ultraLight)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 25)
+                                .foregroundColor(.secondary)
+                        }
+                        
                         HStack(spacing: 30) {
                             VStack {
                                 Button(action: {
-                                    // First button action
+                                    self.isCamera = false
+                                    self.showImagePicker = true
                                 }) {
-                                    Text("Label 1")
-                                        .font(.caption)
+                                    Image("Gallary Button")
                                 }
-                                
                             }
                             VStack {
                                 Button(action: {
-                                    // Second button action
+                                    self.isCamera = true
+                                    self.showImagePicker = true
                                 }) {
-                                    Text("Label 2")
-                                        .font(.caption)
+                                    Image("Camera Button")
                                 }
-                                
                             }
                         }
-                        .padding(.bottom, 10) // Adjust the padding as needed to fit within the image
+                        .padding(.bottom, 10)
                     }
                 }
                 .padding(.top, 20)
@@ -82,7 +93,6 @@ struct DepositRequest: View {
                         .cornerRadius(12)
                 })
                 .padding()
-                .padding(.top, 40)
                 
                 Spacer()
             }
@@ -109,6 +119,48 @@ struct DepositRequest: View {
                 }
             }
         )
+        .sheet(isPresented: $showImagePicker) {
+            ImagePickerforDeposits(sourceType: self.isCamera ? .camera : .photoLibrary, selectedImage: self.$selectedImage)
+        }
+    }
+}
+
+// ImagePickerforDeposits to handle photo library and camera
+struct ImagePickerforDeposits: UIViewControllerRepresentable {
+    enum SourceType {
+        case photoLibrary
+        case camera
+    }
+    
+    var sourceType: SourceType
+    @Binding var selectedImage: UIImage?
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(self)
+    }
+    
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        picker.sourceType = (sourceType == .camera) ? .camera : .photoLibrary
+        return picker
+    }
+    
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+    
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        var parent: ImagePickerforDeposits
+        
+        init(_ parent: ImagePickerforDeposits) {
+            self.parent = parent
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[.originalImage] as? UIImage {
+                parent.selectedImage = image
+            }
+            picker.dismiss(animated: true)
+        }
     }
 }
 

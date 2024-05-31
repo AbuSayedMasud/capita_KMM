@@ -33,7 +33,8 @@ struct inputView: View {
             }
                 
             Divider()
-                .overlay(Color.black)
+                //.overlay(Color.black)
+                .overlay(.primary)
 
         }
             
