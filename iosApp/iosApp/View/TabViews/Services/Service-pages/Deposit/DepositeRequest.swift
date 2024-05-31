@@ -36,10 +36,9 @@ struct DepositRequest: View {
                 // Image with buttons and labels inside the image border
                 ZStack {
                     Rectangle()
-                        //.strokeBorder(Color.gray, lineWidth: 1)
                         .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [5]))
+                        .foregroundColor(appColor)
                         .frame(width: 307, height: 220)
-                        .border(appColor)
                         
                     VStack {
                         if let selectedImage = selectedImage {
