@@ -68,10 +68,25 @@ fun ServiceView(navController: NavHostController) {
                 shape = MaterialTheme.shapes.large,
                 backgroundColor = backgroundColor,
                 onClick = {
-                    if (serviceItem.title == "Deposit") {
-                        navController.navigate("depositStatus")
-                    } else {
-                        navController.navigate(serviceItem.title.toLowerCase())
+                    when (serviceItem.title) {
+                        "Deposit" -> {
+                            navController.navigate("depositStatus")
+                        }
+
+                        "Payment" -> {
+                            navController.navigate("payment")
+                        }
+
+                        "IPO" -> {
+                            navController.navigate("ipo")
+                        }
+
+                        "Tax Certificate" -> {
+                            navController.navigate("taxCertificate")
+                        }
+                        "Product Switch" -> {
+                            navController.navigate("productSwitch")
+                        }
                     }
                 }
 

@@ -71,7 +71,7 @@ fun AccountDetailsView(navController: NavHostController) {
         MyAppBar(
             navController = navController,
             context = LocalContext.current,
-            title = "Profile",
+            title = "Account Details",
             onSearch = { searchText ->
             },
             showSearchBar = false,
@@ -81,7 +81,7 @@ fun AccountDetailsView(navController: NavHostController) {
             showNotificationIcon = false,
             showSettingsIcon = true,
             currentRoute = currentRoute,
-            showArrow = false,
+            showArrow = true,
         )
 
         val window = rememberWindowSizeClass()

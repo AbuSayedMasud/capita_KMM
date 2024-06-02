@@ -18,8 +18,10 @@ import com.leads.capita.android.market.MarketScreen
 import com.leads.capita.android.portfolio.PortfolioScreen
 import com.leads.capita.android.profile.AccountDetailsScreen
 import com.leads.capita.android.profile.AccountDetailsView
+import com.leads.capita.android.profile.ProfileMasterScreen
 import com.leads.capita.android.profile.ProfileScreen
 import com.leads.capita.android.search.SearchScreen
+import com.leads.capita.android.service.ServiceParentScreen
 import com.leads.capita.android.service.ServiceScreen
 import com.leads.capita.android.service.deposit.DepositScreen
 import com.leads.capita.android.service.deposit.DepositStatusScreen
@@ -63,40 +65,21 @@ fun BottomNavGraph(navController: NavHostController) {
                 queryParameters = value,
             )
         }
-
         composable(BottomBar.Trade.route) {
             TradeScreen(navController)
         }
 
         composable(BottomBar.Service.route) {
-            ServiceScreen(navController)
+            ServiceParentScreen(navController)
         }
         composable(BottomBar.Profile.route) {
-            ProfileScreen(
-                colorSelectionViewModel = colorSelectionViewModel,
-                navController = navController,
-            )
-        }
-        composable("transaction") {
-            TransactionScreen(colorSelectionViewModel, navController)
+            ProfileMasterScreen()
         }
         composable("search") {
             SearchScreen()
         }
         composable("settings") {
             SettingsScreen()
-        }
-        composable("payment") {
-            PaymentScreen(navController)
-        }
-        composable("deposit") {
-            DepositScreen(navController)
-        }
-        composable("depositStatus") {
-            DepositStatusScreen(navController)
-        }
-        composable("accountDetails") {
-            AccountDetailsView(navController)
         }
     }
 }
