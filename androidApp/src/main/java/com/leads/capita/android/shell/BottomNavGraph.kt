@@ -20,6 +20,7 @@ import com.leads.capita.android.profile.AccountDetailsScreen
 import com.leads.capita.android.profile.AccountDetailsView
 import com.leads.capita.android.profile.ProfileScreen
 import com.leads.capita.android.search.SearchScreen
+import com.leads.capita.android.service.ServiceParentScreen
 import com.leads.capita.android.service.ServiceScreen
 import com.leads.capita.android.service.deposit.DepositScreen
 import com.leads.capita.android.service.deposit.DepositStatusScreen
@@ -69,7 +70,7 @@ fun BottomNavGraph(navController: NavHostController) {
         }
 
         composable(BottomBar.Service.route) {
-            ServiceScreen(navController)
+            ServiceParentScreen(navController)
         }
         composable(BottomBar.Profile.route) {
             ProfileScreen(
