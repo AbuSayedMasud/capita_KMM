@@ -182,11 +182,12 @@ struct DepositRequest: View {
     @State private var description = ""
     @State private var bankAccount = ""
     @State private var depositType = ""
-    @State private var date = ""
+    @State private var date = Date()
     @State private var transectionRef = ""
     @State private var showImagePicker = false
     @State private var selectedImage: UIImage?
     @State private var cameraSource: CameraSource? = nil // Use an optional CameraSource
+    @State private var showDatePicker = false // State variable to show date picker
     
     var body: some View {
         ScrollView {
@@ -197,7 +198,31 @@ struct DepositRequest: View {
                     .padding(.top, 10)
                 inputView(text: $depositType, title: "Deposit Type", placeHolder: "Select deposit type")
                     .padding(.top, 10)
-                inputView(text: $date, title: "Date", placeHolder: "DD/MM/YYYY")
+                //inputView(text: $date, title: "Date", placeHolder: "DD/MM/YYYY")
+                // Date input view with tap gesture to show date picker
+                                VStack(alignment: .leading) {
+                                    Text("Date")
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.primary)
+                                        .font(.footnote)
+                                    
+                                    HStack {
+                                        Text(date, style: .date) // Display selected date
+                                            .foregroundColor(date == Date() ? .gray : .primary)
+                                            .onTapGesture {
+                                                showDatePicker.toggle() // Toggle date picker visibility
+                                            }
+                                        
+                                        Spacer()
+                                        Image("calender_icon")
+                                            .foregroundColor(.gray)
+                                            .onTapGesture {
+                                                showDatePicker.toggle() // Toggle date picker visibility
+                                            }
+                                    }
+                                    Divider()
+                                        .overlay(.primary)
+                                }
                     .padding(.top, 10)
                 inputView(text: $transectionRef, title: "Transection Ref.", placeHolder: "Enter Transection Reference")
                     .padding(.top, 10)
@@ -210,7 +235,7 @@ struct DepositRequest: View {
                 ZStack {
                     Rectangle()
                         .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [5]))
-                        .foregroundColor(Color.blue) // Set the desired color here
+                        .foregroundColor(appColor)
                         .frame(width: 307, height: 220)
                     
                     VStack {
@@ -298,6 +323,15 @@ struct DepositRequest: View {
                 ImagePickerforDeposits(sourceType: .photoLibrary, selectedImage: self.$selectedImage)
             }
         }
+        .sheet(isPresented: $showDatePicker) {
+                   DatePicker(
+                       "Select Date",
+                       selection: $date,
+                       displayedComponents: [.date]
+                   )
+                   .datePickerStyle(GraphicalDatePickerStyle())
+                   .padding()
+               }
     }
 }
 
