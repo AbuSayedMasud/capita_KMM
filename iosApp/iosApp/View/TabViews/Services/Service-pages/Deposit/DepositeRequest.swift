@@ -188,7 +188,8 @@ struct DepositRequest: View {
     @State private var selectedImage: UIImage?
     @State private var cameraSource: CameraSource? = nil // Use an optional CameraSource
     @State private var showDatePicker = false // State variable to show date picker
-    
+    @State private var showDepositTypePicker = false // State variable to show deposit type picker
+    @State private var depositTypes = ["a","v","c"]
     var body: some View {
         ScrollView {
             VStack {
@@ -196,34 +197,83 @@ struct DepositRequest: View {
                     .padding(.top, 20)
                 inputView(text: $bankAccount, title: "Bank Account", placeHolder: "Enter Bank Account")
                     .padding(.top, 10)
-                inputView(text: $depositType, title: "Deposit Type", placeHolder: "Select deposit type")
-                    .padding(.top, 10)
+                //inputView(text: $depositType, title: "Deposit Type", placeHolder: "Select deposit type")
+                // Deposit Type input view with Menu for drop-down
+                             VStack(alignment: .leading) {
+                                 Text("Deposit Type")
+                                     .fontWeight(.semibold)
+                                     .foregroundColor(.primary)
+                                     .font(.footnote)
+                                 
+                                 Menu {
+                                     ForEach(depositTypes, id: \.self) { type in
+                                         Button(action: {
+                                             depositType = type
+                                         }) {
+                                             Text(type)
+                                         }
+                                     }
+                                 } label: {
+                                     HStack {
+                                         Text(depositType.isEmpty ? "Select deposit type" : depositType)
+                                             .foregroundColor(depositType.isEmpty ? .gray : .primary)
+                                         Spacer()
+                                         Image(systemName: "chevron.down")
+                                             .foregroundColor(.gray)
+                                     }
+                                 }
+                                 Divider()
+                                     .overlay(.primary)
+                             }
+                .padding(.top, 10)
+                .sheet(isPresented: $showDepositTypePicker) {
+                    VStack {
+                        Text("Select Deposit Type")
+                            .font(.headline)
+                            .padding()
+                        
+                        Picker("Deposit Type", selection: $depositType) {
+                            ForEach(depositTypes, id: \.self) { type in
+                                Text(type).tag(type)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(WheelPickerStyle())
+                        
+                        Button("Done") {
+                            showDepositTypePicker = false
+                        }
+                        .padding()
+                    }
+                }
+                
+                .padding(.top, 10)
                 //inputView(text: $date, title: "Date", placeHolder: "DD/MM/YYYY")
                 // Date input view with tap gesture to show date picker
-                                VStack(alignment: .leading) {
-                                    Text("Date")
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.primary)
-                                        .font(.footnote)
-                                    
-                                    HStack {
-                                        Text(date, style: .date) // Display selected date
-                                            .foregroundColor(date == Date() ? .gray : .primary)
-                                            .onTapGesture {
-                                                showDatePicker.toggle() // Toggle date picker visibility
-                                            }
-                                        
-                                        Spacer()
-                                        Image("calender_icon")
-                                            .foregroundColor(.gray)
-                                            .onTapGesture {
-                                                showDatePicker.toggle() // Toggle date picker visibility
-                                            }
-                                    }
-                                    Divider()
-                                        .overlay(.primary)
-                                }
-                    .padding(.top, 10)
+                VStack(alignment: .leading) {
+                    Text("Date")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.primary)
+                        .font(.footnote)
+                    
+                    HStack {
+                        Text(date, style: .date) // Display selected date
+                            .foregroundColor(date == Date() ? .gray : .primary)
+                            .onTapGesture {
+                                showDatePicker.toggle() // Toggle date picker visibility
+                            }
+                        
+                        Spacer()
+                        Image("calender_icon")
+                            .foregroundColor(.gray)
+                            .onTapGesture {
+                                showDatePicker.toggle() // Toggle date picker visibility
+                            }
+                    }
+                    Divider()
+                        .overlay(.primary)
+                }
+                .padding(.top, 10)
                 inputView(text: $transectionRef, title: "Transection Ref.", placeHolder: "Enter Transection Reference")
                     .padding(.top, 10)
                 inputView(text: $amount, title: "Amount", placeHolder: "Enter amount")
@@ -324,14 +374,14 @@ struct DepositRequest: View {
             }
         }
         .sheet(isPresented: $showDatePicker) {
-                   DatePicker(
-                       "Select Date",
-                       selection: $date,
-                       displayedComponents: [.date]
-                   )
-                   .datePickerStyle(GraphicalDatePickerStyle())
-                   .padding()
-               }
+            DatePicker(
+                "Select Date",
+                selection: $date,
+                displayedComponents: [.date]
+            )
+            .datePickerStyle(GraphicalDatePickerStyle())
+            .padding()
+        }
     }
 }
 
