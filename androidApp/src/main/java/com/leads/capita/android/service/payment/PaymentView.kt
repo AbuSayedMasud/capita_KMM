@@ -26,21 +26,82 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.leads.capita.account.Instrument
 import com.leads.capita.android.customAlertDialog.CustomAlertDialog
 import com.leads.capita.android.formatnumber.InputFieldValidator.validateFields
 import com.leads.capita.android.theme.PrimaryColor
 import com.leads.capita.android.theme.White
 import com.leads.capita.android.theme.getCardColors
+import com.leads.capita.bank.BankBranch
+import com.leads.capita.bank.BankListDataResponse
+import com.leads.capita.customerProfile.CustomerProfileResponse
 import com.leads.capita.formatnumber.isWithinMaxCharLimit
+import com.leads.capita.repository.DatabaseDriverFactory
+import com.leads.capita.service.account.AccountServiceImpl
+import com.leads.capita.service.bank.BankServiceImpl
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.decodeFromJsonElement
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PaymentView(navController: NavHostController) {
+    val context = LocalContext.current
+    val databaseDriverFactory = DatabaseDriverFactory(context)
+    var bankListData: List<BankListDataResponse>? by remember { mutableStateOf(null) }
+    // Fetch the account balance information from the service
+    val bankList = BankServiceImpl(databaseDriverFactory).getBankListService()
+
+    bankListData = try {
+        val jsonElement = Json.parseToJsonElement(bankList)
+
+        when (jsonElement) {
+            is JsonArray -> {
+                // Process array
+                jsonElement.mapNotNull { jsonElement ->
+                    // Deserialize each element into Instrument
+                    try {
+                        Json.decodeFromJsonElement<BankListDataResponse>(jsonElement)
+                    } catch (e: SerializationException) {
+                        // Handle deserialization errors
+                        e.printStackTrace()
+                        null
+                    }
+                }
+            }
+
+            is JsonObject -> {
+                jsonElement.mapNotNull { jsonElement ->
+                    // Deserialize each element into Instrument
+
+                        try {
+                            Json.decodeFromJsonElement<BankListDataResponse>(jsonElement.value)
+                        } catch (e: SerializationException) {
+                            // Handle deserialization errors
+                            e.printStackTrace()
+                            null
+                        }
+
+                }
+            }
+
+            else -> {
+                emptyList()
+            }
+        }
+    } catch (e: Exception) {
+        // Handle JSON parsing errors
+        e.printStackTrace()
+        emptyList()
+    }
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
 
@@ -66,14 +127,55 @@ fun PaymentView(navController: NavHostController) {
     val paymentOptions = listOf("Cash", "Cheque", "BFTN", "NPSB", "RTGS")
     var paymentExpanded by remember { mutableStateOf(false) }
     var paymentSelectedOptionText by remember { mutableStateOf("Select payment type") }
-    val bankNameOptions =
-        listOf("AB Bank", "Bangladesh Bank", "City Bank", "Citizen Bank", "FSIBL Bank")
     var bankNameExpanded by remember { mutableStateOf(false) }
     var bankNameSelectedOptionText by remember { mutableStateOf("Select Bank Name") }
-    val branchNameOptions =
-        listOf("Mirpur", "Motijheel", "Savar", "Baipail", "Chandra")
+    var selectedBankId by remember { mutableStateOf(-1) }
     var branchNameExpanded by remember { mutableStateOf(false) }
     var branchNameSelectedOptionText by remember { mutableStateOf("Select Branch Name") }
+    var  branchListData: List<BankBranch>? by remember { mutableStateOf(null) }
+    val branchList=BankServiceImpl(databaseDriverFactory).getBranchListService(selectedBankId)
+    branchListData = try {
+        val jsonElement = Json.parseToJsonElement(branchList)
+
+        when (jsonElement) {
+            is JsonArray -> {
+                // Process array
+                jsonElement.mapNotNull { jsonElement ->
+
+                    try {
+                        Json.decodeFromJsonElement<BankBranch>(jsonElement)
+                    } catch (e: SerializationException) {
+                        e.printStackTrace()
+                        null
+                    }
+                }
+            }
+
+            is JsonObject -> {
+                jsonElement.mapNotNull { jsonElement ->
+                    // Deserialize each element into Instrument
+
+                    try {
+                        Json.decodeFromJsonElement<BankBranch>(jsonElement.value)
+                    } catch (e: SerializationException) {
+                        // Handle deserialization errors
+                        e.printStackTrace()
+                        null
+                    }
+
+                }
+            }
+
+            else -> {
+                emptyList()
+            }
+        }
+    } catch (e: Exception) {
+        // Handle JSON parsing errors
+        e.printStackTrace()
+        emptyList()
+    }
+
     var amount by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     val isAccountCodeError by remember { mutableStateOf(false) }
@@ -266,12 +368,14 @@ fun PaymentView(navController: NavHostController) {
                         bankNameExpanded = false
                     }, Modifier.background(backgroundColor)
                 ) {
-                    bankNameOptions.forEach { selectionOption ->
+                    bankListData?.forEach { selectionOption ->
                         DropdownMenuItem(onClick = {
-                            bankNameSelectedOptionText = selectionOption
+                            bankNameSelectedOptionText = selectionOption.bankName.toString()
+                            selectedBankId= selectionOption.bankId!!
+                            branchNameSelectedOptionText="Select Branch Name"
                             bankNameExpanded = false
                         }) {
-                            Text(text = selectionOption)
+                            Text(text = selectionOption.bankName.toString())
                         }
                     }
                 }
@@ -284,10 +388,10 @@ fun PaymentView(navController: NavHostController) {
                     value = branchNameSelectedOptionText,
                     onValueChange = {
                     },
-                    label = { Text(text = "Bank Name") },
+                    label = { Text(text = "Branch Name") },
                     trailingIcon = {
                         ExposedDropdownMenuDefaults.TrailingIcon(
-                            expanded = bankNameExpanded
+                            expanded = branchNameExpanded
                         )
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(
@@ -312,12 +416,12 @@ fun PaymentView(navController: NavHostController) {
                         bankNameExpanded = false
                     }, Modifier.background(backgroundColor)
                 ) {
-                    branchNameOptions.forEach { selectionOption ->
+                    branchListData?.forEach { selectionOption ->
                         DropdownMenuItem(onClick = {
-                            branchNameSelectedOptionText = selectionOption
+                            branchNameSelectedOptionText = selectionOption.branchName.toString()
                             branchNameExpanded = false
                         }) {
-                            Text(text = selectionOption)
+                            Text(text = selectionOption.branchName.toString())
                         }
                     }
                 }

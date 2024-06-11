@@ -16,11 +16,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.leads.capita.account.Instrument
 import com.leads.capita.android.R
 import com.leads.capita.android.shell.MyAppBar
 import com.leads.capita.android.theme.BackgroundColor
 import com.leads.capita.android.theme.CapitaTheme
 import com.leads.capita.android.theme.rememberWindowSizeClass
+import com.leads.capita.repository.DatabaseDriverFactory
+import com.leads.capita.service.account.AccountServiceImpl
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.decodeFromJsonElement
 
 @Composable
 fun PaymentScreen (navController: NavHostController){
