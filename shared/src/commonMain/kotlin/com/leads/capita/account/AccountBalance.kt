@@ -1,9 +1,9 @@
 package com.leads.capita.account
 
 import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
-@Serializable
+
+
 class AccountBalance(
     @SerialName("accountCode")  var accountCode: String = "",
     @SerialName("accruedCharge")  var accruedCharge: Double = 0.0,
