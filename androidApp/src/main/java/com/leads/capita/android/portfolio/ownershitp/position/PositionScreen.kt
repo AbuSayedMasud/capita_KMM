@@ -23,8 +23,12 @@ import com.leads.capita.android.theme.BackgroundColor
 import com.leads.capita.account.Instrument
 import com.leads.capita.android.portfolio.ownershitp.position.PositionView
 import com.leads.capita.service.account.AccountServiceImpl
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.decodeFromJsonElement
+import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
@@ -37,20 +41,38 @@ fun PositionScreen() {
 //    val homeInstrument = accountInstrument.getInstrumentServices()
 //    instrument = homeInstrument
 //    val positionList = instrument
-    var instrumentsList: AccountInstrument? by remember { mutableStateOf(null) }
     val databaseDriverFactory = DatabaseDriverFactory(context)
     val accountInstrument = AccountServiceImpl(databaseDriverFactory)
     // Fetch the account balance information from the service
     val homeInstrument = accountInstrument.getInstrumentServices()
-    val jsonObject = Json.parseToJsonElement(homeInstrument ?: "").jsonObject
-    val instrumentData = jsonObject["accountCode"]?.jsonPrimitive?.contentOrNull
-    if (instrumentData?.isNotEmpty() == true) {
-        instrumentsList = Json.decodeFromString<AccountInstrument>(homeInstrument)
+    val instrumentsList:List<Instrument> =try {
+        val jsonElement = Json.parseToJsonElement(homeInstrument)
 
-    } else {
+        when (jsonElement) {
+            is JsonArray -> {
+                // Process array
+                jsonElement.mapNotNull { jsonElement ->
+                    // Deserialize each element into Instrument
+                    try {
+                        Json.decodeFromJsonElement<Instrument>(jsonElement)
+                    } catch (e: SerializationException) {
+                        // Handle deserialization errors
+                        e.printStackTrace()
+                        null
+                    }
+                }
+            }
+            else -> {
+                emptyList()
+            }
+        }
+    } catch (e: Exception) {
+        // Handle JSON parsing errors
+        e.printStackTrace()
+        emptyList()
 
     }
-    val positionList: List<Instrument>? = instrumentsList?.instruments
+    val positionList: List<Instrument>? = instrumentsList
 
     var expandedIndex by remember { mutableStateOf(-1) }
 

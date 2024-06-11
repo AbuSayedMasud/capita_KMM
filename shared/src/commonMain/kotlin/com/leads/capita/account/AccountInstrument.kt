@@ -20,6 +20,5 @@ import kotlinx.serialization.Serializable
 //)
 @Serializable
 data class AccountInstrument(
-    val accountCode: String,
     val instruments: List<Instrument>
 )

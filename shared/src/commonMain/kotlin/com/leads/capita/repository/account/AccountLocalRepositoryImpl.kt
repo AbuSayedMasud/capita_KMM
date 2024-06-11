@@ -166,7 +166,6 @@ class AccountLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
 
     override fun createAccountInstrument(instruments: AccountInstrument) {
 
-        val accountCode = instruments.accountCode
         val instrument: List<Instrument> = instruments.instruments
         println("data is not found ${instrument.toString()}")
         db.accountInstrumentQueries.deleteAccountInstrumentData()
@@ -175,7 +174,7 @@ class AccountLocalRepositoryImpl(databaseDriverFactory: DatabaseDriverFactory) :
                 db.accountInstrumentQueries.getAccountInstrumentByUniqueId(instrument.symbole)
             if (existingInstrument.executeAsList().isEmpty()) {
                 db.accountInstrumentQueries.insertAccountInstrumentData(
-                    accountCode = accountCode,
+                    accountCode = "1990",
                     costPrice = instrument.costPrice,
                     costValue = instrument.costValue,
                     gr = instrument.gr,

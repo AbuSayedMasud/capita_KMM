@@ -40,8 +40,12 @@ import com.leads.capita.android.R
 import com.leads.capita.account.AccountInstrument
 import com.leads.capita.account.Instrument
 import com.leads.capita.service.account.AccountServiceImpl
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.decodeFromJsonElement
+import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
@@ -50,7 +54,7 @@ fun HomeInstrumentView(navController: NavHostController) {
     val context = LocalContext.current
 
 
-    var instruments: AccountInstrument? by remember { mutableStateOf(null) }
+
 //    var databaseDriverFactory = DatabaseDriverFactory(context)
 //    val accountInstrument = AccountServiceImpl(databaseDriverFactory)
 //    val homeInstrument = accountInstrument.getInstrumentServices()
@@ -60,14 +64,35 @@ fun HomeInstrumentView(navController: NavHostController) {
     val accountInstrument = AccountServiceImpl(databaseDriverFactory)
     // Fetch the account balance information from the service
     val homeInstrument = accountInstrument.getInstrumentServices()
-    val jsonObject = Json.parseToJsonElement(homeInstrument ?: "").jsonObject
-    val instrumentData = jsonObject["accountCode"]?.jsonPrimitive?.contentOrNull
-    if (instrumentData?.isNotEmpty() == true) {
-        instruments = Json.decodeFromString<AccountInstrument>(homeInstrument)
-    } else {
+    val instruments: List<Instrument> = try {
+        val jsonElement = Json.parseToJsonElement(homeInstrument)
 
+        when (jsonElement) {
+            is JsonArray -> {
+                // Process array
+                jsonElement.mapNotNull { jsonElement ->
+                    // Deserialize each element into Instrument
+                    try {
+                        Json.decodeFromJsonElement<Instrument>(jsonElement)
+                    } catch (e: SerializationException) {
+                        // Handle deserialization errors
+                        e.printStackTrace()
+                        null
+                    }
+                }
+            }
+            else -> {
+                emptyList()
+            }
+        }
+    } catch (e: Exception) {
+        // Handle JSON parsing errors
+        e.printStackTrace()
+        emptyList()
     }
-    val instrument = instruments?.instruments
+
+
+//    val instrument = instruments?.instruments
     val paddingValue = if (isSystemInDarkTheme()) {
         6.dp
     } else {
@@ -144,8 +169,8 @@ fun HomeInstrumentView(navController: NavHostController) {
                 Column(
                     modifier = Modifier.padding(start = 20.dp, end = 20.dp),
                 ) {
-                    for (index in 0 until instrument?.let { minOf(2, it.size) }!!) {
-                        val position = instrument[index]
+                    for (index in 0 until instruments?.let { minOf(2, it.size) }!!) {
+                        val position = instruments!![index]
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
@@ -212,7 +237,7 @@ fun HomeInstrumentView(navController: NavHostController) {
                                 horizontalAlignment = Alignment.End,
                             ) {
                                 Text(
-                                    text = formatNumberWithCommas(position.marketPrice ?:0.0, 2),
+                                    text = formatNumberWithCommas(position.marketPrice ?: 0.0, 2),
                                     textAlign = TextAlign.End,
                                     style = MaterialTheme.typography.body2
                                         .copy(fontSize = 13.sp, color = contentColor),
@@ -250,7 +275,7 @@ fun HomeInstrumentView(navController: NavHostController) {
                                 )
                             }
                         }
-                        if (index < instrument.size - 1) {
+                        if (index < instruments!!.size - 2) {
                             Divider(
                                 modifier = Modifier.padding(vertical = 8.dp),
                             )
