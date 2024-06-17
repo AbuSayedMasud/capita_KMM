@@ -10,7 +10,7 @@
 import Foundation
 
 struct iOSAccountAccountInstrument: Codable {
-    let accountCode: String
+    //let accountCode: String
     let instruments: [Instrument]
 }
 

@@ -10,6 +10,7 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		2B36AC762C17FDA500C85F84 /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36AC752C17FDA500C85F84 /* NewsViewModel.swift */; };
 		2B48FCCF2BE73ACB0056CBFD /* CustomerProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48FCCE2BE73ACB0056CBFD /* CustomerProfileResponseModel.swift */; };
 		2B48FCD22BE73AEB0056CBFD /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48FCD12BE73AEB0056CBFD /* AddressModel.swift */; };
 		2B48FCD42BE73AFF0056CBFD /* AcountsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48FCD32BE73AFF0056CBFD /* AcountsModel.swift */; };
@@ -83,6 +84,7 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		2B36AC752C17FDA500C85F84 /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
 		2B48FCCE2BE73ACB0056CBFD /* CustomerProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerProfileResponseModel.swift; sourceTree = "<group>"; };
 		2B48FCD12BE73AEB0056CBFD /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
 		2B48FCD32BE73AFF0056CBFD /* AcountsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcountsModel.swift; sourceTree = "<group>"; };
@@ -159,6 +161,14 @@
 				058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2B36AC772C17FDAC00C85F84 /* NewsViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2B36AC752C17FDA500C85F84 /* NewsViewModel.swift */,
+			);
+			path = NewsViewModel;
 			sourceTree = "<group>";
 		};
 		2B48FCD02BE73AD20056CBFD /* ProfileModel */ = {
@@ -442,6 +452,7 @@
 		2BCBB7892BD278D800FAE429 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				2B36AC772C17FDAC00C85F84 /* NewsViewModel */,
 				2B48FCDF2BEE3C1C0056CBFD /* InstrumentViewModel */,
 				2B48FCDB2BEA25760056CBFD /* AccountBalanceModel */,
 				2B9AB07F2BE2570C00CDD1E2 /* ProfileViewModel */,
@@ -673,6 +684,7 @@
 				2BB9F3182BD7619E005AE48E /* BiometricAuthView.swift in Sources */,
 				2B780CE62C071BEB007E54E9 /* PaymentRequest.swift in Sources */,
 				2BCBB78D2BD27AC900FAE429 /* AccountBalanceViewModel.swift in Sources */,
+				2B36AC762C17FDA500C85F84 /* NewsViewModel.swift in Sources */,
 				2B780CE02C048FCA007E54E9 /* DepositStatus.swift in Sources */,
 				2BB9F3312BD761DF005AE48E /* OverviewView.swift in Sources */,
 				2BB9F3482BD761E7005AE48E /* Position.swift in Sources */,
@@ -735,7 +747,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -791,7 +803,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -815,7 +827,7 @@
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Capita;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -846,7 +858,7 @@
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Capita;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
